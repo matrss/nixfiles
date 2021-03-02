@@ -1,0 +1,10 @@
+[
+  ./core
+  ./graphical/sway
+  ./adblock-hosts
+  ./wifi.nix
+  ./tinc-hosts.nix
+  ./jellyfin.nix
+  ./sonarr.nix
+  ./radarr.nix
+]

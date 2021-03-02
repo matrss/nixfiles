@@ -1,0 +1,30 @@
+{
+    "cSpellExt.enableDictionaries": ["german"],
+    "cSpell.language": "de,en",
+    "diagnostic.displayByAle": true,
+    // "codeLens.enable": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextPrefix": " >> ",
+    "snippets.snipmate.enable": false,
+    // "diagnostic-languageserver.filetypes": {
+        // "vim": "vint",
+        // "tex": "languagetool",
+        // "markdown": [ "write-good", "markdownlint" ],
+        // "sh": "shellcheck"
+    // },
+    // "languageserver": {
+    //     "elmLS": {
+    //         "command": "elm-language-server",
+    //         "filetypes": ["elm"],
+    //         "rootPatterns": ["elm.json"],
+    //         "initializationOptions": {
+    //             "elmAnalyseTrigger": "change"
+    //         }
+    //     },
+    //     "clangd": {
+    //         "command": "clangd",
+    //         "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+    //         "filetypes": ["c", "cpp", "objc", "objcpp"]
+    //     }
+    // }
+}

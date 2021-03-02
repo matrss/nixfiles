@@ -1,0 +1,22 @@
+#! /bin/sh
+
+virtboard_running=0
+tablet_mode_indicator="/sys/devices/platform/thinkpad_acpi/hotkey_tablet_mode"
+
+while true; do
+  tablet_mode=$(cat "$tablet_mode_indicator")
+  if [ $tablet_mode -eq 1 ]; then
+	if [ $virtboard_running -eq 0 ]; then
+	  virtboard &
+	  virtboard_pid=$!
+	  virtboard_running=1
+	fi
+  elif [ $tablet_mode -eq 0 ]; then
+	if [ $virtboard_running -eq 1 ]; then
+	  kill $virtboard_pid
+	  unset virtboard_pid
+	  virtboard_running=0
+	fi
+  fi
+  sleep 1
+done
