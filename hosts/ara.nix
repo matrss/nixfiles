@@ -9,6 +9,7 @@
     ../profiles/radarr.nix
     ../profiles/bazarr.nix
     ../profiles/jdownloader.nix
+    ../profiles/jdownloader-no-proton.nix
     ../profiles/pyload.nix
     ../profiles/rotating-proxy.nix
     # ../profiles/sabnzbd.nix
