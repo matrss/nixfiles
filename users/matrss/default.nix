@@ -93,7 +93,7 @@
 
     programs.password-store = {
       enable = true;
-      package = pkgs.pass-wayland;
+      package = pkgs.pass.withExtensions (exts: [ exts.pass-audit ]);
     };
 
     programs.gpg.enable = true;
