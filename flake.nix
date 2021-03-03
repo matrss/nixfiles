@@ -178,7 +178,7 @@
 
           ara = {
             # hostname = "ara";
-            hostname = "192.168.178.254";
+            hostname = "10.0.0.2";
             sshUser = "root";
 
             # autoRollback = false;
