@@ -118,7 +118,7 @@
   networking.firewall.allowedUDPPorts = [ 655 ];
   networking.firewall.allowedTCPPorts = [ 655 3179 ];
 
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   services.tinc.networks.mesh = {
     name = "andromeda";
