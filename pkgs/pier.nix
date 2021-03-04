@@ -8,10 +8,10 @@ rustPlatform.buildRustPackage rec {
     owner = "pier-cli";
     repo = "pier";
     rev = "${version}";
-    sha256 = "sha256-DTPYUnajcjWR+lytCr55p4p7jeLj8sQPSRc14jXEbA8=";
+    sha256 = "sha256-nh8r9jZ+wC/SrxhnUiOBwHt+FkbedWYvokmCwDKjQ0g=";
   };
 
-  cargoSha256 = "sha256-hgDnqnfr65Kg3pq7FpBwU4nT9c7xJcOiGXvNJQDUHJg=";
+  cargoSha256 = "sha256-MYmQ2L9VMku3Lo7tagonIszjJvXvqWuIH9TBc5DTpKk=";
 
   doCheck = false;
 
