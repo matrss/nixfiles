@@ -30,7 +30,7 @@ let
           nixpkgs = { pkgs = pkgs; };
           # nix.registry.nixpkgs.flake = inputs.nixpkgs;
           nix.registry = lib.mapAttrs (id: flake: { flake = flake; }) {
-            nixpkgs = basePkgset;
+            self = basePkgset;
             inherit (inputs) large small rel2009;
           };
         };
