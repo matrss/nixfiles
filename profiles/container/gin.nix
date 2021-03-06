@@ -14,8 +14,10 @@ in {
     ports =
       [ "0.0.0.0:${toString hostPort}:${toString containerPort}" "2323:22" ];
 
-    volumes = [ "gin-data:/data" "gin-backup:/backup" ];
+    volumes = [ "/volumes/gin-data:/data" "/volumes/gin-backup:/backup" ];
+
+    extraOptions = [ "--net=services" ];
   };
 
-  networking.firewall.allowedTCPPorts = [ hostPort 2222 ];
+  networking.firewall.allowedTCPPorts = [ hostPort 2323 ];
 }

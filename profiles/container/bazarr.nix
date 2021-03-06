@@ -13,7 +13,15 @@ in {
 
     ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
-    volumes = [ "bazarr-config:/config" "/srv/media:/media" ];
+    volumes = [ "/volumes/bazarr-config:/config" "/srv/media:/media" ];
+
+    extraOptions = [
+      "--net=services"
+      "--label=traefik.enable=true"
+      "--label=traefik.http.routers.bazarr.rule=Host(`bazarr.ara.matrss.de`)"
+      "--label=traefik.http.routers.bazarr.entrypoints=websecure"
+      "--label=traefik.http.routers.bazarr.middlewares=authelia@docker"
+    ];
   };
 
   networking.firewall.allowedTCPPorts = [ hostPort ];

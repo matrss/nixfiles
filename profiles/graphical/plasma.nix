@@ -37,6 +37,7 @@
     xournalpp
     discord
     qtpass
+    nextcloud-client
 
     # KDE/Plasma apps
     syncthingtray

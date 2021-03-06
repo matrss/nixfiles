@@ -14,10 +14,16 @@ in {
     ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
     volumes = [
-      "sonarr-config:/config"
+      "/volumes/sonarr-config:/config"
       "/srv/media:/media"
-      # "/srv/media/Downloads:/downloads"
-      # "/srv/media/Series:/tv"
+    ];
+
+    extraOptions = [
+      "--net=services"
+      "--label=traefik.enable=true"
+      "--label=traefik.http.routers.sonarr.rule=Host(`sonarr.ara.matrss.de`)"
+      "--label=traefik.http.routers.sonarr.entrypoints=websecure"
+      "--label=traefik.http.routers.sonarr.middlewares=authelia@docker"
     ];
   };
 

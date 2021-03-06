@@ -1,0 +1,36 @@
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+    [entryPoints.web.http]
+      [entryPoints.web.http.redirections]
+        [entryPoints.web.http.redirections.entrypoint]
+          to = "websecure"
+          scheme = "https"
+
+  [entryPoints.websecure]
+    address = ":443"
+    [entryPoints.websecure.http]
+      [entryPoints.websecure.http.tls]
+        certresolver = "letsencrypt"
+
+  [entryPoints.traefik]
+    address = ":8080"
+
+# [log]
+#   level = "debug"
+
+[api]
+  insecure = true
+
+[providers.docker]
+  exposedByDefault = false
+  # defaultRule = "Host(`{{ trimPrefix `/` .Name }}.ara.matrss.de`)"
+
+[certificatesResolvers.letsencrypt.acme]
+  email = "matthias.risze@gmail.com"
+  storage = "/letsencrypt/acme.json"
+  ## Enable the let's encrypt staging servers for testing purposes
+  # caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  [certificatesResolvers.letsencrypt.acme.httpChallenge]
+    # used during the challenge
+    entryPoint = "web"

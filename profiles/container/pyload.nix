@@ -14,7 +14,7 @@
       };
 
       volumes = [
-        "pyload-config:/config:rw"
+        "/volumes/pyload-config:/config:rw"
         "/srv/media/Downloads/pyload:/downloads:rw"
       ];
 
@@ -28,7 +28,6 @@
       cmd = [
         "caddy"
         "reverse-proxy"
-        # "--change-host-header"
         "--from"
         ":8000"
         "--to"

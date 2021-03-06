@@ -13,7 +13,7 @@
       };
 
       volumes = [
-        "jdownloader-config:/config:rw"
+        "/volumes/jdownloader-config:/config:rw"
         "/srv/media/Downloads/jdownloader2:/output:rw"
         "/etc/localtime:/etc/localtime:ro"
       ];

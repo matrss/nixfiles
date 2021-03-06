@@ -14,10 +14,16 @@ in {
     ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
     volumes = [
-      "radarr-config:/config"
+      "/volumes/radarr-config:/config"
       "/srv/media:/media"
-      # "/srv/media/Downloads:/downloads"
-      # "/srv/media/Movies:/movies"
+    ];
+
+    extraOptions = [
+      "--net=services"
+      "--label=traefik.enable=true"
+      "--label=traefik.http.routers.radarr.rule=Host(`radarr.ara.matrss.de`)"
+      "--label=traefik.http.routers.radarr.entrypoints=websecure"
+      "--label=traefik.http.routers.radarr.middlewares=authelia@docker"
     ];
   };
 

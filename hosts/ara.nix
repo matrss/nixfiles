@@ -4,18 +4,17 @@
   imports = [
     ../users/root
     ../users/matrss-ara
-    ../profiles/jellyfin.nix
-    ../profiles/sonarr.nix
-    ../profiles/radarr.nix
-    ../profiles/bazarr.nix
-    ../profiles/jdownloader.nix
-    ../profiles/jdownloader-no-proton.nix
-    ../profiles/pyload.nix
-    ../profiles/rotating-proxy.nix
-    # ../profiles/sabnzbd.nix
-    ../profiles/gin.nix
-    # ../profiles/syncthing.nix
-    # ../profiles/cr-unblocker.nix
+    ../profiles/container/services-network.nix
+    ../profiles/container/traefik-reverse-proxy
+    ../profiles/container/authelia.nix
+    # ../profiles/container/hello-world.nix
+    ../profiles/container/whoami.nix
+    ../profiles/container/jellyfin.nix
+    ../profiles/container/sonarr.nix
+    ../profiles/container/radarr.nix
+    ../profiles/container/bazarr.nix
+    ../profiles/container/jdownloader.nix
+    ../profiles/container/pyload.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -67,7 +66,7 @@
   boot.initrd.network.ssh = {
     enable = true;
     port = 2222;
-    hostKeys = [ "/root/host_ed25519_key.priv" ];
+    hostKeys = [ "/root/secrets/host_ed25519_key.priv" ];
   };
 
   # Don't swap as much; should be better for the SSD.
@@ -117,6 +116,12 @@
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
   };
 
+  fileSystems."/volumes" = {
+    device = "LABEL=data";
+    fsType = "btrfs";
+    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/volumes" ];
+  };
+
   fileSystems."/var/lib" = {
     device = "LABEL=data";
     fsType = "btrfs";
@@ -125,9 +130,21 @@
 
   swapDevices = [ ];
 
-  # Enable ssh server
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "prohibit-password";
+  # Enable ssh server.
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "prohibit-password";
+    passwordAuthentication = false;
+  };
+
+  # Ban attackers.
+  services.fail2ban = {
+    enable = true;
+    bantime-increment = {
+      enable = true;
+      maxtime = "48h";
+    };
+  };
 
   # Auto discovery.
   services.avahi.enable = true;
@@ -149,23 +166,32 @@
     prefixLength = 24;
   }];
   networking.firewall.allowedUDPPorts = [ 655 ];
-  networking.firewall.allowedTCPPorts = [
-    655
-    12345 # netcat, for jdownloader reconnect script
-  ];
-
-  # networking.firewall.enable = false;
+  networking.firewall.allowedTCPPorts = [ 655 ];
 
   services.tinc.networks.mesh = {
     name = "ara";
-    rsaPrivateKeyFile = ../secrets/hosts/ara/tinc/rsa_key.priv;
-    ed25519PrivateKeyFile = ../secrets/hosts/ara/tinc/ed25519_key.priv;
+    # rsaPrivateKeyFile = ../secrets/hosts/ara/tinc/rsa_key.priv;
+    # ed25519PrivateKeyFile = ../secrets/hosts/ara/tinc/ed25519_key.priv;
+    rsaPrivateKeyFile = builtins.toFile "rsa.priv"
+      (builtins.readFile ../secrets/hosts/ara/tinc/rsa_key.priv);
+    ed25519PrivateKeyFile = builtins.toFile "ed25519.priv"
+      (builtins.readFile ../secrets/hosts/ara/tinc/ed25519_key.priv);
     extraConfig = ''
       ConnectTo = draco
     '';
   };
 
-  virtualisation.oci-containers.backend = "podman";
+  services.ddclient = {
+    enable = true;
+    protocol = "cloudflare";
+    username = "matthias.risze@gmail.com";
+    password = builtins.readFile ../secrets/hosts/ara/cloudflare/cf-api.txt;
+    domains = [ "ara.matrss.de" "*.ara.matrss.de" ];
+    zone = "matrss.de";
+  };
+
+  # virtualisation.podman.enable = true;
+  # virtualisation.oci-containers.backend = "podman";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

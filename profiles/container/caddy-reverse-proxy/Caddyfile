@@ -1,0 +1,3 @@
+hello.ara.matrss.de {
+    reverse_proxy hello-world:80
+}

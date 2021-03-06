@@ -3,6 +3,7 @@
 
   inputs = {
 
+    # TODO: get rid of nixpkgs in favor of large
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     large.url = "github:NixOS/nixpkgs/nixos-unstable";
     small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
@@ -11,9 +12,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      # url = "github:matrss/home-manager/mako_as_a_service";
-      # url = "/home/matrss/Projects/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "large";
     };
 
     home-manager-rel2009 = {
@@ -22,6 +21,12 @@
     };
 
     emacs.url = "github:nix-community/emacs-overlay";
+
+    neovim = {
+      url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "large";
+      inputs.flake-utils.follows = "flake-utils";
+    };
 
     nur.url = "github:nix-community/nur";
 
@@ -73,6 +78,7 @@
           inherit system config;
           overlays = (attrValues self.overlays) ++ [
             inputs.emacs.overlay
+            inputs.neovim.overlay
             inputs.nur.overlay
             (channelToOverlay {
               inherit system config;
@@ -105,14 +111,6 @@
           shellHook = ''
             export PATH="$PWD/utils:$PATH"
           '';
-          # shellHook = ''
-          #   # mkdir -p secrets
-          #   PATH=${
-          #     pkgs.writeShellScriptBin "nix" ''
-          #       ${pkgs.nixFlakes}/bin/nix --option experimental-features "nix-command flakes ca-references" "$@"
-          #     ''
-          #   }/bin:$PATH
-          # '';
         };
 
         packages = let
@@ -142,6 +140,8 @@
           # modules
           moduleList = import ./modules/home-manager/list.nix;
           modulesAttrs = pathsToImportedAttrs moduleList;
+
+          # TODO: add home-manager profiles (move them into profiles as well?)
         in modulesAttrs;
 
         overlay = import ./pkgs;
@@ -177,11 +177,8 @@
           };
 
           ara = {
-            # hostname = "ara";
-            hostname = "10.0.0.2";
+            hostname = "ara.matrss.de";
             sshUser = "root";
-
-            # autoRollback = false;
 
             profiles.system = {
               user = "root";

@@ -30,6 +30,16 @@
 ;; Trailing white space are banned!
 (setq-default show-trailing-whitespace t)
 
+(defun disable-trailing-whitespace ()
+  (setq show-trailing-whitespace nil))
+
+;; Shouldn't highlight trailing whitespaces in some modes.
+(add-hook 'term-mode-hook #'disable-trailing-whitespace)
+(add-hook 'eshell-mode-hook #'disable-trailing-whitespace)
+(add-hook 'fundamental-mode-hook #'disable-trailing-whitespace)
+; (add-hook 'term-mode #'disable-trailing-whitespace)
+; (add-hook 'eshell-mode #'disable-trailing-whitespace)
+
 ;; I typically want to use UTF-8.
 (prefer-coding-system 'utf-8)
 
@@ -37,15 +47,6 @@
 ;; than half a page.
 (setq scroll-step 1
       scroll-conservatively 5)
-
-(defun rah-disable-trailing-whitespace-mode ()
-  (setq show-trailing-whitespace nil))
-
-;; Shouldn't highlight trailing spaces in terminal mode.
-(add-hook 'term-mode #'rah-disable-trailing-whitespace-mode)
-(add-hook 'term-mode-hook #'rah-disable-trailing-whitespace-mode)
-(add-hook 'eshell-mode #'rah-disable-trailing-whitespace-mode)
-(add-hook 'eshell-mode-hook #'rah-disable-trailing-whitespace-mode)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -148,7 +149,6 @@
   (setq org-agenda-files '("~/Sync/org"))
   (setq org-default-notes-file (concat org-directory "/0-inbox.org")))
 
-
 (use-package evil-org
   :after (evil org)
   :hook (org-mode . evil-org-mode)
@@ -164,6 +164,8 @@
 (use-package nix-mode)
 
 (use-package markdown-mode)
+(use-package evil-markdown
+  :after (evil markdown-mode))
 (use-package poly-markdown
   :after (polymode markdown-mode))
   ; :hook (markdown-mode . poly-markdown-mode)

@@ -32,10 +32,21 @@
   # # Don't swap as much; should be better for the SSD.
   # boot.kernel.sysctl."vm.swappiness" = 1;
 
-  # Enable ssh server
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "prohibit-password";
-  services.fail2ban.enable = true;
+  # Enable ssh server.
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "prohibit-password";
+    passwordAuthentication = false;
+  };
+
+  # Ban attackers.
+  services.fail2ban = {
+    enable = true;
+    bantime-increment = {
+      enable = true;
+      maxtime = "48h";
+    };
+  };
 
   # # Set initial root password to empty.
   # users.users.root.initialHashedPassword = "";

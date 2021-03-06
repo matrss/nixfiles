@@ -4,7 +4,8 @@
   ./adblock-hosts
   ./wifi.nix
   ./tinc-hosts.nix
-  ./jellyfin.nix
-  ./sonarr.nix
-  ./radarr.nix
+
+  ./container/jellyfin.nix
+  ./container/sonarr.nix
+  ./container/radarr.nix
 ]

@@ -24,6 +24,9 @@
     '';
   };
 
+  # Just very convenient.
+  programs.command-not-found.enable = true;
+
   # Needed Syncthing errors relating to too many fs watchers.
   boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
 
