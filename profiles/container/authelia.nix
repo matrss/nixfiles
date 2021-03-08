@@ -16,12 +16,7 @@
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.authelia.rule=Host(`auth.ara.matrss.de`)"
       "--label=traefik.http.routers.authelia.entrypoints=websecure"
-      "--label=traefik.http.middlewares.authelia.forwardauth.address=http://authelia:9091/api/verify?rd=https://auth.ara.matrss.de/"
-      "--label=traefik.http.middlewares.authelia.forwardauth.trustForwardHeader=true"
-      "--label=traefik.http.middlewares.authelia.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email"
-      "--label=traefik.http.middlewares.authelia-basic.forwardauth.address=http://authelia:9091/api/verify?auth=basic"
-      "--label=traefik.http.middlewares.authelia-basic.forwardauth.trustForwardHeader=true"
-      "--label=traefik.http.middlewares.authelia-basic.forwardauth.authResponseHeaders=Remote-User, Remote-Groups, Remote-Name, Remote-Email"
+      "--label=traefik.http.routers.authelia.middlewares=public@file"
     ];
   };
 }

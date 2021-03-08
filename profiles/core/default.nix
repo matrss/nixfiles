@@ -14,6 +14,7 @@
     tree
     opensc
     doas
+    mosh
   ];
 
   # Enable flakes support.

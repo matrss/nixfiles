@@ -186,7 +186,10 @@
     protocol = "cloudflare";
     username = "matthias.risze@gmail.com";
     password = builtins.readFile ../secrets/hosts/ara/cloudflare/cf-api.txt;
-    domains = [ "ara.matrss.de" "*.ara.matrss.de" ];
+    domains = [
+      "ara.matrss.de"
+      "*.ara.matrss.de"
+    ];
     zone = "matrss.de";
   };
 

@@ -23,7 +23,7 @@ in {
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.sonarr.rule=Host(`sonarr.ara.matrss.de`)"
       "--label=traefik.http.routers.sonarr.entrypoints=websecure"
-      "--label=traefik.http.routers.sonarr.middlewares=authelia@docker"
+      "--label=traefik.http.routers.sonarr.middlewares=secured@file"
     ];
   };
 

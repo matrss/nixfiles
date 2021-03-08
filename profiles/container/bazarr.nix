@@ -20,7 +20,8 @@ in {
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.bazarr.rule=Host(`bazarr.ara.matrss.de`)"
       "--label=traefik.http.routers.bazarr.entrypoints=websecure"
-      "--label=traefik.http.routers.bazarr.middlewares=authelia@docker"
+      "--label=traefik.http.routers.bazarr.middlewares=secured@file"
+      # "--label=traefik.http.routers.bazarr.middlewares.secure-headers.contentSecurityPolicy=\"script-src 'unsafe-inline'\""
     ];
   };
 

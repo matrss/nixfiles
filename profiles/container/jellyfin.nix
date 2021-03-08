@@ -18,7 +18,7 @@ in {
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.jellyfin.rule=Host(`jellyfin.ara.matrss.de`)"
       "--label=traefik.http.routers.jellyfin.entrypoints=websecure"
-      "--label=traefik.http.routers.jellyfin.middlewares=authelia@docker"
+      "--label=traefik.http.routers.jellyfin.middlewares=secured@file"
       "--label=traefik.http.services.jellyfin.loadbalancer.server.port=8096"
     ];
   };
