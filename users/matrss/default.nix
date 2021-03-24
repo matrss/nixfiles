@@ -24,8 +24,11 @@
       fd
       git
       tig
-      youtube-dl
       pier
+
+      youtube-dl
+      # filebot
+      # tinymediamanager
     ];
 
     home.sessionVariables = {

@@ -3,7 +3,7 @@ let
   containerPort = 8096;
 in {
   virtualisation.oci-containers.containers.jellyfin = {
-    image = "jellyfin/jellyfin:10.7.0-rc4";
+    image = "jellyfin/jellyfin:10.7.0";
 
     user = "1000:100";
 

@@ -10,11 +10,11 @@
     pciutils
     usbutils
     vim
+    gnumake
     htop
     tree
     opensc
     doas
-    mosh
   ];
 
   # Enable flakes support.

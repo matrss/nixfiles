@@ -15,4 +15,5 @@ final: prev: {
   datalad = prev.python37Packages.callPackage ./datalad.nix { };
   # lightly = prev.callPackage ./lightly.nix { };
   networkmanager-ssh = prev.callPackage ./networkmanager-ssh.nix { };
+  tinymediamanager = prev.callPackage ./tinymediamanager.nix { };
 }

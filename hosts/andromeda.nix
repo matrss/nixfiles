@@ -98,7 +98,7 @@
   # programs.singularity.enable = true;
   environment.systemPackages = with pkgs; [ docker-compose ];
 
-  virtualisation.podman.enable = true;
+  # virtualisation.podman.enable = true;
 
   # Enable adb
   programs.adb.enable = true;
