@@ -33,8 +33,8 @@
 
     home.sessionVariables = {
       # Native wayland support for firefox
-      # MOZ_ENABLE_WAYLAND = "1";
-      EDITOR = "nvim";
+      MOZ_ENABLE_WAYLAND = "1";
+      EDITOR = "emacsclient -c";
     };
 
     xdg.enable = true;
