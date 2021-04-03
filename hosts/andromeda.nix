@@ -1,4 +1,4 @@
-{ lib, pkgs, hosts, ... }:
+{ lib, config, pkgs, hosts, ... }:
 
 {
   imports = [
@@ -135,6 +135,8 @@
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
+
+  services.xserver.wacom.enable = lib.mkDefault config.services.xserver.enable;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
