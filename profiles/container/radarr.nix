@@ -3,7 +3,7 @@ let
   containerPort = 7878;
 in {
   virtualisation.oci-containers.containers.radarr = {
-    image = "linuxserver/radarr:nightly-version-3.1.0.4615";
+    image = "linuxserver/radarr:nightly-version-3.1.0.4832";
 
     environment = {
       PUID = "1000";

@@ -1,6 +1,6 @@
 {
   virtualisation.oci-containers.containers.authelia = {
-    image = "authelia/authelia";
+    image = "authelia/authelia:4.27.4";
 
     volumes = [
       "${../../secrets/hosts/ara/authelia/configuration.yml}:/configuration.yml:ro"

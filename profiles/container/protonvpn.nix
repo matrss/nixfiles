@@ -2,7 +2,7 @@
 
 {
   virtualisation.oci-containers.containers.protonvpn = {
-    image = "tprasadtp/protonvpn:latest";
+    image = "ghcr.io/tprasadtp/protonvpn:4.1.2";
 
     environment = import ../../secrets/protonvpn-env.nix;
 

@@ -3,7 +3,7 @@
 
   virtualisation.oci-containers.containers = {
     jdownloader = {
-      image = "jlesage/jdownloader-2:latest";
+      image = "jlesage/jdownloader-2:v1.7.0";
 
       dependsOn = [ "protonvpn" ];
 
@@ -22,7 +22,7 @@
     };
 
     jdown-revproxy = {
-      image = "caddy:2.0.0";
+      image = "caddy:2.3.0-alpine";
       dependsOn = [ "jdownloader" ];
       ports = [ "5800:5800" ];
       cmd = [

@@ -3,7 +3,7 @@
 
   virtualisation.oci-containers.containers = {
     pyload = {
-      image = "linuxserver/pyload:latest";
+      image = "linuxserver/pyload:version-4b905ceb";
 
       dependsOn = [ "protonvpn" ];
 
@@ -22,7 +22,7 @@
     };
 
     pyload-revproxy = {
-      image = "caddy:2.0.0";
+      image = "caddy:2.3.0-alpine";
       dependsOn = [ "pyload" ];
       ports = [ "8000:8000" ];
       cmd = [

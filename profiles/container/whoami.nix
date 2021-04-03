@@ -1,6 +1,6 @@
 {
   virtualisation.oci-containers.containers.whoami = {
-    image = "containous/whoami:latest";
+    image = "containous/whoami:v1.5.0";
 
     extraOptions = [
       "--net=services"

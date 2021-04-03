@@ -3,7 +3,7 @@ let
   containerPort = 6767;
 in {
   virtualisation.oci-containers.containers.bazarr = {
-    image = "linuxserver/bazarr:latest";
+    image = "linuxserver/bazarr:version-v0.9.3";
 
     environment = {
       PUID = "1000";
