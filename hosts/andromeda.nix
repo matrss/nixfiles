@@ -133,8 +133,8 @@
     '';
   };
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
 
   services.xserver.wacom.enable = lib.mkDefault config.services.xserver.enable;
 
