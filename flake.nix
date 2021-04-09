@@ -4,7 +4,7 @@
   inputs = {
 
     # TODO: get rid of nixpkgs in favor of large
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     large.url = "github:NixOS/nixpkgs/nixos-unstable";
     small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     rel2009-tempsecretsfix.url = "/home/matrss/Projects/nixpkgs";
@@ -30,7 +30,10 @@
 
     nur.url = "github:nix-community/nur";
 
-    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "large";
+    };
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -82,6 +85,11 @@
             inputs.nur.overlay
             (channelToOverlay {
               inherit system config;
+              flake = "nixpkgs";
+              branch = "master";
+            })
+            (channelToOverlay {
+              inherit system config;
               flake = "large";
               branch = "nixos-unstable";
             })
@@ -98,7 +106,7 @@
           ];
         };
     in flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgsFor inputs.nixpkgs system;
+      let pkgs = nixpkgsFor inputs.large system;
       in {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
