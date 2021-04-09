@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     wrapGApp "$out/bin/virtboard"
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://source.puri.sm/Librem5/virtboard";
     description =
       "A basic keyboard, blazing the path of modern Wayland keyboards. Sacrificial.";

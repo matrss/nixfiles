@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ cmake libxkbcommon ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://source.puri.sm/Librem5/feedbackd";
     description =
       "A daemon to provide haptic (and later more) feedback on events";

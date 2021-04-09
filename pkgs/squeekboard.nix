@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ wayland wayland-protocols feedbackd libxkbcommon ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://source.puri.sm/Librem5/squeekboard";
     description = "The final Librem5 keyboard";
     # license = licenses.mit;

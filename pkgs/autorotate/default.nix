@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     cp $src/autorotate $out/bin
   '';
 
-  meta = with stdenv.lib;
+  meta = with lib;
     {
       # homepage = "";
       # description = "";

@@ -13,7 +13,7 @@ rustPlatform.buildRustPackage rec {
 
   cargoSha256 = "sha256-7tNG16OKijGfrMmxvSR5L+D1biV2qMNNXQtPD/Hn308=";
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://github.com/efernau/rot8";
     description =
       "Automatic display rotation using built-in accelerometer for sway and X11.";

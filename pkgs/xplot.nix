@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ libX11 ];
 
-  meta = with stdenv.lib;
+  meta = with lib;
     {
       # homepage = "https://github.com/efernau/rot8";
       # description =

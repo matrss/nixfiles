@@ -1,4 +1,4 @@
-{ stdenv, rustPlatform, fetchFromGitHub }:
+{ stdenv, lib, rustPlatform, fetchFromGitHub }:
 
 rustPlatform.buildRustPackage rec {
   pname = "pier";
@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://github.com/pier-cli/pier";
     description = "A Linux script management CLI written in Rust";
     license = licenses.mit;

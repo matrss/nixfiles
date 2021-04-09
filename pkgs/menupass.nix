@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     cp -a menupass $out/bin/menupass
   '';
 
-  wrapperPath = stdenv.lib.makeBinPath [ bemenu wtype pass ];
+  wrapperPath = lib.makeBinPath [ bemenu wtype pass ];
 
   fixupPhase = ''
     wrapProgram $out/bin/menupass \

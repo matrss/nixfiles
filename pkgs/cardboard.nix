@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ wayland libffi ] ++ wlroots.buildInputs;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = "https://gitlab.com/cardboardwm/cardboard";
     description = ''
       Cardboard is a unique, scrollable tiling Wayland compositor designed with
