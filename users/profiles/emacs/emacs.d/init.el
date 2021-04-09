@@ -163,6 +163,8 @@
 
 (use-package nix-mode)
 
+(use-package rust-mode)
+
 (use-package markdown-mode)
 (use-package evil-markdown
   :after (evil markdown-mode))
