@@ -3,13 +3,13 @@
     image = "authelia/authelia:4.27.4";
 
     volumes = [
-      "${../../secrets/hosts/ara/authelia/configuration.yml}:/configuration.yml:ro"
+      "${
+        ../../secrets/hosts/ara/authelia/configuration.yml
+      }:/configuration.yml:ro"
       "/volumes/authelia-config:/config:rw"
     ];
 
-    cmd = [
-      "--config" "/configuration.yml"
-    ];
+    cmd = [ "--config" "/configuration.yml" ];
 
     extraOptions = [
       "--net=services"

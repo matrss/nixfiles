@@ -6,17 +6,17 @@
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
 
-    serviceConfig = let
-      dockercli = "${config.virtualisation.docker.package}/bin/docker";
-    in {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = ''
-        ${pkgs.bash}/bin/sh -c "${dockercli} network create services || true"
-      '';
-      ExecStop = ''
-        ${pkgs.bash}/bin/sh -c "${dockercli} network rm services || true"
-      '';
-    };
+    serviceConfig =
+      let dockercli = "${config.virtualisation.docker.package}/bin/docker";
+      in {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = ''
+          ${pkgs.bash}/bin/sh -c "${dockercli} network create services || true"
+        '';
+        ExecStop = ''
+          ${pkgs.bash}/bin/sh -c "${dockercli} network rm services || true"
+        '';
+      };
   };
 }

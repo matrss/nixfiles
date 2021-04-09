@@ -64,6 +64,6 @@ in {
   draco =
     config "draco" inputs.rel2009 inputs.home-manager-rel2009 "x86_64-linux";
   # ara = config "ara" inputs.rel2009-tempsecretsfix inputs.home-manager-rel2009
-    # "x86_64-linux";
+  # "x86_64-linux";
   ara = config "ara" inputs.large inputs.home-manager "x86_64-linux";
 }

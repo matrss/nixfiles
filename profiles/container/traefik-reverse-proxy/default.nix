@@ -2,10 +2,7 @@
   virtualisation.oci-containers.containers.traefik-reverse-proxy = {
     image = "traefik:v2.4.8";
 
-    ports = [
-      "0.0.0.0:80:80"
-      "0.0.0.0:443:443"
-    ];
+    ports = [ "0.0.0.0:80:80" "0.0.0.0:443:443" ];
 
     volumes = [
       "${./static-config.toml}:/etc/traefik/traefik.toml:ro"

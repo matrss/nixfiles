@@ -25,14 +25,7 @@
       image = "caddy:2.3.0-alpine";
       dependsOn = [ "pyload" ];
       ports = [ "8000:8000" ];
-      cmd = [
-        "caddy"
-        "reverse-proxy"
-        "--from"
-        ":8000"
-        "--to"
-        "10.1.1.2:8000"
-      ];
+      cmd = [ "caddy" "reverse-proxy" "--from" ":8000" "--to" "10.1.1.2:8000" ];
       extraOptions = [ "--net=proton_network" ];
     };
   };

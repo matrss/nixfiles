@@ -13,10 +13,7 @@ in {
 
     ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
-    volumes = [
-      "/volumes/radarr-config:/config"
-      "/srv/media:/media"
-    ];
+    volumes = [ "/volumes/radarr-config:/config" "/srv/media:/media" ];
 
     extraOptions = [
       "--net=services"
