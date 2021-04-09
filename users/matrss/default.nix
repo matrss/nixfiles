@@ -11,7 +11,7 @@
     ];
 
     home.packages = with pkgs; [
-      datalad
+      # datalad
       git-annex
       (python3.withPackages (ps: with ps; [ pip ]))
 
@@ -27,6 +27,9 @@
       pier
 
       youtube-dl
+
+      rstudio
+      # dcraw
       # filebot
       # tinymediamanager
     ];

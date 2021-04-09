@@ -6,7 +6,11 @@
   home-manager.users.matrss2 = {
     imports = [ ];
 
-    home.packages = with pkgs; [ datalad git-annex ];
+    home.packages = with pkgs;
+      [
+        # datalad
+        git-annex
+      ];
 
     programs.git = {
       enable = true;
