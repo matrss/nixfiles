@@ -35,9 +35,8 @@
     spotify
     libreoffice
     xournalpp
-    discord
+    nixpkgs.discord
     qtpass
-    nextcloud-client
 
     # KDE/Plasma apps
     syncthingtray
