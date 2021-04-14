@@ -1,5 +1,15 @@
-{ stdenv, fetchurl, meson, ninja, pkg-config, wayland, wayland-protocols
-, libxkbcommon, cairo, wrapGAppsHook, gsettings-desktop-schemas }:
+{ stdenv
+, fetchurl
+, meson
+, ninja
+, pkg-config
+, wayland
+, wayland-protocols
+, libxkbcommon
+, cairo
+, wrapGAppsHook
+, gsettings-desktop-schemas
+}:
 
 stdenv.mkDerivation rec {
   pname = "virtboard";

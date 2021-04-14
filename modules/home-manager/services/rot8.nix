@@ -4,7 +4,8 @@ with lib;
 
 let cfg = config.services.rot8;
 
-in {
+in
+{
   options = {
     services.rot8 = {
       enable = mkEnableOption "the rot8 screen rotation daemon";

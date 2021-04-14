@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 
 let hmConfig = config;
-in {
+in
+{
   imports = [
     ./waybar
     ./bemenu.nix
@@ -155,31 +156,33 @@ in {
         };
       };
 
-      keybindings = let
-        modifier = config.modifier;
-        wobpipe = hmConfig.services.wob.pipe;
-      in lib.mkOptionDefault {
-        "${modifier}+p" = "exec ${pkgs.menupass}/bin/menupass";
-        "${modifier}+Tab" =
-          "exec ${pkgs.sway}/bin/swaymsg workspace back_and_forth";
-        "XF86AudioLowerVolume" =
-          "exec ${pkgs.pamixer}/bin/pamixer -d 5 && ${pkgs.pamixer}/bin/pamixer --unmute && ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobpipe}";
-        "XF86AudioRaiseVolume" =
-          "exec ${pkgs.pamixer}/bin/pamixer -i 5 && ${pkgs.pamixer}/bin/pamixer --unmute && ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobpipe}";
-        "XF86AudioMute" =
-          "exec ${pkgs.pamixer}/bin/pamixer --toggle-mute && (${pkgs.pamixer}/bin/pamixer --get-mute && echo 0 > ${wobpipe}) || ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobpipe}";
-        "XF86AudioMicMute" =
-          "exec ${pkgs.pamixer}/bin/pamixer --source 1 --toggle-mute";
-        "XF86MonBrightnessUp" =
-          "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5% && ${pkgs.brightnessctl}/bin/brightnessctl -m i | cut -d',' -f4 | tr -d '%' > ${wobpipe}";
-        "XF86MonBrightnessDown" =
-          "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%- && ${pkgs.brightnessctl}/bin/brightnessctl -m i | cut -d',' -f4 | tr -d '%' > ${wobpipe}";
-        "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-        "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
-        "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
-        "Print" =
-          ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)"'';
-      };
+      keybindings =
+        let
+          modifier = config.modifier;
+          wobpipe = hmConfig.services.wob.pipe;
+        in
+        lib.mkOptionDefault {
+          "${modifier}+p" = "exec ${pkgs.menupass}/bin/menupass";
+          "${modifier}+Tab" =
+            "exec ${pkgs.sway}/bin/swaymsg workspace back_and_forth";
+          "XF86AudioLowerVolume" =
+            "exec ${pkgs.pamixer}/bin/pamixer -d 5 && ${pkgs.pamixer}/bin/pamixer --unmute && ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobpipe}";
+          "XF86AudioRaiseVolume" =
+            "exec ${pkgs.pamixer}/bin/pamixer -i 5 && ${pkgs.pamixer}/bin/pamixer --unmute && ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobpipe}";
+          "XF86AudioMute" =
+            "exec ${pkgs.pamixer}/bin/pamixer --toggle-mute && (${pkgs.pamixer}/bin/pamixer --get-mute && echo 0 > ${wobpipe}) || ${pkgs.pamixer}/bin/pamixer --get-volume > ${wobpipe}";
+          "XF86AudioMicMute" =
+            "exec ${pkgs.pamixer}/bin/pamixer --source 1 --toggle-mute";
+          "XF86MonBrightnessUp" =
+            "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5% && ${pkgs.brightnessctl}/bin/brightnessctl -m i | cut -d',' -f4 | tr -d '%' > ${wobpipe}";
+          "XF86MonBrightnessDown" =
+            "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%- && ${pkgs.brightnessctl}/bin/brightnessctl -m i | cut -d',' -f4 | tr -d '%' > ${wobpipe}";
+          "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+          "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+          "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+          "Print" =
+            ''exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)"'';
+        };
 
       # keycodebindings = {
       #   "197" =

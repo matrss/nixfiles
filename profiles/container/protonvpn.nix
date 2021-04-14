@@ -24,7 +24,8 @@
 
     serviceConfig =
       let dockercli = "${config.virtualisation.docker.package}/bin/docker";
-      in {
+      in
+      {
         Type = "oneshot";
         RemainAfterExit = true;
         ExecStart = ''

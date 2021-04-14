@@ -1,7 +1,8 @@
 let
   hostPort = 8989;
   containerPort = 8989;
-in {
+in
+{
   virtualisation.oci-containers.containers.sonarr = {
     image = "linuxserver/sonarr:preview-version-3.0.5.1143";
 

@@ -1,5 +1,17 @@
-{ stdenv, fetchurl, meson, ninja, cmake, pkg-config, glib, gsound, libgudev
-, json-glib, gobject-introspection, vala, libxkbcommon }:
+{ stdenv
+, fetchurl
+, meson
+, ninja
+, cmake
+, pkg-config
+, glib
+, gsound
+, libgudev
+, json-glib
+, gobject-introspection
+, vala
+, libxkbcommon
+}:
 
 stdenv.mkDerivation rec {
   pname = "feedbackd";

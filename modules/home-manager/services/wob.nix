@@ -4,7 +4,8 @@ with lib;
 
 let cfg = config.services.wob;
 
-in {
+in
+{
   options = {
     services.wob = {
       enable = mkEnableOption "Whether to enable wob.";
@@ -154,28 +155,30 @@ in {
 
       Service = {
         ExecStartPre = "-${pkgs.coreutils}/bin/mkfifo ${cfg.pipe}";
-        ExecStart = let
-          wobCall = toString ([
-            "${cfg.package}/bin/wob"
-            (optional (cfg.timeout != null) "--timeout ${toString cfg.timeout}")
-            (optional (cfg.max != null) "--max ${toString cfg.max}")
-            (optional (cfg.width != null) "--width ${toString cfg.width}")
-            (optional (cfg.height != null) "--height ${toString cfg.height}")
-            (optional (cfg.offset != null) "--offset ${toString cfg.offset}")
-            (optional (cfg.border != null) "--border ${toString cfg.border}")
-            (optional (cfg.padding != null) "--padding ${toString cfg.padding}")
-            (optional (cfg.margin != null) "--margin ${toString cfg.margin}")
-            (optional (cfg.borderColor != null)
-              "--border-color ${toString cfg.borderColor}")
-            (optional (cfg.backgroundColor != null)
-              "--background-color ${toString cfg.backgroundColor}")
-            (optional (cfg.barColor != null)
-              "--bar-color ${toString cfg.barColor}")
-          ] ++ (map (a: "--anchor ${a}") cfg.anchors)
+        ExecStart =
+          let
+            wobCall = toString ([
+              "${cfg.package}/bin/wob"
+              (optional (cfg.timeout != null) "--timeout ${toString cfg.timeout}")
+              (optional (cfg.max != null) "--max ${toString cfg.max}")
+              (optional (cfg.width != null) "--width ${toString cfg.width}")
+              (optional (cfg.height != null) "--height ${toString cfg.height}")
+              (optional (cfg.offset != null) "--offset ${toString cfg.offset}")
+              (optional (cfg.border != null) "--border ${toString cfg.border}")
+              (optional (cfg.padding != null) "--padding ${toString cfg.padding}")
+              (optional (cfg.margin != null) "--margin ${toString cfg.margin}")
+              (optional (cfg.borderColor != null)
+                "--border-color ${toString cfg.borderColor}")
+              (optional (cfg.backgroundColor != null)
+                "--background-color ${toString cfg.backgroundColor}")
+              (optional (cfg.barColor != null)
+                "--bar-color ${toString cfg.barColor}")
+            ] ++ (map (a: "--anchor ${a}") cfg.anchors)
             ++ (map (o: "--output ${o}") cfg.outputs));
-        in ''
-          ${pkgs.bash}/bin/sh -c "${pkgs.coreutils}/bin/tail -f ${cfg.pipe} | ${wobCall}"
-        '';
+          in
+          ''
+            ${pkgs.bash}/bin/sh -c "${pkgs.coreutils}/bin/tail -f ${cfg.pipe} | ${wobCall}"
+          '';
         ExecStopPost = "-${pkgs.coreutils}/bin/rm ${cfg.pipe}";
       };
 

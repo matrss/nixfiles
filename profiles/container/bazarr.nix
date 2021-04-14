@@ -1,7 +1,8 @@
 let
   hostPort = 6767;
   containerPort = 6767;
-in {
+in
+{
   virtualisation.oci-containers.containers.bazarr = {
     image = "linuxserver/bazarr:version-v0.9.3";
 

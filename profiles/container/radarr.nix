@@ -1,7 +1,8 @@
 let
   hostPort = 7878;
   containerPort = 7878;
-in {
+in
+{
   virtualisation.oci-containers.containers.radarr = {
     image = "linuxserver/radarr:nightly-version-3.1.0.4832";
 

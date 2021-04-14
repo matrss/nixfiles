@@ -4,7 +4,8 @@ with lib;
 
 let cfg = config.services.autorotate;
 
-in {
+in
+{
   options = {
     services.autorotate = {
       enable = mkEnableOption "autorotate script for sway";

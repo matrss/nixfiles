@@ -1,7 +1,32 @@
-{ python3Packages, buildPythonPackage, fetchPypi, wrapt, requests, msgpack
-, whoosh, simplejson, keyrings-alt, PyGithub, boto, keyring, jsmin, fasteners
-, humanize, appdirs, annexremote, tqdm, patool, iso8601, setuptools, git-annex
-, python-gitlab, mutagen, exifread, pillow, python-xmp-toolkit, pypandoc, nose
+{ python3Packages
+, buildPythonPackage
+, fetchPypi
+, wrapt
+, requests
+, msgpack
+, whoosh
+, simplejson
+, keyrings-alt
+, PyGithub
+, boto
+, keyring
+, jsmin
+, fasteners
+, humanize
+, appdirs
+, annexremote
+, tqdm
+, patool
+, iso8601
+, setuptools
+, git-annex
+, python-gitlab
+, mutagen
+, exifread
+, pillow
+, python-xmp-toolkit
+, pypandoc
+, nose
 }:
 
 let
@@ -25,7 +50,8 @@ let
 
     doCheck = false;
   };
-in buildPythonPackage rec {
+in
+buildPythonPackage rec {
   pname = "datalad";
   version = "0.14.0";
 

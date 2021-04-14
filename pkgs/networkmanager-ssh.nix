@@ -1,10 +1,26 @@
-{ lib, stdenv, fetchFromGitHub, substituteAll, vpnc, intltool, pkg-config
-, networkmanager, libsecret, gtk3, withGnome ? true, gnome3, glib, kmod, file
-, fetchpatch, libnma }:
+{ lib
+, stdenv
+, fetchFromGitHub
+, substituteAll
+, vpnc
+, intltool
+, pkg-config
+, networkmanager
+, libsecret
+, gtk3
+, withGnome ? true
+, gnome3
+, glib
+, kmod
+, file
+, fetchpatch
+, libnma
+}:
 let
   pname = "NetworkManager-ssh";
   version = "1.2.11";
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   name = "${pname}${if withGnome then "-gnome" else ""}-${version}";
 
   src = fetchFromGitHub {

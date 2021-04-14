@@ -6,7 +6,8 @@ let
 
   cfg = config.programs.password-store;
 
-in {
+in
+{
 
   options.programs.password-store = {
     # enableBashIntegration = mkOption {

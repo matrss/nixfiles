@@ -68,9 +68,12 @@
       # Nonstandard channel wrapper for build visibility
       channelToOverlay = { system, config, flake, branch }:
         (final: prev: {
-          ${flake} = lib.mapAttrs (k: v:
-            diffTrace (baseNameOf inputs.${flake}) (baseNameOf prev.path)
-            "pkgs.${k} pinned to nixpkgs/${branch}" v) (import inputs.${flake} {
+          ${flake} = lib.mapAttrs
+            (k: v:
+              diffTrace (baseNameOf inputs.${flake}) (baseNameOf prev.path)
+                "pkgs.${k} pinned to nixpkgs/${branch}"
+                v)
+            (import inputs.${flake} {
               inherit config system;
               overlays = [ ];
             });
@@ -105,35 +108,41 @@
             })
           ];
         };
-    in flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgsFor inputs.large system;
-      in {
-        devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [
-            git
-            git-crypt
-            nixFlakes
-            nixfmt
-            inputs.deploy-rs.defaultPackage."${system}"
-          ];
-          shellHook = ''
-            export PATH="$PWD/utils:$PATH"
-          '';
-        };
+    in
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let pkgs = nixpkgsFor inputs.large system;
+        in
+        {
+          devShell = pkgs.mkShell {
+            nativeBuildInputs = with pkgs; [
+              git
+              git-crypt
+              nixFlakes
+              nixfmt
+              inputs.deploy-rs.defaultPackage."${system}"
+            ];
+            shellHook = ''
+              export PATH="$PWD/utils:$PATH"
+            '';
+          };
 
-        packages = let
-          packages = self.overlay pkgs pkgs;
-          overlays = lib.filterAttrs (n: v: n != "pkgs") self.overlays;
-          overlayPkgs = genAttrs (attrNames overlays)
-            (name: (overlays."${name}" pkgs pkgs)."${name}");
-        in recursiveUpdate packages overlayPkgs;
+          packages =
+            let
+              packages = self.overlay pkgs pkgs;
+              overlays = lib.filterAttrs (n: v: n != "pkgs") self.overlays;
+              overlayPkgs = genAttrs (attrNames overlays)
+                (name: (overlays."${name}" pkgs pkgs)."${name}");
+            in
+            recursiveUpdate packages overlayPkgs;
 
-      }) // {
+        }) // {
 
-        nixosConfigurations =
-          import ./hosts (recursiveUpdate inputs { inherit nixpkgsFor; });
+      nixosConfigurations =
+        import ./hosts (recursiveUpdate inputs { inherit nixpkgsFor; });
 
-        nixosModules = let
+      nixosModules =
+        let
           # modules
           moduleList = import ./modules/list.nix;
           modulesAttrs = pathsToImportedAttrs moduleList;
@@ -142,63 +151,68 @@
           profilesList = import ./profiles/list.nix;
           profilesAttrs = { profiles = pathsToImportedAttrs profilesList; };
 
-        in recursiveUpdate modulesAttrs profilesAttrs;
+        in
+        recursiveUpdate modulesAttrs profilesAttrs;
 
-        hmModules = let
+      hmModules =
+        let
           # modules
           moduleList = import ./modules/home-manager/list.nix;
           modulesAttrs = pathsToImportedAttrs moduleList;
 
           # TODO: add home-manager profiles (move them into profiles as well?)
-        in modulesAttrs;
+        in
+        modulesAttrs;
 
-        overlay = import ./pkgs;
+      overlay = import ./pkgs;
 
-        overlays = let
+      overlays =
+        let
           overlayDir = ./overlays;
           fullPath = name: overlayDir + "/${name}";
           overlayPaths = (map fullPath (attrNames (readDir overlayDir)))
-            ++ [ ./pkgs ];
-        in pathsToImportedAttrs overlayPaths;
+          ++ [ ./pkgs ];
+        in
+        pathsToImportedAttrs overlayPaths;
 
-        deploy.nodes = {
-          andromeda = {
-            hostname = "andromeda";
-            sshUser = "root";
+      deploy.nodes = {
+        andromeda = {
+          hostname = "andromeda";
+          sshUser = "root";
 
-            profiles.system = {
-              user = "root";
-              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-                self.nixosConfigurations.andromeda;
-            };
-          };
-
-          draco = {
-            hostname = "168.119.121.219";
-            sshUser = "root";
-
-            profiles.system = {
-              user = "root";
-              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-                self.nixosConfigurations.draco;
-            };
-          };
-
-          ara = {
-            hostname = "ara.matrss.de";
-            sshUser = "root";
-
-            profiles.system = {
-              user = "root";
-              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-                self.nixosConfigurations.ara;
-            };
+          profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.andromeda;
           };
         };
 
-        # This is highly advised, and will prevent many possible mistakes
-        checks = builtins.mapAttrs
-          (system: deployLib: deployLib.deployChecks self.deploy)
-          inputs.deploy-rs.lib;
+        draco = {
+          hostname = "168.119.121.219";
+          sshUser = "root";
+
+          profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.draco;
+          };
+        };
+
+        ara = {
+          hostname = "ara.matrss.de";
+          sshUser = "root";
+
+          profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.ara;
+          };
+        };
       };
+
+      # This is highly advised, and will prevent many possible mistakes
+      checks = builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy)
+        inputs.deploy-rs.lib;
+    };
 }

@@ -13,15 +13,17 @@
 
   nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
 
-  networking.firewall = let
-    kdeconnectPorts = {
-      from = 1714;
-      to = 1764;
+  networking.firewall =
+    let
+      kdeconnectPorts = {
+        from = 1714;
+        to = 1764;
+      };
+    in
+    {
+      allowedTCPPortRanges = [ kdeconnectPorts ];
+      allowedUDPPortRanges = [ kdeconnectPorts ];
     };
-  in {
-    allowedTCPPortRanges = [ kdeconnectPorts ];
-    allowedUDPPortRanges = [ kdeconnectPorts ];
-  };
 
   environment.systemPackages = with pkgs; [
     firefox

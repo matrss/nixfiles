@@ -1,5 +1,19 @@
-{ stdenv, fetchurl, meson, ninja, cmake, rustc, cargo, pkg-config, glib, wayland
-, wayland-protocols, gnome3, gtk3, libxkbcommon, feedbackd }:
+{ stdenv
+, fetchurl
+, meson
+, ninja
+, cmake
+, rustc
+, cargo
+, pkg-config
+, glib
+, wayland
+, wayland-protocols
+, gnome3
+, gtk3
+, libxkbcommon
+, feedbackd
+}:
 
 stdenv.mkDerivation rec {
   pname = "squeekboard";

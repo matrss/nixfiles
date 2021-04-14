@@ -1,5 +1,16 @@
-{ stdenv, fetchurl, meson, ninja, pkg-config, wayland, git, wlroots, gcc10
-, libffi, cereal, tl-expected }:
+{ stdenv
+, fetchurl
+, meson
+, ninja
+, pkg-config
+, wayland
+, git
+, wlroots
+, gcc10
+, libffi
+, cereal
+, tl-expected
+}:
 
 stdenv.mkDerivation rec {
   pname = "cardboard";
