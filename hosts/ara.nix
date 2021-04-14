@@ -4,6 +4,7 @@
   imports = [
     ../users/root
     ../users/matrss-ara
+    ../profiles/gitlab-runner.nix
     ../profiles/container/services-network.nix
     ../profiles/container/traefik-reverse-proxy
     ../profiles/container/authelia.nix
