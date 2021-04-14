@@ -32,6 +32,7 @@
       youtube-dl
 
       rstudio
+      vscodium
       # dcraw
       # filebot
       # tinymediamanager
@@ -96,8 +97,7 @@
       enable = true;
       userName = "Matthias Riße";
       userEmail = "matthias.risze@t-online.de";
-
-      # extraConfig = { pull = { ff = "only"; }; };
+      extraConfig = { pull = { ff = "only"; }; };
     };
 
     programs.password-store = {
