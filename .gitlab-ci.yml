@@ -1,0 +1,21 @@
+stages:
+  - update
+
+update inputs:
+  tags: [ nixFlakes ]
+  stage: update
+  only:
+    - schedules
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - git config --global user.email "matthias.risze@t-online.de"
+    - git config --global user.name "gitlab-runner"
+  script:
+    - nix flake update --commit-lock-file
+    - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
+    - nix build .#nixosConfigurations.ara.config.system.build.toplevel
+    - nix build .#nixosConfigurations.draco.config.system.build.toplevel
+    - git push --force origin ci-update
