@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, makeWrapper, bemenu, wtype, pass }:
+{ lib, stdenv, fetchFromGitHub, makeWrapper, bemenu, wtype, pass }:
 
 stdenv.mkDerivation rec {
   name = "menupass";

@@ -1,4 +1,4 @@
-{ stdenv }:
+{ lib, stdenv }:
 
 stdenv.mkDerivation rec {
   pname = "autorotate";
