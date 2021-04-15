@@ -2,16 +2,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "pier";
-  version = "master";
+  version = "0.1.4";
 
   src = fetchFromGitHub {
     owner = "pier-cli";
     repo = "pier";
-    rev = "${version}";
-    sha256 = "sha256-nh8r9jZ+wC/SrxhnUiOBwHt+FkbedWYvokmCwDKjQ0g=";
+    rev = "v${version}";
+    sha256 = "sha256-DTPYUnajcjWR+lytCr55p4p7jeLj8sQPSRc14jXEbA8=";
   };
 
-  cargoSha256 = "sha256-MYmQ2L9VMku3Lo7tagonIszjJvXvqWuIH9TBc5DTpKk=";
+  cargoSha256 = "sha256-cpP8iMsPP727Uifa6NVMtRWRiq09QalpnbN1lYMsg34=";
 
   doCheck = false;
 
