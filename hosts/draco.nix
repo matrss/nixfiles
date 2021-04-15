@@ -59,19 +59,6 @@
   environment.systemPackages = with pkgs; [ vim ];
   # services.xserver.desktopManager.plasma5.enable = true;
 
-  networking.interfaces."tinc.mesh".ipv4.addresses = [{
-    address = hosts.draco.ip.tinc;
-    prefixLength = 24;
-  }];
-  networking.firewall.allowedUDPPorts = [ 655 ];
-  networking.firewall.allowedTCPPorts = [ 655 ];
-
-  services.tinc.networks.mesh = {
-    name = "draco";
-    rsaPrivateKeyFile = ../secrets/hosts/draco/tinc/rsa_key.priv;
-    ed25519PrivateKeyFile = ../secrets/hosts/draco/tinc/ed25519_key.priv;
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

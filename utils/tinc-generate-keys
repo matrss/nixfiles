@@ -1,4 +1,0 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p tinc_pre
-
-tinc --config . generate-keys

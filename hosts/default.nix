@@ -51,7 +51,6 @@ let
           local
           hm-config
           # self.nixosModules.profiles.adblock-hosts
-          self.nixosModules.profiles.tinc-hosts
           ({ _module.args = { hosts = import ../secrets/hosts.nix; }; })
         ];
     };

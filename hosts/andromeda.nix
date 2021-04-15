@@ -111,28 +111,6 @@
     # samsung-unified-linux-driver_1_00_37
   ];
 
-  networking.interfaces."tinc.mesh".ipv4.addresses = [{
-    address = hosts.andromeda.ip.tinc;
-    prefixLength = 24;
-  }];
-  networking.firewall.allowedUDPPorts = [ 655 ];
-  networking.firewall.allowedTCPPorts = [ 655 3179 ];
-
-  networking.firewall.enable = true;
-
-  services.tinc.networks.mesh = {
-    name = "andromeda";
-    # settings.PrivateKeyFile = "../secrets/hosts/andromeda/tinc/rsa_key.priv";
-    # settings.Ed25519PrivateKeyFile = "/home/matrss/nix-config/secrets/hosts/andromeda/tinc/ed25519_key.priv";
-    rsaPrivateKeyFile = builtins.toFile "rsa.priv"
-      (builtins.readFile ../secrets/hosts/andromeda/tinc/rsa_key.priv);
-    ed25519PrivateKeyFile = builtins.toFile "ed25519.priv"
-      (builtins.readFile ../secrets/hosts/andromeda/tinc/ed25519_key.priv);
-    extraConfig = ''
-      ConnectTo = draco
-    '';
-  };
-
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
 

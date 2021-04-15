@@ -162,26 +162,6 @@
     ffmpeg
   ];
 
-  networking.interfaces."tinc.mesh".ipv4.addresses = [{
-    address = hosts.ara.ip.tinc;
-    prefixLength = 24;
-  }];
-  networking.firewall.allowedUDPPorts = [ 655 ];
-  networking.firewall.allowedTCPPorts = [ 655 ];
-
-  services.tinc.networks.mesh = {
-    name = "ara";
-    # rsaPrivateKeyFile = ../secrets/hosts/ara/tinc/rsa_key.priv;
-    # ed25519PrivateKeyFile = ../secrets/hosts/ara/tinc/ed25519_key.priv;
-    rsaPrivateKeyFile = builtins.toFile "rsa.priv"
-      (builtins.readFile ../secrets/hosts/ara/tinc/rsa_key.priv);
-    ed25519PrivateKeyFile = builtins.toFile "ed25519.priv"
-      (builtins.readFile ../secrets/hosts/ara/tinc/ed25519_key.priv);
-    extraConfig = ''
-      ConnectTo = draco
-    '';
-  };
-
   services.ddclient = {
     enable = true;
     protocol = "cloudflare";
