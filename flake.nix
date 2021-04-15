@@ -118,12 +118,8 @@
               git
               git-crypt
               nixFlakes
-              nixfmt
               inputs.deploy-rs.defaultPackage."${system}"
             ];
-            shellHook = ''
-              export PATH="$PWD/utils:$PATH"
-            '';
           };
 
           packages =
@@ -135,6 +131,12 @@
             in
             recursiveUpdate packages overlayPkgs;
 
+          apps =
+            let
+              scripts = import ./scripts.nix { inherit pkgs; };
+              f = name: flake-utils.lib.mkApp { drv = scripts."${name}"; };
+            in
+            genAttrs (attrNames scripts) f;
         }) // {
 
       nixosConfigurations =
