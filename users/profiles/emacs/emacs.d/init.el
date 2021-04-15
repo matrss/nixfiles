@@ -71,7 +71,7 @@
   :config
   (which-key-mode t))
 
-(use-package undo-fu)
+; (use-package undo-fu)
 
 (use-package evil
   ;; evil-leader first, so that it works in initial buffers (*scratch*, ...)
