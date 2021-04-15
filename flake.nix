@@ -7,7 +7,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     large.url = "github:NixOS/nixpkgs/nixos-unstable";
     small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    rel2009-tempsecretsfix.url = "/home/matrss/Projects/nixpkgs";
     rel2009.url = "github:NixOS/nixpkgs/nixos-20.09";
 
     home-manager = {
