@@ -186,17 +186,6 @@
           };
         };
 
-        draco = {
-          hostname = "168.119.121.219";
-          sshUser = "root";
-
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.draco;
-          };
-        };
-
         ara = {
           hostname = "ara.matrss.de";
           sshUser = "root";
