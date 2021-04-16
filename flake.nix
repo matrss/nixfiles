@@ -115,11 +115,17 @@
         {
           devShell = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
+              scripts
+
               git
               git-crypt
               nixFlakes
               inputs.deploy-rs.defaultPackage."${system}"
             ];
+
+            shellHook = ''
+              export NIX_FLAKE_DIR="$PWD"
+            '';
           };
 
           packages =
@@ -133,7 +139,7 @@
 
           apps =
             let
-              scripts = import ./scripts.nix { inherit pkgs; };
+              scripts = import ./pkgs/scripts.nix { inherit pkgs; };
               f = name: flake-utils.lib.mkApp { drv = scripts."${name}"; };
             in
             genAttrs (attrNames scripts) f;

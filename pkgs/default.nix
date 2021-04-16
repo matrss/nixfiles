@@ -16,4 +16,9 @@ final: prev: {
   # lightly = prev.callPackage ./lightly.nix { };
   networkmanager-ssh = prev.callPackage ./networkmanager-ssh.nix { };
   tinymediamanager = prev.callPackage ./tinymediamanager.nix { };
+
+  scripts = prev.symlinkJoin {
+    name = "scripts";
+    paths = builtins.attrValues (import ./scripts.nix { pkgs = prev; });
+  };
 }
