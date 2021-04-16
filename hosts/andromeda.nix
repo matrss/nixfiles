@@ -3,7 +3,6 @@
 {
   imports = [
     ../users/matrss
-    ../users/matrss2
     ../users/root
     ../profiles/wifi.nix
     ../profiles/graphical/plasma.nix
