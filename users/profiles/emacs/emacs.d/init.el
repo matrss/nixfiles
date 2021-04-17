@@ -75,9 +75,7 @@
 
 (use-package evil
   ;; evil-leader first, so that it works in initial buffers (*scratch*, ...)
-  :after (undo-fu evil-leader)
-  :init
-  (setq evil-undo-system 'undo-fu)
+  :after (evil-leader)
   :config
   (evil-mode t))
 
