@@ -249,7 +249,8 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "rel2009": "rel2009",
-        "small": "small"
+        "small": "small",
+        "sops-nix": "sops-nix"
       }
     },
     "small": {
@@ -265,6 +266,26 @@
         "owner": "NixOS",
         "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "large"
+        ]
+      },
+      "locked": {
+        "lastModified": 1618226608,
+        "narHash": "sha256-Hq/lcu48RhE3U6gYYkuT7v6hLHeu1PrasiaBiGkCX+w=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "ade2f5c17184df9d4c42d36da18a6ed903b4c02d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
         "type": "github"
       }
     },

@@ -1,6 +1,8 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 {
+  sops.secrets.gitlab-runner-env = { };
+
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
   virtualisation.docker.enable = true;
   services.gitlab-runner = {
@@ -12,7 +14,7 @@
         # File should contain at least these two variables:
         # `CI_SERVER_URL`
         # `REGISTRATION_TOKEN`
-        registrationConfigFile = ../secrets/hosts/ara/gitlab-runner-env;
+        registrationConfigFile = config.sops.secrets.gitlab-runner-env.path;
         dockerImage = "alpine";
         dockerVolumes = [
           "/nix/store:/nix/store:ro"

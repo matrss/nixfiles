@@ -1,4 +1,4 @@
-{ lib, pkgs, hosts, ... }:
+{ lib, pkgs, config, hosts, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
     ../profiles/gitlab-runner.nix
     ../profiles/container/services-network.nix
     ../profiles/container/traefik-reverse-proxy
-    ../profiles/container/authelia.nix
+    ../profiles/container/authelia
     # ../profiles/container/hello-world.nix
     ../profiles/container/whoami.nix
     ../profiles/container/jellyfin.nix
@@ -60,6 +60,7 @@
   };
 
   # Early ssh so that the disk can be decrypted.
+  sops.secrets.initrd-ssh-key = { };
   boot.kernelParams = [
     "ip=${hosts.ara.ip.lan}::${hosts.router.ip.lan}:255.255.255.0::enp0s25:off"
   ];
@@ -67,7 +68,7 @@
   boot.initrd.network.ssh = {
     enable = true;
     port = 2222;
-    hostKeys = [ "/root/secrets/host_ed25519_key.priv" ];
+    hostKeys = [ config.sops.secrets.initrd-ssh-key.path ];
   };
 
   # Don't swap as much; should be better for the SSD.
@@ -153,6 +154,9 @@
   services.avahi.publish.enable = true;
   services.avahi.publish.addresses = true;
 
+  # Default sops file for secrets.
+  sops.defaultSopsFile = ../secrets/ara/secrets.yaml;
+
   environment.systemPackages = with pkgs; [
     vim
     btrfs-progs
@@ -162,13 +166,11 @@
     ffmpeg
   ];
 
+  # Enable dynamic dns updating.
+  sops.secrets.ddclient-config = { };
   services.ddclient = {
     enable = true;
-    protocol = "cloudflare";
-    username = "matthias.risze@gmail.com";
-    password = builtins.readFile ../secrets/hosts/ara/cloudflare/cf-api.txt;
-    domains = [ "ara.matrss.de" "*.ara.matrss.de" ];
-    zone = "matrss.de";
+    configFile = config.sops.secrets.ddclient-config.path;
   };
 
   # virtualisation.podman.enable = true;

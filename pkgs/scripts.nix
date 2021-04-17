@@ -1,11 +1,6 @@
 { pkgs, ... }:
 
 {
-  ara-deploy-early-boot-ssh-host-key = pkgs.writeScriptBin "ara-deploy-early-boot-ssh-host-key" ''
-    #! /bin/sh
-
-    ${pkgs.openssh}/bin/scp secrets/hosts/ara/initrd_ssh/host_ed25519_key.priv root@ara.matrss.de:~
-  '';
   ara-remote-unlock = pkgs.writeScriptBin "ara-remote-unlock" ''
     #! /bin/sh
 

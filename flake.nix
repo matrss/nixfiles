@@ -29,6 +29,8 @@
 
     nur.url = "github:nix-community/nur";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "large";
@@ -118,9 +120,11 @@
               scripts
 
               git
-              git-crypt
+              ssh-to-pgp
               nixFlakes
+
               inputs.deploy-rs.defaultPackage."${system}"
+              inputs.sops-nix.packages."${system}".sops-pgp-hook
             ];
 
             shellHook = ''

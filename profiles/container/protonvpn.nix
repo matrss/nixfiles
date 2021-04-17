@@ -1,14 +1,21 @@
 { pkgs, config, ... }:
 
 {
+  sops.secrets.protonvpn-env = { };
+
   virtualisation.oci-containers.containers.protonvpn = {
     image = "ghcr.io/tprasadtp/protonvpn:4.1.2";
 
-    environment = import ../../secrets/protonvpn-env.nix;
+    environment = {
+      PROTONVPN_TIER = "0";
+      PROTONVPN_COUNTRY = "NL";
+      PROTONVPN_EXCLUDE_CIDRS = "10.1.1.0/24";
+    };
 
     volumes = [ "/dev/net:/dev/net:z" ];
 
     extraOptions = [
+      "--env-file=${config.sops.secrets.protonvpn-env.path}"
       "--cap-add=NET_ADMIN"
       "--net=proton_network"
       "--ip=10.1.1.2"
