@@ -51,16 +51,8 @@ let
           global
           local
           hm-config
-          # self.nixosModules.profiles.adblock-hosts
-          ({ _module.args = { hosts = import ../profiles/hosts.nix; }; })
         ];
     };
-
-  # hosts = utils.recImport {
-  #   dir = ./.;
-  #   _import = config;
-  # };
-  # in hosts
 in
 {
   andromeda =

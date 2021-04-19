@@ -1,5 +1,14 @@
-{ lib, pkgs, config, hosts, ... }:
+{ lib, pkgs, config, ... }:
 
+let
+  hosts = {
+    # Homeserver
+    ara.ip.lan = "192.168.178.254";
+
+    # FRITZ!Box
+    router.ip.lan = "192.168.178.1";
+  };
+in
 {
   imports = [
     ../users/root
