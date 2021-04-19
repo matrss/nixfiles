@@ -32,7 +32,24 @@
       youtube-dl
 
       rstudio
-      vscodium
+      (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions; let
+          jupyter = vscode-utils.buildVscodeMarketplaceExtension {
+            mktplcRef = {
+              name = "jupyter";
+              publisher = "ms-toolsai";
+              version = "2021.6.755784270";
+              sha256 = "sha256-32sPd6lxGXh7X1jNQDUvwXjEox64xu3loiazkAATftM=";
+            };
+          };
+        in
+        [
+          vscodevim.vim
+          ms-vsliveshare.vsliveshare
+          ms-python.python
+          jupyter
+        ];
+      })
       # dcraw
       # filebot
       # tinymediamanager
