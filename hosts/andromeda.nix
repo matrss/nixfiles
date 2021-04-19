@@ -4,7 +4,6 @@
   imports = [
     ../users/matrss
     ../users/root
-    ../profiles/wifi.nix
     ../profiles/graphical/plasma.nix
   ];
 

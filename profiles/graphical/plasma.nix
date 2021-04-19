@@ -24,6 +24,7 @@
       allowedTCPPortRanges = [ kdeconnectPorts ];
       allowedUDPPortRanges = [ kdeconnectPorts ];
     };
+  networking.networkmanager.enable = true;
 
   environment.systemPackages = with pkgs; [
     firefox
