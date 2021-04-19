@@ -1,7 +1,6 @@
 [
   ./core
   ./graphical/sway
-  ./adblock-hosts
   ./wifi.nix
 
   ./container/jellyfin.nix
