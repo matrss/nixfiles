@@ -27,7 +27,6 @@
       fd
       git
       tig
-      pier
 
       youtube-dl
 
