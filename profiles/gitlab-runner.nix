@@ -15,6 +15,8 @@
         # `CI_SERVER_URL`
         # `REGISTRATION_TOKEN`
         registrationConfigFile = config.sops.secrets.gitlab-runner-env.path;
+        registrationFlags = [ "--locked=false" ];
+        protected = true;
         dockerImage = "alpine";
         dockerVolumes = [
           "/nix/store:/nix/store:ro"
