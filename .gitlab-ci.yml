@@ -11,10 +11,13 @@ update inputs:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - ssh-keyscan -t rsa "${CI_SERVER_HOST}" >> ~/.ssh/known_hosts
     - git config --global user.email "matthias.risze@t-online.de"
     - git config --global user.name "gitlab-runner"
+    - git remote set-url origin "git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git"
+    - git checkout -b ci-update
   script:
     - nix flake update --commit-lock-file
     - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
     - nix build .#nixosConfigurations.ara.config.system.build.toplevel
-    - git push --force origin ci-update
+    - git push --set-upstream --force origin ci-update
