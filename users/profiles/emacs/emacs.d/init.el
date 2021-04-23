@@ -159,6 +159,10 @@
   :after (polymode org))
   ; :hook (org-mode . poly-org-mode)
 
+(use-package editorconfig
+  :config
+  (editorconfig-mode t))
+
 (use-package nix-mode)
 
 (use-package rust-mode)
