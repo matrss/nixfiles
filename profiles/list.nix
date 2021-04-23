@@ -7,6 +7,7 @@
   ./container/traefik-reverse-proxy/default.nix
   ./container/authelia/default.nix
   ./container/jellyfin.nix
+  ./container/paperless-ng.nix
   ./container/sonarr.nix
   ./container/radarr.nix
   ./container/bazarr.nix
