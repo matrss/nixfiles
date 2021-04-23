@@ -1,23 +1,15 @@
-stages:
-  - update
-
-update inputs:
+default:
   tags: [ nixFlakes ]
-  stage: update
-  only:
-    - schedules
-  before_script:
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan -t rsa "${CI_SERVER_HOST}" >> ~/.ssh/known_hosts
-    - git config --global user.email "matthias.risze@t-online.de"
-    - git config --global user.name "gitlab-runner"
-    - git remote set-url origin "git@${CI_SERVER_HOST}:${CI_PROJECT_PATH}.git"
-    - git checkout -b ci-update
-  script:
-    - nix flake update --commit-lock-file
-    - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
-    - nix build .#nixosConfigurations.ara.config.system.build.toplevel
-    - git push --set-upstream --force origin ci-update
+
+stages:
+  - build
+
+workflow:
+  rules:
+    - if: '$CI_MERGE_REQUEST_IID'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+flake check:
+  stage: build
+  script: nix flake check

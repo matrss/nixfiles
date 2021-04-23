@@ -1,6 +1,6 @@
 final: prev: {
-  datalad = prev.python37Packages.callPackage ./datalad.nix { };
-  networkmanager-ssh = prev.callPackage ./networkmanager-ssh.nix { };
+  # datalad = prev.python37Packages.callPackage ./datalad.nix { };
+  # networkmanager-ssh = prev.callPackage ./networkmanager-ssh.nix { };
 
   scripts = prev.symlinkJoin {
     name = "scripts";

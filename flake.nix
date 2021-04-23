@@ -46,9 +46,9 @@
 
   outputs = inputs@{ self, flake-utils, home-manager, ... }:
     let
-      inherit (builtins) attrNames attrValues readDir;
+      inherit (builtins) attrNames attrValues readDir pathExists;
       inherit (inputs.nixpkgs) lib;
-      inherit (lib) removeSuffix recursiveUpdate genAttrs;
+      inherit (lib) removeSuffix recursiveUpdate genAttrs optionalAttrs;
 
       genAttrs' = values: f: builtins.listToAttrs (map f values);
       pathsToImportedAttrs = paths:
@@ -181,7 +181,7 @@
         let
           overlayDir = ./overlays;
           fullPath = name: overlayDir + "/${name}";
-          overlayPaths = (map fullPath (attrNames (readDir overlayDir)))
+          overlayPaths = (map fullPath (attrNames (optionalAttrs (pathExists overlayDir) (readDir overlayDir))))
           ++ [ ./pkgs ];
         in
         pathsToImportedAttrs overlayPaths;
