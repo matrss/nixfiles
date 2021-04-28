@@ -183,6 +183,13 @@ in
     configFile = config.sops.secrets.ddclient-config.path;
   };
 
+  services.f2b-miner = {
+    enable = true;
+    logFile = "/home/matrss/public/data/f2b-bans.csv";
+    user = "matrss";
+    group = "users";
+  };
+
   # virtualisation.podman.enable = true;
   # virtualisation.oci-containers.backend = "podman";
 

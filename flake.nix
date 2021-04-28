@@ -27,6 +27,8 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
+    f2b-bans.url = "gitlab:matrss/fail2ban-bans";
+
     nur.url = "github:nix-community/nur";
 
     sops-nix.url = "github:Mic92/sops-nix";
@@ -87,6 +89,7 @@
             inputs.emacs.overlay
             inputs.neovim.overlay
             inputs.nur.overlay
+            inputs.f2b-bans.overlay
             (channelToOverlay {
               inherit system config;
               flake = "nixpkgs";
