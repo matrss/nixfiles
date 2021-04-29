@@ -26,6 +26,9 @@
     };
   networking.networkmanager.enable = true;
 
+  # Enable solaar udev rule for logitech devices
+  services.udev.packages = [ pkgs.solaar ];
+
   environment.systemPackages = with pkgs; [
     firefox
     plasma-browser-integration
@@ -40,6 +43,7 @@
     xournalpp
     nixpkgs.discord
     qtpass
+    solaar
 
     # KDE/Plasma apps
     syncthingtray
