@@ -44,6 +44,7 @@
     nixpkgs.discord
     qtpass
     solaar
+    gimp
 
     # KDE/Plasma apps
     syncthingtray
