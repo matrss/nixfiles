@@ -61,8 +61,27 @@
   # Don't swap as much; should be better for the SSD.
   boot.kernel.sysctl."vm.swappiness" = 1;
 
-  # CPU governor.
+  # Power management
+  # TODO: possibly undervolt
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  services.tlp = {
+    enable = true;
+    settings = {
+      TLP_ENABLE = 1;
+      TLP_DEFAULT_MODE = "AC";
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 50;
+      DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
+      DEVICES_TO_DISABLE_ON_WIFI_CONNECT = "wwan";
+      DEVICES_TO_DISABLE_ON_WWAN_CONNECT = "wifi";
+      DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
+      DEVICES_TO_ENABLE_ON_WIFI_DISCONNECT = "";
+      DEVICES_TO_ENABLE_ON_WWAN_DISCONNECT = "";
+      USB_BLACKLIST_PHONE = 1;
+    };
+  };
 
   # Enable ssh server
   services.openssh.enable = true;
