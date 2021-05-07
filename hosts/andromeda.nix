@@ -83,6 +83,9 @@
     };
   };
 
+  # Microcode update
+  hardware.cpu.intel.updateMicrocode = true;
+
   # Enable ssh server
   services.openssh.enable = true;
 
