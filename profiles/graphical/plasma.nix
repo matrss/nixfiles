@@ -11,7 +11,8 @@
   ];
   services.xserver.desktopManager.plasma5.enable = true;
 
-  nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
+  # This is set by default by enabling services.xserver.desktopManager.plasma5
+  # nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
 
   networking.firewall =
     let
@@ -31,7 +32,6 @@
 
   environment.systemPackages = with pkgs; [
     firefox
-    plasma-browser-integration
     thunderbird
     vlc
 

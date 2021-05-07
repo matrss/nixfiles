@@ -65,6 +65,9 @@
 
     programs.browserpass.enable = true;
 
+    # Fix native-messaging for firefox plasma integration
+    home.file.".mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${pkgs.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+
     # xdg.mime.enable = true;
     # xdg.mimeApps.enable = true;
     # xdg.mimeApps.defaultApplications = {
