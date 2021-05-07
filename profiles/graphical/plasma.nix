@@ -53,8 +53,8 @@
     ark
     gwenview
     skanlite
+    krita
     kdeconnect
-    wacomtablet
   ];
 
   programs.steam.enable = true;
