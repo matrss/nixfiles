@@ -50,8 +50,8 @@
       {
         # runners for building in docker via host's nix-daemon
         # nix store will be readable in runner, might be insecure
-        nix = nixFlakesRunner // { protected = false; };
-        nixProtected = nixFlakesRunner // { protected = true; };
+        nix = nixFlakesRunner // { protected = false; registrationFlags = nixFlakesRunner.registrationFlags ++ [ "--name=nix_ara" ]; };
+        nixProtected = nixFlakesRunner // { protected = true; registrationFlags = nixFlakesRunner.registrationFlags ++ [ "--name=nixProtected_ara" ]; };
       };
   };
 }
