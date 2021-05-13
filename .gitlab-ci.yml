@@ -2,7 +2,7 @@ default:
   tags: [ nixFlakes ]
 
 stages:
-  - build
+  - test
 
 workflow:
   rules:
@@ -11,5 +11,5 @@ workflow:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 flake check:
-  stage: build
+  stage: test
   script: nix flake check
