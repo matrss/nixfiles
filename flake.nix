@@ -38,6 +38,7 @@
       inputs.nixpkgs.follows = "large";
     };
 
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     flake-utils.url = "github:numtide/flake-utils";
 
     flake-compat = {
@@ -113,109 +114,156 @@
           ];
         };
     in
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let pkgs = nixpkgsFor inputs.large system;
-        in
-        {
-          devShell = pkgs.mkShell {
-            nativeBuildInputs = with pkgs; [
-              scripts
+    recursiveUpdate
+      (flake-utils.lib.eachDefaultSystem
+        (system:
+          let pkgs = nixpkgsFor inputs.large system;
+          in
+          {
+            devShell = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [
+                scripts
 
-              git
-              ssh-to-pgp
-              nixFlakes
+                git
+                ssh-to-pgp
+                nixFlakes
 
-              inputs.deploy-rs.defaultPackage."${system}"
-              inputs.sops-nix.packages."${system}".sops-pgp-hook
-            ];
+                inputs.deploy-rs.defaultPackage."${system}"
+                inputs.sops-nix.packages."${system}".sops-pgp-hook
+              ];
 
-            shellHook = ''
-              export NIX_FLAKE_DIR="$PWD"
-            '';
+              shellHook = self.checks.${system}.pre-commit-check.shellHook + ''
+                export NIX_FLAKE_DIR="$PWD"
+              '';
+            };
+
+            packages =
+              let
+                packages = self.overlay pkgs pkgs;
+                overlays = lib.filterAttrs (n: v: n != "pkgs") self.overlays;
+                overlayPkgs = genAttrs (attrNames overlays)
+                  (name: (overlays."${name}" pkgs pkgs)."${name}");
+              in
+              recursiveUpdate packages overlayPkgs;
+
+            apps =
+              let
+                scripts = import ./pkgs/scripts.nix { inherit pkgs; };
+                f = name: flake-utils.lib.mkApp { drv = scripts."${name}"; };
+              in
+              genAttrs (attrNames scripts) f;
+
+            checks = {
+              pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+                src = ./.;
+                hooks = {
+                  nixpkgs-fmt.enable = true;
+                  trailing-whitespace = {
+                    enable = true;
+                    name = "Trim Trailing Whitespace";
+                    description = "This hook trims trailing whitespace.";
+                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/trailing-whitespace-fixer";
+                    types = [ "text" ];
+                  };
+                  end-of-file-fixer = {
+                    enable = true;
+                    name = "Fix End of Files";
+                    description = "Ensures that a file is either empty, or ends with one newline.";
+                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/end-of-file-fixer";
+                    types = [ "text" ];
+                  };
+                  check-yaml = {
+                    enable = true;
+                    name = "Check Yaml";
+                    description = "This hook checks yaml files for parseable syntax.";
+                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/check-yaml";
+                    types = [ "yaml" ];
+                  };
+                  check-added-large-files = {
+                    enable = true;
+                    name = "Check for added large files";
+                    description = "Prevent giant files from being committed";
+                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/check-added-large-files";
+                  };
+                  detect-private-key = {
+                    enable = true;
+                    name = "Detect Private Key";
+                    description = "Detects the presence of private keys";
+                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/detect-private-key";
+                    types = [ "text" ];
+                  };
+                };
+              };
+            };
+          }))
+      {
+
+        nixosConfigurations =
+          import ./hosts (recursiveUpdate inputs {
+            inherit nixpkgsFor;
+          });
+
+        nixosModules =
+          let
+            # modules
+            moduleList = import ./modules/list.nix;
+            modulesAttrs = pathsToImportedAttrs moduleList;
+
+            # profiles
+            profilesList = import ./profiles/list.nix;
+            profilesAttrs = { profiles = pathsToImportedAttrs profilesList; };
+
+          in
+          recursiveUpdate modulesAttrs profilesAttrs;
+
+        hmModules =
+          let
+            # modules
+            moduleList = import ./modules/home-manager/list.nix;
+            modulesAttrs = pathsToImportedAttrs moduleList;
+
+            # TODO: add home-manager profiles (move them into profiles as well?)
+          in
+          modulesAttrs;
+
+        overlay = import ./pkgs;
+
+        overlays =
+          let
+            overlayDir = ./overlays;
+            fullPath = name: overlayDir + "/${name}";
+            overlayPaths = (map fullPath (attrNames (optionalAttrs (pathExists overlayDir) (readDir overlayDir))))
+              ++ [ ./pkgs ];
+          in
+          pathsToImportedAttrs overlayPaths;
+
+        deploy.nodes = {
+          andromeda = {
+            hostname = "andromeda";
+            sshUser = "root";
+
+            profiles.system = {
+              user = "root";
+              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+                self.nixosConfigurations.andromeda;
+            };
           };
 
-          packages =
-            let
-              packages = self.overlay pkgs pkgs;
-              overlays = lib.filterAttrs (n: v: n != "pkgs") self.overlays;
-              overlayPkgs = genAttrs (attrNames overlays)
-                (name: (overlays."${name}" pkgs pkgs)."${name}");
-            in
-            recursiveUpdate packages overlayPkgs;
+          ara = {
+            hostname = "ara.matrss.de";
+            sshUser = "root";
 
-          apps =
-            let
-              scripts = import ./pkgs/scripts.nix { inherit pkgs; };
-              f = name: flake-utils.lib.mkApp { drv = scripts."${name}"; };
-            in
-            genAttrs (attrNames scripts) f;
-        }) // {
-
-      nixosConfigurations =
-        import ./hosts (recursiveUpdate inputs { inherit nixpkgsFor; });
-
-      nixosModules =
-        let
-          # modules
-          moduleList = import ./modules/list.nix;
-          modulesAttrs = pathsToImportedAttrs moduleList;
-
-          # profiles
-          profilesList = import ./profiles/list.nix;
-          profilesAttrs = { profiles = pathsToImportedAttrs profilesList; };
-
-        in
-        recursiveUpdate modulesAttrs profilesAttrs;
-
-      hmModules =
-        let
-          # modules
-          moduleList = import ./modules/home-manager/list.nix;
-          modulesAttrs = pathsToImportedAttrs moduleList;
-
-          # TODO: add home-manager profiles (move them into profiles as well?)
-        in
-        modulesAttrs;
-
-      overlay = import ./pkgs;
-
-      overlays =
-        let
-          overlayDir = ./overlays;
-          fullPath = name: overlayDir + "/${name}";
-          overlayPaths = (map fullPath (attrNames (optionalAttrs (pathExists overlayDir) (readDir overlayDir))))
-          ++ [ ./pkgs ];
-        in
-        pathsToImportedAttrs overlayPaths;
-
-      deploy.nodes = {
-        andromeda = {
-          hostname = "andromeda";
-          sshUser = "root";
-
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.andromeda;
+            profiles.system = {
+              user = "root";
+              path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+                self.nixosConfigurations.ara;
+            };
           };
         };
 
-        ara = {
-          hostname = "ara.matrss.de";
-          sshUser = "root";
-
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.ara;
-          };
-        };
+        # This is highly advised, and will prevent many possible mistakes
+        checks = builtins.mapAttrs
+          (system: deployLib: deployLib.deployChecks self.deploy)
+          inputs.deploy-rs.lib;
       };
-
-      # This is highly advised, and will prevent many possible mistakes
-      checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy)
-        inputs.deploy-rs.lib;
-    };
 }
