@@ -87,12 +87,20 @@
   (key-chord-define evil-replace-state-map "jk" 'evil-normal-state))
 
 (use-package evil-leader
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
   :config
   (global-evil-leader-mode t)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
     "bk" 'kill-current-buffer
     "bb" 'ivy-switch-buffer))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 
 (use-package ivy
   :config
@@ -133,8 +141,6 @@
 (use-package polymode)
 
 (use-package magit)
-(use-package evil-magit
-  :after (evil magit))
 
 (use-package org
   ; :hook (org-mode . org-indent-mode)
@@ -168,8 +174,8 @@
 (use-package rust-mode)
 
 (use-package markdown-mode)
-(use-package evil-markdown
-  :after (evil markdown-mode))
+; (use-package evil-markdown
+;   :after (evil markdown-mode))
 (use-package poly-markdown
   :after (polymode markdown-mode))
   ; :hook (markdown-mode . poly-markdown-mode)
