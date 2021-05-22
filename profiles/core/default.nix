@@ -23,6 +23,8 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc.automatic = true;
+    optimise.automatic = true;
   };
 
   # Just very convenient.
