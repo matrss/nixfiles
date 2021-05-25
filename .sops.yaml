@@ -1,8 +1,11 @@
-keys:
+keys: &all
   - &matrss D4E6EEB5AE9313B44A2CBA0341A52B3BE0CC4FF1
   - &andromeda 83A5F8B61E07083FC1AEA887B9EE9491A27E95A2
   - &ara BA6847C91B50DF3F7E79BFAD945645C450F686ED
 creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - pgp: *all
   - path_regex: secrets/andromeda/[^/]+\.yaml$
     key_groups:
       - pgp:
