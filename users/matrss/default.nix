@@ -26,6 +26,7 @@
       ripgrep
       fd
       git
+      gitsh
       tig
 
       youtube-dl
