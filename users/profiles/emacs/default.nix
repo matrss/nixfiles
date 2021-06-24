@@ -41,10 +41,10 @@
     #   ]);
   };
 
-  services.emacs = {
-    enable = true;
-    client.enable = true;
-  };
+  # services.emacs = {
+  #   enable = true;
+  #   client.enable = true;
+  # };
 
   home.file.".emacs.d/early-init.el".source = ./emacs.d/early-init.el;
   home.file.".emacs.d/init.el".source = ./emacs.d/init.el;
