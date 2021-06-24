@@ -51,7 +51,7 @@
     home.sessionVariables = {
       # Native wayland support for firefox
       MOZ_ENABLE_WAYLAND = "1";
-      EDITOR = "emacsclient -c";
+      EDITOR = "neovide --geometry=195x45";
     };
 
     xdg.enable = true;

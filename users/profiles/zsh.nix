@@ -27,12 +27,15 @@
     shellAliases = {
       t = "todo.sh -a -t -d $XDG_CONFIG_HOME/todotxt/todo.cfg";
       ls = "ls --color";
-      e = "emacsclient -c $@";
     };
 
     initExtra = ''
       # case-insensitive (uppercase from lowercase) completion
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+      e() {
+        nohup neovide --geometry=195x45 $@ > /dev/null 2>&1 & disown
+      }
 
       # if [[ $DISPLAY ]]; then
       #   [[ $- != *i* ]] && return
