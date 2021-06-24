@@ -29,6 +29,9 @@
       gitsh
       tig
 
+      neuron-notes
+      zk
+
       youtube-dl
 
       rstudio
