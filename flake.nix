@@ -27,6 +27,8 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
+    neuron.url = "github:srid/neuron";
+
     f2b-bans.url = "gitlab:matrss/fail2ban-bans";
 
     nur.url = "github:nix-community/nur";
@@ -110,6 +112,9 @@
               inherit system config;
               flake = "rel2009";
               branch = "nixos-20.09";
+            })
+            (final: prev: {
+              neuron-notes = inputs.neuron.packages.${system}.neuron;
             })
           ];
         };
