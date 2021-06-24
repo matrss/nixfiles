@@ -20,7 +20,7 @@ buildGoModule {
 
   runVend = true;
 
-  vendorSha256 = "sha256-pkW51qXK03h7eIk8MWIHBknmGrd+bUq8V3ZzkNnpP8c=";
+  vendorSha256 = "sha256-FGdM++cGYxdqPgFuffPSH/oyVmm0LuoJDhw+M0bs+to=";
 
   doCheck = false;
 }
