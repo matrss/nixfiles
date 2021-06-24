@@ -3,6 +3,7 @@ final: prev: {
   # networkmanager-ssh = prev.callPackage ./networkmanager-ssh.nix { };
 
   gitsh = prev.callPackage ./gitsh.nix { };
+  zk = prev.callPackage ./zk.nix { };
 
   scripts = prev.symlinkJoin {
     name = "scripts";
