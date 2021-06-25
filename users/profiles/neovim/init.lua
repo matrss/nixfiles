@@ -9,6 +9,9 @@ require('packer').startup {
             requires = {
                 -- 'nvim-telescope/telescope.nvim',
             },
+            after = {
+                'telescope.nvim',
+            },
         }
 
         use 'vim-pandoc/vim-pandoc'
@@ -17,7 +20,10 @@ require('packer').startup {
         use {
             'TimUntersberger/neogit',
             requires = {
-                'nvim-lua/plenary.nvim',
+                -- 'nvim-lua/plenary.nvim',
+            },
+            after = {
+                'plenary.nvim',
             },
         }
 
@@ -137,6 +143,10 @@ require('packer').startup {
                 'rmagatti/auto-session',
                 -- 'nvim-telescope/telescope.nvim',
             },
+            after = {
+                'auto-session',
+                'telescope.nvim',
+            },
         }
         -- use {
         --     'glepnir/galaxyline.nvim',
@@ -174,6 +184,10 @@ require('packer').startup {
                 'nvim-lua/popup.nvim',
                 'nvim-lua/plenary.nvim',
             },
+            after = {
+                'popup.nvim',
+                'plenary.nvim',
+            },
             config = function()
                 require('telescope').setup {
                     defaults = {
@@ -193,6 +207,9 @@ require('packer').startup {
             'nvim-telescope/telescope-symbols.nvim',
             requires = {
                 -- 'nvim-telescope/telescope.nvim',
+            },
+            after = {
+                'telescope.nvim',
             },
         }
         use {
