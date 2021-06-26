@@ -29,6 +29,8 @@ require('packer').startup {
 
         use {
             'neovim/nvim-lspconfig',
+            ft = { 'lua', 'rust', 'python', 'c', 'cpp', 'nix', 'sh', 'bash', },
+            cmd = { 'LspStart', 'LspRestart', },
             config = function()
                 local lspc = require('lspconfig')
                 lspc.sumneko_lua.setup {
