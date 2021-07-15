@@ -8,6 +8,8 @@ in
 
     user = "1000:100";
 
+    ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
+
     volumes = [
       "/volumes/jellyfin-config:/config"
       "/volumes/jellyfin-cache:/cache"
@@ -15,7 +17,7 @@ in
     ];
 
     extraOptions = [
-      "--network=host"
+      "--net=services"
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.jellyfin.rule=Host(`jellyfin.ara.matrss.de`)"
       "--label=traefik.http.routers.jellyfin.entrypoints=websecure"
