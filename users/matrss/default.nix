@@ -32,6 +32,8 @@
       neuron-notes
       zk
 
+      et
+
       youtube-dl
 
       rstudio
