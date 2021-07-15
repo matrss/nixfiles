@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home-manager.users.matrss = {
+  home-manager.users.matrss = { config, pkgs, ... }: {
     imports = [
       ../profiles/neovim
       ../profiles/emacs
@@ -48,10 +48,13 @@
       # tinymediamanager
     ];
 
+    home.homeDirectory = "/home/matrss";
+
     home.sessionVariables = {
       # Native wayland support for firefox
       MOZ_ENABLE_WAYLAND = "1";
       EDITOR = "neovide --geometry=195x45";
+      ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/Sync/zettelkasten";
     };
 
     xdg.enable = true;
