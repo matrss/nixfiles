@@ -46,6 +46,8 @@
     solaar
     gimp
 
+    teams
+
     # KDE/Plasma apps
     syncthingtray
     krunner-pass
