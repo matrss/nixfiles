@@ -116,8 +116,9 @@
 
   # Enable docker daemon
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
   # programs.singularity.enable = true;
-  environment.systemPackages = with pkgs; [ docker-compose ];
+  environment.systemPackages = with pkgs; [ docker-compose virt-manager ];
 
   # virtualisation.podman.enable = true;
 
