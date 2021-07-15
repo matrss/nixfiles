@@ -29,10 +29,22 @@ require('packer').startup {
 
         use {
             'neovim/nvim-lspconfig',
-            ft = { 'lua', 'rust', 'python', 'c', 'cpp', 'nix', 'sh', 'bash', },
+            ft = { 'pandoc', 'lua', 'rust', 'python', 'c', 'cpp', 'nix', 'sh', 'bash', },
             cmd = { 'LspStart', 'LspRestart', },
             config = function()
                 local lspc = require('lspconfig')
+                local configs = require('lspconfig/configs')
+                configs.zk = {
+                  default_config = {
+                    cmd = {'zk', 'lsp', '--log', '/tmp/zk-lsp.log'},
+                    filetypes = {'pandoc'},
+                    root_dir = function()
+                      return vim.loop.cwd()
+                    end,
+                    settings = {}
+                  };
+                }
+                lspc.zk.setup {}
                 lspc.sumneko_lua.setup {
                     cmd = { "lua-language-server" },
                     settings = {
@@ -157,17 +169,19 @@ require('packer').startup {
         --         require('galaxyline_settings')
         --     end,
         -- }
-        -- use {
-        --     'megalithic/zk.nvim',
-        --     requires = {
-        --         -- 'nvim-telescope/telescope.nvim'
-        --     },
-        --     config = function()
-        --         require('zk').setup {
-        --             fuzzy_finder = 'telescope',
-        --         }
-        --     end,
-        -- }
+        use {
+            'megalithic/zk.nvim',
+            requires = {
+                -- 'nvim-telescope/telescope.nvim'
+            },
+            config = function()
+                require('zk').setup {
+                    -- not yet implemented:
+                    -- fuzzy_finder = 'telescope',
+                    link_format = 'wiki',
+                }
+            end,
+        }
         -- use {
         --     'oberblastmeister/neuron.nvim',
         --     requires = {
@@ -194,7 +208,7 @@ require('packer').startup {
                 require('telescope').setup {
                     defaults = {
                         layout_strategy = "bottom_pane",
-                        layout_defaults = {
+                        layout_config = {
                             vertical = {
                                 mirror = true,
                             },
@@ -238,6 +252,15 @@ require('packer').startup {
                 }
             end,
         }
+        use 'nvim-treesitter/nvim-treesitter-textobjects'
+        use {
+            'AckslD/nvim-anywise-reg.lua',
+            config = function()
+                require("anywise_reg").setup {}
+            end,
+        }
+        use 'junegunn/goyo.vim'
+        use 'junegunn/limelight.vim'
     end
 }
 
