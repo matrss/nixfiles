@@ -329,9 +329,10 @@ augroup end
 
 -- Unmap help on <f1> so that it does not open when using neovide and switching
 -- virtual desktops
--- TODO: somehow it still opens sometimes
 vim.api.nvim_set_keymap('n', '<f1>', '<nop>', { noremap = true })
 vim.api.nvim_set_keymap('i', '<f1>', '<nop>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<m-f1>', '<nop>', { noremap = true })
+vim.api.nvim_set_keymap('i', '<m-f1>', '<nop>', { noremap = true })
 
 -- Reasonable way to get back into normal mode
 vim.api.nvim_set_keymap('t', '<leader><esc>', [[<c-\><c-n>]], { noremap = true })
