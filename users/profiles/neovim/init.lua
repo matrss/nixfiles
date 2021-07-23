@@ -335,3 +335,9 @@ vim.api.nvim_set_keymap('i', '<f1>', '<nop>', { noremap = true })
 
 -- Reasonable way to get back into normal mode
 vim.api.nvim_set_keymap('t', '<leader><esc>', [[<c-\><c-n>]], { noremap = true })
+
+-- Set undo points when writing a long bit of prose
+vim.api.nvim_set_keymap('i', '.', '.<c-g>u', { noremap = true })
+vim.api.nvim_set_keymap('i', '!', '!<c-g>u', { noremap = true })
+vim.api.nvim_set_keymap('i', '?', '?<c-g>u', { noremap = true })
+vim.api.nvim_set_keymap('i', ':', ':<c-g>u', { noremap = true })
