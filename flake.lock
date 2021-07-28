@@ -45,11 +45,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1619647488,
-        "narHash": "sha256-LdV7uX0V49cKDQPB/xJkygKCWjUVcwx8u4DhocWoNvs=",
+        "lastModified": 1627485330,
+        "narHash": "sha256-cInrp1c3QbfK8eB8u+BtvV9abK8Uph6wox67QL7xogE=",
         "owner": "matrss",
         "repo": "fail2ban-bans",
-        "rev": "fcbd796466f0d2031c70bd2fef56ba08e38cb9b3",
+        "rev": "426108511ba0167e24698e413c16a2613df21c73",
         "type": "gitlab"
       },
       "original": {
