@@ -28,6 +28,10 @@ access_control:
       policy: two_factor
       subject: "group:users"
 
+    - domain: filestash.ara.matrss.de
+      policy: two_factor
+      subject: "group:users"
+
     - domain: sonarr.ara.matrss.de
       policy: two_factor
       subject: "user:matrss"

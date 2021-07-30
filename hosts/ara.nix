@@ -20,6 +20,7 @@ in
     ../profiles/container/authelia
     # ../profiles/container/hello-world.nix
     ../profiles/container/whoami.nix
+    ../profiles/container/filestash.nix
     ../profiles/container/publicfiles.nix
     ../profiles/container/jellyfin.nix
     ../profiles/container/sonarr.nix
