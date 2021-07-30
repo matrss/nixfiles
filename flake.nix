@@ -134,7 +134,7 @@
                 nixFlakes
 
                 inputs.deploy-rs.defaultPackage."${system}"
-                inputs.sops-nix.packages."${system}".sops-pgp-hook
+                inputs.sops-nix.packages."${system}".sops-import-keys-hook
               ];
 
               shellHook = self.checks.${system}.pre-commit-check.shellHook + ''
