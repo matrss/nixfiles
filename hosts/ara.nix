@@ -149,6 +149,8 @@ in
     enable = true;
     permitRootLogin = "prohibit-password";
     passwordAuthentication = false;
+    # Required for fail2ban
+    logLevel = "VERBOSE";
   };
 
   # Ban attackers.
