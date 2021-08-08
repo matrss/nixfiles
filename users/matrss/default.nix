@@ -4,7 +4,6 @@
   home-manager.users.matrss = { config, pkgs, ... }: {
     imports = [
       ../profiles/neovim
-      ../profiles/emacs
       ../profiles/direnv
       ../profiles/zsh.nix
       ../profiles/tmux.nix
