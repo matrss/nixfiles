@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    neovide
+    # neovide
   ];
 
   programs.neovim = rec {
