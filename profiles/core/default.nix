@@ -25,6 +25,7 @@
     '';
     gc.automatic = true;
     optimise.automatic = true;
+    trustedUsers = [ "@wheel" ];
   };
 
   # Just very convenient.
