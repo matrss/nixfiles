@@ -37,4 +37,6 @@
   services.resolved.domains = [ "local" ];
 
   services.udev.packages = with pkgs; [ libu2f-host yubikey-personalization ];
+
+  sops.secrets.root-ssh-key = { };
 }
