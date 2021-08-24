@@ -15,19 +15,19 @@ in
     ../users/matrss-ara
     ../profiles/auto-upgrade.nix
     ../profiles/gitlab-runner.nix
-    ../profiles/container/services-network.nix
-    ../profiles/container/traefik-reverse-proxy
-    ../profiles/container/authelia
-    # ../profiles/container/hello-world.nix
-    ../profiles/container/whoami.nix
-    ../profiles/container/filestash.nix
-    ../profiles/container/publicfiles.nix
-    ../profiles/container/jellyfin.nix
-    ../profiles/container/sonarr.nix
-    ../profiles/container/radarr.nix
-    ../profiles/container/bazarr.nix
-    ../profiles/container/jdownloader.nix
-    ../profiles/container/pyload.nix
+    ../profiles/docker-container/services-network.nix
+    ../profiles/docker-container/traefik-reverse-proxy
+    ../profiles/docker-container/authelia
+    # ../profiles/docker-container/hello-world.nix
+    ../profiles/docker-container/whoami.nix
+    ../profiles/docker-container/filestash.nix
+    ../profiles/docker-container/publicfiles.nix
+    ../profiles/docker-container/jellyfin.nix
+    ../profiles/docker-container/sonarr.nix
+    ../profiles/docker-container/radarr.nix
+    ../profiles/docker-container/bazarr.nix
+    ../profiles/docker-container/jdownloader.nix
+    ../profiles/docker-container/pyload.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
