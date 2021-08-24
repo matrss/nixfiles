@@ -187,27 +187,6 @@
         "type": "github"
       }
     },
-    "home-manager-rel2009": {
-      "inputs": {
-        "nixpkgs": [
-          "rel2009"
-        ]
-      },
-      "locked": {
-        "lastModified": 1622312678,
-        "narHash": "sha256-LsVDvO6TBnSQNNoV+Dt10+jx91eS74k8hf4zIOMAyR0=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "49706878e1580d796cc99b63574310405935113f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "release-20.09",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "large": {
       "locked": {
         "lastModified": 1629292755,
@@ -381,21 +360,6 @@
         "type": "github"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1629730318,
-        "narHash": "sha256-edVTRqGB0BRknoLosy4+eStUZDW6UIf2MoT73deUwlY=",
-        "owner": "nix-community",
-        "repo": "nur",
-        "rev": "cca72fc1c37811aa9075ceb2ce6e2e36bb452042",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nur",
-        "type": "github"
-      }
-    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -458,12 +422,10 @@
         "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
-        "home-manager-rel2009": "home-manager-rel2009",
         "large": "large",
         "neovim": "neovim",
         "neuron": "neuron",
         "nixpkgs": "nixpkgs_4",
-        "nur": "nur",
         "pre-commit-hooks": "pre-commit-hooks",
         "rel2009": "rel2009",
         "small": "small",

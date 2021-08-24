@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "large";
     };
 
-    home-manager-rel2009 = {
-      url = "github:nix-community/home-manager/release-20.09";
-      inputs.nixpkgs.follows = "rel2009";
-    };
-
     emacs.url = "github:nix-community/emacs-overlay";
 
     neovim = {
@@ -30,8 +25,6 @@
     neuron.url = "github:srid/neuron";
 
     f2b-bans.url = "gitlab:matrss/fail2ban-bans";
-
-    nur.url = "github:nix-community/nur";
 
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -91,7 +84,6 @@
           overlays = (attrValues self.overlays) ++ [
             inputs.emacs.overlay
             inputs.neovim.overlay
-            inputs.nur.overlay
             inputs.f2b-bans.overlay
             (channelToOverlay {
               inherit system config;
