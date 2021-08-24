@@ -1,0 +1,28 @@
+# https://numtide.github.io/devshell
+[[commands]]
+package = "deploy-rs.deploy-rs"
+name = "deploy"
+category = "maintenance"
+help = "deploy on (remote) hosts using deploy-rs"
+
+[[commands]]
+package = "ssh-to-pgp"
+category = "maintenance"
+help = "convert ssh keys to pgp, useful for sops-nix"
+
+[[commands]]
+package = "scripts"
+name = "ara-remote-unlock"
+category = "maintenance"
+help = "unlock ara over ssh"
+
+# [[commands]]
+# package = "scripts"
+# name = "nm-connection-sync"
+# category = "maintenance"
+# help = "synchronize networkmanager connection settings between system and repository"
+
+[devshell]
+packages = [
+  "git", "nixFlakes", "sops-import-keys-hook"
+]

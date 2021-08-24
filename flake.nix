@@ -3,6 +3,9 @@
 
   inputs = {
 
+    devshell.url = "github:numtide/devshell";
+    flake-utils.url = "github:numtide/flake-utils";
+
     # TODO: get rid of nixpkgs in favor of large
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     large.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -34,7 +37,6 @@
     };
 
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    flake-utils.url = "github:numtide/flake-utils";
 
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -82,6 +84,9 @@
         import basePkgset {
           inherit system config;
           overlays = (attrValues self.overlays) ++ [
+            inputs.devshell.overlay
+            inputs.deploy-rs.overlay
+            inputs.sops-nix.overlay
             inputs.emacs.overlay
             inputs.neovim.overlay
             inputs.f2b-bans.overlay
@@ -117,21 +122,8 @@
           let pkgs = nixpkgsFor inputs.large system;
           in
           {
-            devShell = pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [
-                scripts
-
-                git
-                ssh-to-pgp
-                nixFlakes
-
-                inputs.deploy-rs.defaultPackage."${system}"
-                inputs.sops-nix.packages."${system}".sops-import-keys-hook
-              ];
-
-              shellHook = self.checks.${system}.pre-commit-check.shellHook + ''
-                export NIX_FLAKE_DIR="$PWD"
-              '';
+            devShell = pkgs.devshell.mkShell {
+              imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
             };
 
             packages =
