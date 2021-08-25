@@ -41,7 +41,7 @@ help = "check conformance with .editorconfig"
 
 [[commands]]
 name = "lint"
-command = "fmt-nix --check && editorconfig-checker"
+command = "fmt-nix --check; editorconfig-checker"
 category = "lint"
 help = "run all lint tools"
 
