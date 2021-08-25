@@ -12,34 +12,29 @@
     small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     rel2009.url = "github:NixOS/nixpkgs/nixos-20.09";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "large";
-    };
+    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.inputs.nixpkgs.follows = "large";
 
     emacs.url = "github:nix-community/emacs-overlay";
+    emacs.inputs.nixpkgs.follows = "large";
 
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "large";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "large";
+    neovim.inputs.flake-utils.follows = "flake-utils";
 
     neuron.url = "github:srid/neuron";
+    neuron.inputs.flake-utils.follows = "flake-utils";
 
     f2b-bans.url = "gitlab:matrss/fail2ban-bans";
+    f2b-bans.inputs.nixpkgs.follows = "large";
+    f2b-bans.inputs.flake-utils.follows = "flake-utils";
 
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "large";
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "large";
-    };
-
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "large";
+    deploy-rs.inputs.utils.follows = "flake-utils";
   };
 
   outputs = inputs@{ self, flake-utils, home-manager, ... }:
