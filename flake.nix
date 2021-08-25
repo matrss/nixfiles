@@ -36,8 +36,6 @@
       inputs.nixpkgs.follows = "large";
     };
 
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -141,49 +139,6 @@
                 f = name: flake-utils.lib.mkApp { drv = scripts."${name}"; };
               in
               genAttrs (attrNames scripts) f;
-
-            checks = {
-              pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-                src = ./.;
-                hooks = {
-                  nixpkgs-fmt.enable = true;
-                  trailing-whitespace = {
-                    enable = true;
-                    name = "Trim Trailing Whitespace";
-                    description = "This hook trims trailing whitespace.";
-                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/trailing-whitespace-fixer";
-                    types = [ "text" ];
-                  };
-                  end-of-file-fixer = {
-                    enable = true;
-                    name = "Fix End of Files";
-                    description = "Ensures that a file is either empty, or ends with one newline.";
-                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/end-of-file-fixer";
-                    types = [ "text" ];
-                  };
-                  check-yaml = {
-                    enable = true;
-                    name = "Check Yaml";
-                    description = "This hook checks yaml files for parseable syntax.";
-                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/check-yaml";
-                    types = [ "yaml" ];
-                  };
-                  check-added-large-files = {
-                    enable = true;
-                    name = "Check for added large files";
-                    description = "Prevent giant files from being committed";
-                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/check-added-large-files";
-                  };
-                  detect-private-key = {
-                    enable = true;
-                    name = "Detect Private Key";
-                    description = "Detects the presence of private keys";
-                    entry = "${pkgs.python3Packages.pre-commit-hooks}/bin/detect-private-key";
-                    types = [ "text" ];
-                  };
-                };
-              };
-            };
           }))
       {
 

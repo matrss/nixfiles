@@ -22,7 +22,13 @@ help = "unlock ara over ssh"
 # category = "maintenance"
 # help = "synchronize networkmanager connection settings between system and repository"
 
+[[commands]]
+name = "fmtsrc"
+command = "nixpkgs-fmt ${@} $DEVSHELL_ROOT"
+category = "lint"
+help = "format nix source files"
+
 [devshell]
 packages = [
-  "git", "nixFlakes", "sops-import-keys-hook"
+  "git", "nixFlakes", "sops-import-keys-hook", "nixpkgs-fmt"
 ]

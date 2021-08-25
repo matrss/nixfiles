@@ -14,7 +14,6 @@
       git-annex
       # (python3.withPackages (ps: with ps; [ pip ]))
 
-      pre-commit
       cargo
 
       unrar
