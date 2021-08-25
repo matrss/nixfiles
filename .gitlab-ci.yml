@@ -1,15 +1,20 @@
-default:
-  tags: [ nixFlakes ]
-
-stages:
-  - test
-
 workflow:
   rules:
     - if: '$CI_MERGE_REQUEST_IID'
     - if: '$CI_COMMIT_TAG'
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
+stages:
+  - lint
+  - test
+
+lint:
+  tags: [ nixFlakes ]
+  stage: lint
+  image: nixpkgs/nix-flakes:latest
+  script: nix develop --command lint
+
 flake check:
+  tags: [ nixFlakes ]
   stage: test
   script: nix flake check

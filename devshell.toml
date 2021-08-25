@@ -23,10 +23,16 @@ help = "unlock ara over ssh"
 # help = "synchronize networkmanager connection settings between system and repository"
 
 [[commands]]
-name = "fmtsrc"
+name = "fmt-nix"
 command = "nixpkgs-fmt ${@} $DEVSHELL_ROOT"
 category = "lint"
 help = "format nix source files"
+
+[[commands]]
+name = "fmt-src"
+command = "fmt-nix"
+category = "lint"
+help = "run all fmt tools"
 
 [[commands]]
 package = "editorconfig-checker"
@@ -35,7 +41,7 @@ help = "check conformance with .editorconfig"
 
 [[commands]]
 name = "lint"
-command = "fmtsrc && editorconfig-checker"
+command = "fmt-nix --check && editorconfig-checker"
 category = "lint"
 help = "run all lint tools"
 
