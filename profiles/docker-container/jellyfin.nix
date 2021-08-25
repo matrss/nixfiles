@@ -4,7 +4,7 @@ let
 in
 {
   virtualisation.oci-containers.containers.jellyfin = {
-    image = "jellyfin/jellyfin:10.7.1";
+    image = "jellyfin/jellyfin:10.7.6";
 
     user = "1000:100";
 

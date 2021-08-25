@@ -16,11 +16,9 @@ in
     ../profiles/auto-upgrade.nix
     ../profiles/gitlab-runner.nix
     ../profiles/docker-container/services-network.nix
-    ../profiles/docker-container/traefik-reverse-proxy
+    ../profiles/docker-container/traefik
     ../profiles/docker-container/authelia
-    # ../profiles/docker-container/hello-world.nix
     ../profiles/docker-container/whoami.nix
-    ../profiles/docker-container/filestash.nix
     ../profiles/docker-container/publicfiles.nix
     ../profiles/docker-container/jellyfin.nix
     ../profiles/docker-container/sonarr.nix

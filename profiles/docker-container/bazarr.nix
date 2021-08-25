@@ -4,7 +4,7 @@ let
 in
 {
   virtualisation.oci-containers.containers.bazarr = {
-    image = "linuxserver/bazarr:version-v0.9.3";
+    image = "linuxserver/bazarr:version-v0.9.7";
 
     environment = {
       PUID = "1000";

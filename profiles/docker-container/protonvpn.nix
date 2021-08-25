@@ -4,7 +4,7 @@
   sops.secrets.protonvpn-env = { };
 
   virtualisation.oci-containers.containers.protonvpn = {
-    image = "ghcr.io/tprasadtp/protonvpn:4.1.2";
+    image = "ghcr.io/tprasadtp/protonvpn:4.2.1";
 
     environment = {
       PROTONVPN_TIER = "0";

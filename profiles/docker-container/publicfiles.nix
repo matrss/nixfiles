@@ -1,6 +1,6 @@
 {
   virtualisation.oci-containers.containers.publicfiles = {
-    image = "caddy:2.3.0";
+    image = "caddy:2.4.3";
 
     volumes = [ "/home/matrss/public:/publicfiles:ro" ];
 

@@ -1,6 +1,6 @@
 {
   virtualisation.oci-containers.containers.traefik-reverse-proxy = {
-    image = "traefik:v2.4.8";
+    image = "traefik:v2.5.1";
 
     ports = [ "0.0.0.0:80:80" "0.0.0.0:443:443" ];
 

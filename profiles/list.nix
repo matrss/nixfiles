@@ -3,17 +3,16 @@
   ./graphical/plasma.nix
   ./graphical/sway
 
-  ./container/services-network.nix
-  ./container/traefik-reverse-proxy/default.nix
-  ./container/authelia/default.nix
-  ./container/jellyfin.nix
-  ./container/paperless-ng.nix
-  ./container/sonarr.nix
-  ./container/radarr.nix
-  ./container/bazarr.nix
-  ./container/whoami.nix
+  ./docker-container/services-network.nix
+  ./docker-container/traefik/default.nix
+  ./docker-container/authelia/default.nix
+  ./docker-container/jellyfin.nix
+  ./docker-container/sonarr.nix
+  ./docker-container/radarr.nix
+  ./docker-container/bazarr.nix
+  ./docker-container/whoami.nix
 
-  ./container/protonvpn.nix
-  ./container/jdownloader.nix
-  ./container/pyload.nix
+  ./docker-container/protonvpn.nix
+  ./docker-container/jdownloader.nix
+  ./docker-container/pyload.nix
 ]

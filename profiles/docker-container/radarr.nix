@@ -4,7 +4,7 @@ let
 in
 {
   virtualisation.oci-containers.containers.radarr = {
-    image = "linuxserver/radarr:nightly-version-3.1.0.4832";
+    image = "linuxserver/radarr:version-3.2.2.5080";
 
     environment = {
       PUID = "1000";

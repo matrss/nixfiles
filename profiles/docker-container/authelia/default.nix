@@ -8,7 +8,7 @@
   };
 
   virtualisation.oci-containers.containers.authelia = {
-    image = "authelia/authelia:4.27.4";
+    image = "authelia/authelia:4.30.4";
 
     environment = {
       AUTHELIA_JWT_SECRET_FILE = "${config.sops.secrets.authelia-jwt-secret.path}";
