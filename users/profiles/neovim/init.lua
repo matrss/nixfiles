@@ -35,14 +35,14 @@ require('packer').startup {
                 local lspc = require('lspconfig')
                 local configs = require('lspconfig/configs')
                 configs.zk = {
-                  default_config = {
-                    cmd = {'zk', 'lsp', '--log', '/tmp/zk-lsp.log'},
-                    filetypes = {'pandoc'},
-                    root_dir = function()
-                      return vim.loop.cwd()
-                    end,
-                    settings = {}
-                  };
+                    default_config = {
+                        cmd = {'zk', 'lsp', '--log', '/tmp/zk-lsp.log'},
+                        filetypes = {'pandoc'},
+                        root_dir = function()
+                            return vim.loop.cwd()
+                        end,
+                        settings = {}
+                    };
                 }
                 lspc.zk.setup {}
                 lspc.sumneko_lua.setup {

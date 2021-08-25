@@ -28,6 +28,17 @@ command = "nixpkgs-fmt ${@} $DEVSHELL_ROOT"
 category = "lint"
 help = "format nix source files"
 
+[[commands]]
+package = "editorconfig-checker"
+category = "lint"
+help = "check conformance with .editorconfig"
+
+[[commands]]
+name = "lint"
+command = "fmtsrc && editorconfig-checker"
+category = "lint"
+help = "run all lint tools"
+
 [devshell]
 packages = [
   "git", "nixFlakes", "sops-import-keys-hook", "nixpkgs-fmt"
