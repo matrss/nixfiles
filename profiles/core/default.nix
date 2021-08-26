@@ -38,5 +38,8 @@
 
   services.udev.packages = with pkgs; [ libu2f-host yubikey-personalization ];
 
+  security.apparmor.enable = true;
+  security.apparmor.killUnconfinedConfinables = true;
+
   sops.secrets.root-ssh-key = { };
 }
