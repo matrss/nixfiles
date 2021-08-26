@@ -1,1 +1,1 @@
-[ ./services/autorotate.nix ./services/wob.nix ]
+[ ./programs/password-store.nix ]

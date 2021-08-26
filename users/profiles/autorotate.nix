@@ -1,1 +1,0 @@
-{ services.autorotate.enable = true; }

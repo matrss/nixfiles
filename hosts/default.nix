@@ -17,7 +17,7 @@ let
           hm-config = { config, ... }: {
             options.home-manager.users = lib.mkOption {
               type = lib.types.attrsOf (lib.types.submoduleWith {
-                modules = with self.hmModules; [ wob autorotate ];
+                modules = with self.hmModules; [ ];
                 specialArgs = { super = config; };
               });
             };
