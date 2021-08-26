@@ -15,18 +15,18 @@ in
     ../users/matrss-ara
     ../profiles/auto-upgrade.nix
     ../profiles/gitlab-runner.nix
-    ../profiles/docker-container/services-network.nix
-    ../profiles/docker-container/traefik
-    ../profiles/docker-container/authelia
-    ../profiles/docker-container/whoami.nix
-    ../profiles/docker-container/publicfiles.nix
-    ../profiles/docker-container/jellyfin.nix
-    ../profiles/docker-container/sonarr.nix
-    ../profiles/docker-container/radarr.nix
-    ../profiles/docker-container/bazarr.nix
-    ../profiles/docker-container/jdownloader.nix
-    ../profiles/docker-container/pyload.nix
-    ../profiles/docker-container/vaultwarden.nix
+    ../profiles/oci-container/services-network.nix
+    ../profiles/oci-container/traefik
+    ../profiles/oci-container/authelia
+    ../profiles/oci-container/whoami.nix
+    ../profiles/oci-container/publicfiles.nix
+    ../profiles/oci-container/jellyfin.nix
+    ../profiles/oci-container/sonarr.nix
+    ../profiles/oci-container/radarr.nix
+    ../profiles/oci-container/bazarr.nix
+    ../profiles/oci-container/jdownloader.nix
+    ../profiles/oci-container/pyload.nix
+    ../profiles/oci-container/vaultwarden.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

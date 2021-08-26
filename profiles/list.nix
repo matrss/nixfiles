@@ -3,16 +3,17 @@
   ./graphical/plasma.nix
   ./graphical/sway
 
-  ./docker-container/services-network.nix
-  ./docker-container/traefik/default.nix
-  ./docker-container/authelia/default.nix
-  ./docker-container/jellyfin.nix
-  ./docker-container/sonarr.nix
-  ./docker-container/radarr.nix
-  ./docker-container/bazarr.nix
-  ./docker-container/whoami.nix
+  ./oci-container/services-network.nix
+  ./oci-container/traefik/default.nix
+  ./oci-container/authelia/default.nix
+  ./oci-container/jellyfin.nix
+  ./oci-container/sonarr.nix
+  ./oci-container/radarr.nix
+  ./oci-container/bazarr.nix
+  ./oci-container/whoami.nix
+  ./oci-container/vaultwarden.nix
 
-  ./docker-container/protonvpn.nix
-  ./docker-container/jdownloader.nix
-  ./docker-container/pyload.nix
+  ./oci-container/protonvpn.nix
+  ./oci-container/jdownloader.nix
+  ./oci-container/pyload.nix
 ]
