@@ -28,7 +28,13 @@ access_control:
       policy: two_factor
       subject: "group:users"
 
-    - domain: filestash.ara.matrss.de
+    - domain: vaultwarden.ara.matrss.de
+      resources:
+        - "^/api/.*$"
+        - "^/identity/connect/token$"
+      policy: bypass
+
+    - domain: vaultwarden.ara.matrss.de
       policy: two_factor
       subject: "group:users"
 

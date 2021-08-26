@@ -26,6 +26,7 @@ in
     ../profiles/docker-container/bazarr.nix
     ../profiles/docker-container/jdownloader.nix
     ../profiles/docker-container/pyload.nix
+    ../profiles/docker-container/vaultwarden.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
