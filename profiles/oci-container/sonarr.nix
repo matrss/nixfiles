@@ -1,7 +1,3 @@
-let
-  hostPort = 8989;
-  containerPort = 8989;
-in
 {
   virtualisation.oci-containers.containers.sonarr = {
     image = "linuxserver/sonarr:version-3.0.6.1265";
@@ -11,8 +7,6 @@ in
       PGID = "100";
       TZ = "Europe/Berlin";
     };
-
-    ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
     volumes = [ "/volumes/sonarr-config:/config" "/srv/media:/media" ];
 
@@ -24,6 +18,4 @@ in
       "--label=traefik.http.routers.sonarr.middlewares=secured@file"
     ];
   };
-
-  networking.firewall.allowedTCPPorts = [ hostPort ];
 }

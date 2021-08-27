@@ -1,14 +1,8 @@
-let
-  hostPort = 8096;
-  containerPort = 8096;
-in
 {
   virtualisation.oci-containers.containers.jellyfin = {
     image = "jellyfin/jellyfin:10.7.6";
 
     user = "1000:100";
-
-    ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
     volumes = [
       "/volumes/jellyfin-config:/config"
@@ -25,6 +19,4 @@ in
       "--label=traefik.http.services.jellyfin.loadbalancer.server.port=8096"
     ];
   };
-
-  networking.firewall.allowedTCPPorts = [ hostPort ];
 }

@@ -1,7 +1,3 @@
-let
-  hostPort = 7878;
-  containerPort = 7878;
-in
 {
   virtualisation.oci-containers.containers.radarr = {
     image = "linuxserver/radarr:version-3.2.2.5080";
@@ -11,8 +7,6 @@ in
       PGID = "100";
       TZ = "Europe/Berlin";
     };
-
-    ports = [ "0.0.0.0:${toString hostPort}:${toString containerPort}" ];
 
     volumes = [ "/volumes/radarr-config:/config" "/srv/media:/media" ];
 
@@ -24,6 +18,4 @@ in
       "--label=traefik.http.routers.radarr.middlewares=secured@file"
     ];
   };
-
-  networking.firewall.allowedTCPPorts = [ hostPort ];
 }

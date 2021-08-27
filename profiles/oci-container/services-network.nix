@@ -13,7 +13,7 @@
         Type = "oneshot";
         RemainAfterExit = true;
         ExecStart = ''
-          ${pkgs.bash}/bin/sh -c "${dockercli} network create services || true"
+          ${pkgs.bash}/bin/sh -c "${dockercli} network create --driver bridge services || true"
         '';
         ExecStop = ''
           ${pkgs.bash}/bin/sh -c "${dockercli} network rm services || true"
