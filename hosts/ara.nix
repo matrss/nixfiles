@@ -13,7 +13,6 @@ in
   imports = [
     ../users/root
     ../users/matrss-ara
-    ../profiles/auto-upgrade.nix
     ../profiles/gitlab-runner.nix
     ../profiles/oci-container/services-network.nix
     ../profiles/oci-container/traefik

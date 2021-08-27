@@ -5,7 +5,6 @@
     ../users/matrss
     ../users/root
     ../profiles/graphical/plasma.nix
-    ../profiles/auto-upgrade.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
