@@ -23,8 +23,6 @@ in
     ../profiles/oci-container/sonarr.nix
     ../profiles/oci-container/radarr.nix
     ../profiles/oci-container/bazarr.nix
-    ../profiles/oci-container/jdownloader.nix
-    ../profiles/oci-container/pyload.nix
     ../profiles/oci-container/vaultwarden.nix
   ];
 
