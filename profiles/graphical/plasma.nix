@@ -43,6 +43,7 @@
     xournalpp
     nixpkgs.discord
     qtpass
+    bitwarden
     solaar
     gimp
 

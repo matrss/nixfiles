@@ -34,6 +34,8 @@
 
       youtube-dl
 
+      bitwarden-cli
+
       rstudio
       (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions; [
