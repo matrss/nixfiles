@@ -38,6 +38,7 @@ directory = "/etc/traefik/dynamic-config"
 
 
 [providers.docker]
+endpoint = "tcp://traefik-docker-socket-proxy:2375"
 exposedByDefault = false
 # defaultRule = "Host(`{{ trimPrefix `/` .Name }}.ara.matrss.de`)"
 

@@ -1,4 +1,8 @@
+{ config, pkgs, ... }:
+
 {
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   virtualisation.oci-containers.containers.traefik = {
     image = "traefik:v2.5.1";
 
@@ -8,7 +12,6 @@
       "${./static-config.toml}:/etc/traefik/traefik.toml:ro"
       "${./dynamic-config}:/etc/traefik/dynamic-config:ro"
       "/volumes/traefik-data:/data:rw"
-      "/var/run/docker.sock:/var/run/docker.sock:ro"
     ];
 
     extraOptions = [
@@ -23,5 +26,17 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  virtualisation.oci-containers.containers.traefik-docker-socket-proxy = {
+    image = "tecnativa/docker-socket-proxy:0.1.1";
+
+    environment.CONTAINERS = "1";
+
+    volumes = [
+      "/var/run/docker.sock:/var/run/docker.sock:ro"
+    ];
+
+    extraOptions = [
+      "--net=services"
+    ];
+  };
 }
