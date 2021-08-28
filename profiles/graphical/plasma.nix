@@ -42,7 +42,6 @@
     libreoffice
     xournalpp
     nixpkgs.discord
-    qtpass
     bitwarden
     solaar
     gimp
@@ -51,7 +50,6 @@
 
     # KDE/Plasma apps
     syncthingtray
-    krunner-pass
     okular
     ark
     gwenview

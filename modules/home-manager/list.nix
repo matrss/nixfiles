@@ -1,1 +1,1 @@
-[ ./programs/password-store.nix ]
+[ ]
