@@ -9,7 +9,6 @@ stages:
   - test
 
 lint:
-  tags: [ nixFlakes ]
   stage: lint
   image: nixpkgs/nix-flakes:latest
   script: nix develop --command lint
