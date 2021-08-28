@@ -15,7 +15,7 @@
     ];
 
     extraOptions = [
-      "--net=services"
+      "--network=web"
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.api.rule=Host(`traefik.ara.matrss.de`)"
       "--label=traefik.http.routers.api.entrypoints=websecure"
@@ -36,7 +36,30 @@
     ];
 
     extraOptions = [
-      "--net=services"
+      "--network=web"
     ];
+  };
+
+  systemd.services.init-web-network = {
+    description = "Create a network bridge named web for exposed services.";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig =
+      let executable =
+        if config.virtualisation.oci-containers.backend == "docker" then "${config.virtualisation.docker.package}/bin/docker"
+        else if config.virtualisation.oci-containers.backend == "podman" then "${config.virtualisation.podman.package}/bin/podman"
+        else throw "Unhandled backend: ${config.virtualisation.oci-containers.backend}";
+      in
+      {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = ''
+          ${pkgs.bash}/bin/sh -c "${executable} network create --driver bridge web || true"
+        '';
+        ExecStop = ''
+          ${pkgs.bash}/bin/sh -c "${executable} network rm services || true"
+        '';
+      };
   };
 }

@@ -11,7 +11,7 @@
     volumes = [ "/volumes/sonarr-config:/config" "/srv/media:/media" ];
 
     extraOptions = [
-      "--net=services"
+      "--network=web"
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.sonarr.rule=Host(`sonarr.ara.matrss.de`)"
       "--label=traefik.http.routers.sonarr.entrypoints=websecure"

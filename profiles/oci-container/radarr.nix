@@ -11,7 +11,7 @@
     volumes = [ "/volumes/radarr-config:/config" "/srv/media:/media" ];
 
     extraOptions = [
-      "--net=services"
+      "--network=web"
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.radarr.rule=Host(`radarr.ara.matrss.de`)"
       "--label=traefik.http.routers.radarr.entrypoints=websecure"

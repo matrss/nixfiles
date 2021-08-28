@@ -10,7 +10,7 @@
     volumes = [ "/volumes/vaultwarden-data:/data:rw" ];
 
     extraOptions = [
-      "--net=services"
+      "--network=web"
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.ara.matrss.de`)"
       "--label=traefik.http.routers.vaultwarden.entrypoints=websecure"

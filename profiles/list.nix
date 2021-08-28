@@ -3,7 +3,6 @@
   ./graphical/plasma.nix
   ./graphical/sway
 
-  ./oci-container/services-network.nix
   ./oci-container/traefik/default.nix
   ./oci-container/authelia/default.nix
   ./oci-container/jellyfin.nix

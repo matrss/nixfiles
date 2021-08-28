@@ -7,7 +7,7 @@
     cmd = [ "caddy" "file-server" "--browse" "--root" "/publicfiles" ];
 
     extraOptions = [
-      "--net=services"
+      "--network=web"
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.publicfiles.rule=Host(`public.ara.matrss.de`)"
       "--label=traefik.http.routers.publicfiles.entrypoints=websecure"

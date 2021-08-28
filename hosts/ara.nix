@@ -14,7 +14,6 @@ in
     ../users/root
     ../users/matrss-ara
     ../profiles/gitlab-runner.nix
-    ../profiles/oci-container/services-network.nix
     ../profiles/oci-container/traefik
     ../profiles/oci-container/authelia
     ../profiles/oci-container/whoami.nix
