@@ -25,8 +25,9 @@ access_control:
       subject: "group:users"
 
     - domain: jellyfin.ara.matrss.de
-      policy: two_factor
-      subject: "group:users"
+      policy: bypass
+      # policy: two_factor
+      # subject: "group:users"
 
     - domain: vaultwarden.ara.matrss.de
       resources:
