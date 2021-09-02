@@ -24,6 +24,8 @@
       "/volumes/authelia-config:/config:rw"
     ];
 
+    ports = [ "127.0.0.1:9091:9091" ];
+
     cmd = [ "--config" "/configuration.yml" ];
 
     extraOptions = [

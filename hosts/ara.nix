@@ -14,7 +14,7 @@ in
     ../users/root
     ../users/matrss-ara
     ../profiles/gitlab-runner.nix
-    ../profiles/oci-container/traefik
+    ../profiles/traefik.nix
     ../profiles/oci-container/authelia
     ../profiles/oci-container/whoami.nix
     ../profiles/oci-container/publicfiles.nix
@@ -22,7 +22,6 @@ in
     ../profiles/oci-container/sonarr.nix
     ../profiles/oci-container/radarr.nix
     ../profiles/oci-container/bazarr.nix
-    ../profiles/oci-container/vaultwarden.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
