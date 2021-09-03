@@ -21,7 +21,7 @@ in
     ../profiles/nixos-container/jellyfin.nix
     ../profiles/nixos-container/sonarr.nix
     ../profiles/nixos-container/radarr.nix
-    ../profiles/nixos-container/bazarr.nix
+    # ../profiles/nixos-container/bazarr.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

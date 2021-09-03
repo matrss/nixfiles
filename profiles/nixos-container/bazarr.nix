@@ -8,7 +8,7 @@
     hostAddress = "10.11.0.22";
     localAddress = "10.11.1.22";
     bindMounts = {
-      "${config.containers.bazarr.config.users.users.bazarr.home}" = { hostPath = "/volumes/bazarr-config"; isReadOnly = false; };
+      "/var/lib/bazarr" = { hostPath = "/volumes/bazarr-config"; isReadOnly = false; };
       "/media" = { hostPath = "/srv/media"; isReadOnly = false; };
     };
     config = {
