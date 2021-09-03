@@ -88,6 +88,13 @@
           };
         };
       };
+
+      http.routers.traefik = {
+        rule = "Host(`traefik.ara.matrss.de`)";
+        entryPoints = [ "websecure" ];
+        middlewares = [ "secured" ];
+        service = "api@internal";
+      };
     };
   };
 
