@@ -18,7 +18,7 @@ in
     ../profiles/oci-container/authelia
     ../profiles/oci-container/whoami.nix
     ../profiles/oci-container/publicfiles.nix
-    ../profiles/oci-container/jellyfin.nix
+    ../profiles/nixos-container/jellyfin.nix
     ../profiles/nixos-container/sonarr.nix
     ../profiles/nixos-container/radarr.nix
     ../profiles/nixos-container/bazarr.nix
