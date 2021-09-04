@@ -29,6 +29,9 @@ access_control:
       # policy: two_factor
       # subject: "group:users"
 
+    - domain: nextcloud.ara.matrss.de
+      policy: bypass
+
     - domain: vaultwarden.ara.matrss.de
       resources:
         - "^/api/.*$"

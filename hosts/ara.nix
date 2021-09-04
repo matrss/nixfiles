@@ -22,6 +22,7 @@ in
     ../profiles/nixos-container/sonarr.nix
     ../profiles/nixos-container/radarr.nix
     # ../profiles/nixos-container/bazarr.nix
+    ../profiles/nixos-container/nextcloud.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
