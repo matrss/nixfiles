@@ -24,6 +24,6 @@
       middlewares = [ "secured" ];
       service = "sonarr";
     };
-    services.sonarr.loadBalancer.servers = [ { url = "http://${config.containers.sonarr.localAddress}:8989"; } ];
+    services.sonarr.loadBalancer.servers = [{ url = "http://${config.containers.sonarr.localAddress}:8989"; }];
   };
 }

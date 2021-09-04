@@ -24,6 +24,6 @@
       middlewares = [ "secured" ];
       service = "radarr";
     };
-    services.radarr.loadBalancer.servers = [ { url = "http://${config.containers.radarr.localAddress}:7878"; } ];
+    services.radarr.loadBalancer.servers = [{ url = "http://${config.containers.radarr.localAddress}:7878"; }];
   };
 }

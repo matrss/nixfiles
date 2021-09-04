@@ -27,6 +27,6 @@
       middlewares = [ "secured" ];
       service = "bazarr";
     };
-    services.bazarr.loadBalancer.servers = [ { url = "http://${config.containers.bazarr.localAddress}:6767"; } ];
+    services.bazarr.loadBalancer.servers = [{ url = "http://${config.containers.bazarr.localAddress}:6767"; }];
   };
 }

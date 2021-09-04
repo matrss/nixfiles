@@ -25,6 +25,6 @@
       middlewares = [ "secured" ];
       service = "jellyfin";
     };
-    services.jellyfin.loadBalancer.servers = [ { url = "http://${config.containers.jellyfin.localAddress}:8096"; } ];
+    services.jellyfin.loadBalancer.servers = [{ url = "http://${config.containers.jellyfin.localAddress}:8096"; }];
   };
 }
