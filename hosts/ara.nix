@@ -206,6 +206,9 @@ in
     group = "users";
   };
 
+  virtualisation.docker.enable = true;
+  virtualisation.docker.storageDriver = "overlay2";
+
   # virtualisation.podman.enable = true;
   # virtualisation.oci-containers.backend = "podman";
 
