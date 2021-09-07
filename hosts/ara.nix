@@ -210,6 +210,10 @@ in
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
 
+  networking.nat.enable = true;
+  networking.nat.internalInterfaces = [ "ve-+" ];
+  networking.nat.externalInterface = "enp0s25";
+
   # virtualisation.podman.enable = true;
   # virtualisation.oci-containers.backend = "podman";
 
