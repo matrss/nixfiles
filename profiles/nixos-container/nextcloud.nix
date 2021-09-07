@@ -58,7 +58,7 @@
     routers.nextcloud = {
       rule = "Host(`nextcloud.ara.matrss.de`)";
       entryPoints = [ "websecure" ];
-      middlewares = [ "secured" ];
+      middlewares = [ "secured_no-csp" ];
       service = "nextcloud";
     };
     services.nextcloud.loadBalancer.servers = [{ url = "http://${config.containers.nextcloud.localAddress}:80"; }];

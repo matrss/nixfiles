@@ -22,7 +22,7 @@
     routers.jellyfin = {
       rule = "Host(`jellyfin.ara.matrss.de`)";
       entryPoints = [ "websecure" ];
-      middlewares = [ "secured" ];
+      middlewares = [ "secured_style-src-unsafe-inline" ];
       service = "jellyfin";
     };
     services.jellyfin.loadBalancer.servers = [{ url = "http://${config.containers.jellyfin.localAddress}:8096"; }];

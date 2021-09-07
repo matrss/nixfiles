@@ -33,7 +33,7 @@
       "--label=traefik.enable=true"
       "--label=traefik.http.routers.authelia.rule=Host(`auth.ara.matrss.de`)"
       "--label=traefik.http.routers.authelia.entrypoints=websecure"
-      "--label=traefik.http.routers.authelia.middlewares=public@file"
+      "--label=traefik.http.routers.authelia.middlewares=public_style-src-unsafe-inline@file"
     ];
   };
 }

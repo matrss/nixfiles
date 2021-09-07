@@ -21,7 +21,7 @@
     routers.sonarr = {
       rule = "Host(`sonarr.ara.matrss.de`)";
       entryPoints = [ "websecure" ];
-      middlewares = [ "secured" ];
+      middlewares = [ "secured_style-src-unsafe-inline" ];
       service = "sonarr";
     };
     services.sonarr.loadBalancer.servers = [{ url = "http://${config.containers.sonarr.localAddress}:8989"; }];
