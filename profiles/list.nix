@@ -3,14 +3,13 @@
   ./graphical/plasma.nix
   ./graphical/sway
 
-  ./oci-container/traefik/default.nix
+  ./traefik.nix
   ./oci-container/authelia/default.nix
-  ./oci-container/jellyfin.nix
-  ./oci-container/sonarr.nix
-  ./oci-container/radarr.nix
-  ./oci-container/bazarr.nix
   ./oci-container/whoami.nix
-  ./oci-container/vaultwarden.nix
+  ./nixos-container/jellyfin.nix
+  ./nixos-container/sonarr.nix
+  ./nixos-container/radarr.nix
+  ./nixos-container/bazarr.nix
 
   ./oci-container/protonvpn.nix
   ./oci-container/jdownloader.nix
