@@ -15,9 +15,9 @@
       "${config.sops.secrets.nextcloud-admin-password.path}" = { hostPath = "${config.sops.secrets.nextcloud-admin-password.path}"; isReadOnly = true; };
     };
     config = {
-
       services.nextcloud.enable = true;
       services.nextcloud.hostName = "nextcloud.ara.matrss.de";
+      services.nextcloud.https = true;
       services.nextcloud.caching.redis = true;
       services.nextcloud.config = {
         adminuser = "admin";
@@ -27,6 +27,7 @@
         dbname = "nextcloud";
         dbuser = "nextcloud";
         defaultPhoneRegion = "DE";
+        overwriteProtocol = "https";
       };
 
       services.postgresql = {
@@ -41,6 +42,11 @@
       };
 
       services.redis.enable = true;
+      services.redis.unixSocket = "/run/redis/redis.sock";
+      services.redis.unixSocketPerm = 770;
+
+      users.users.nginx.extraGroups = [ "redis" ];
+      users.users.nextcloud.extraGroups = [ "redis" ];
 
       networking.firewall.allowedTCPPorts = [ 80 ];
 
