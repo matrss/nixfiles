@@ -37,14 +37,14 @@
       bitwarden-cli
 
       rstudio
-      (vscode-with-extensions.override {
-        vscodeExtensions = with vscode-extensions; [
-          vscodevim.vim
-          ms-vsliveshare.vsliveshare
-          ms-python.python
-          ms-toolsai.jupyter
-        ];
-      })
+      # (vscode-with-extensions.override {
+      #   vscodeExtensions = with vscode-extensions; [
+      #     vscodevim.vim
+      #     ms-vsliveshare.vsliveshare
+      #     ms-python.python
+      #     ms-toolsai.jupyter
+      #   ];
+      # })
       # dcraw
       # filebot
       # tinymediamanager
