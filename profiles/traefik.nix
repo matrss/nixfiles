@@ -52,50 +52,54 @@
         sniStrict = true;
       };
 
-      http.middlewares = let
-        secureHeadersWith = overwrites: lib.recursiveUpdate {
-          accessControlAllowMethods = [ "GET" "OPTIONS" "PUT" ];
-          accessControlMaxAge = 100;
-          hostsProxyHeaders = [ "X-Forwarded-Host" ];
-          stsSeconds = 63072000;
-          stsIncludeSubdomains = true;
-          stsPreload = true;
-          forceSTSHeader = true;
-          frameDeny = true;
-          contentTypeNosniff = true;
-          browserXssFilter = true;
-          referrerPolicy = "same-origin";
-          permissionsPolicy = "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';";
-          customResponseHeaders = {
-            X-Robots-Tag = "none,noarchive,nosnippet,notranslate,noimageindex,";
-            server = "";
+      http.middlewares =
+        let
+          secureHeadersWith = overwrites: lib.recursiveUpdate
+            {
+              accessControlAllowMethods = [ "GET" "OPTIONS" "PUT" ];
+              accessControlMaxAge = 100;
+              hostsProxyHeaders = [ "X-Forwarded-Host" ];
+              stsSeconds = 63072000;
+              stsIncludeSubdomains = true;
+              stsPreload = true;
+              forceSTSHeader = true;
+              frameDeny = true;
+              contentTypeNosniff = true;
+              browserXssFilter = true;
+              referrerPolicy = "same-origin";
+              permissionsPolicy = "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';";
+              customResponseHeaders = {
+                X-Robots-Tag = "none,noarchive,nosnippet,notranslate,noimageindex,";
+                server = "";
+              };
+            }
+            overwrites;
+        in
+        {
+          public.chain.middlewares = [ "rate-limit" "secure-headers" ];
+          public_style-src-unsafe-inline.chain.middlewares = [ "rate-limit" "secure-headers_style-src-unsafe-inline" ];
+          secured.chain.middlewares = [ "rate-limit" "secure-headers" "authelia" ];
+          secured_style-src-unsafe-inline.chain.middlewares = [ "rate-limit" "secure-headers_style-src-unsafe-inline" "authelia" ];
+          secured_no-csp.chain.middlewares = [ "rate-limit" "secure-headers_no-csp" "authelia" ];
+          rate-limit.rateLimit = {
+            average = 100;
+            period = "1s";
+            burst = 50;
           };
-        } overwrites;
-      in {
-        public.chain.middlewares = [ "rate-limit" "secure-headers" ];
-        public_style-src-unsafe-inline.chain.middlewares = [ "rate-limit" "secure-headers_style-src-unsafe-inline" ];
-        secured.chain.middlewares = [ "rate-limit" "secure-headers" "authelia" ];
-        secured_style-src-unsafe-inline.chain.middlewares = [ "rate-limit" "secure-headers_style-src-unsafe-inline" "authelia" ];
-        secured_no-csp.chain.middlewares = [ "rate-limit" "secure-headers_no-csp" "authelia" ];
-        rate-limit.rateLimit = {
-          average = 100;
-          period = "1s";
-          burst = 50;
+          authelia.forwardAuth = {
+            address = "http://127.0.0.1:9091/api/verify?rd=https://auth.ara.matrss.de/";
+            trustForwardHeader = true;
+            authResponseHeaders = [ "Remote-User" "Remote-Groups" "Remote-Name" "Remote-Email" ];
+          };
+          # src: https://www.reddit.com/r/selfhosted/comments/iqvykv/authelia_and_multiple_apps/g5yds86/
+          secure-headers.headers = secureHeadersWith {
+            contentSecurityPolicy = "upgrade-insecure-requests; default-src 'none'; frame-ancestors 'self'; object-src 'none'; require-sri-for script style; base-uri 'self'; form-action 'self'; manifest-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob: data:; worker-src 'self' blob:; font-src 'self'; connect-src 'self' wss:;";
+          };
+          secure-headers_style-src-unsafe-inline.headers = secureHeadersWith {
+            contentSecurityPolicy = "upgrade-insecure-requests; default-src 'none'; frame-ancestors 'self'; object-src 'none'; require-sri-for script style; base-uri 'self'; form-action 'self'; manifest-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; worker-src 'self' blob:; font-src 'self'; connect-src 'self' wss:;";
+          };
+          secure-headers_no-csp.headers = secureHeadersWith { };
         };
-        authelia.forwardAuth = {
-          address = "http://127.0.0.1:9091/api/verify?rd=https://auth.ara.matrss.de/";
-          trustForwardHeader = true;
-          authResponseHeaders = [ "Remote-User" "Remote-Groups" "Remote-Name" "Remote-Email" ];
-        };
-        # src: https://www.reddit.com/r/selfhosted/comments/iqvykv/authelia_and_multiple_apps/g5yds86/
-        secure-headers.headers = secureHeadersWith {
-          contentSecurityPolicy = "upgrade-insecure-requests; default-src 'none'; frame-ancestors 'self'; object-src 'none'; require-sri-for script style; base-uri 'self'; form-action 'self'; manifest-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob: data:; worker-src 'self' blob:; font-src 'self'; connect-src 'self' wss:;";
-        };
-        secure-headers_style-src-unsafe-inline.headers = secureHeadersWith {
-          contentSecurityPolicy = "upgrade-insecure-requests; default-src 'none'; frame-ancestors 'self'; object-src 'none'; require-sri-for script style; base-uri 'self'; form-action 'self'; manifest-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; worker-src 'self' blob:; font-src 'self'; connect-src 'self' wss:;";
-        };
-        secure-headers_no-csp.headers = secureHeadersWith { };
-      };
 
       http.routers.traefik = {
         rule = "Host(`traefik.ara.matrss.de`)";
