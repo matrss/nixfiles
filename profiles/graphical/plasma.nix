@@ -45,6 +45,7 @@
     bitwarden
     solaar
     gimp
+    nextcloud-client
 
     teams
 
