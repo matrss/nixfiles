@@ -5,11 +5,11 @@
     ${pkgs.openssh}/bin/ssh -p 2222 root@192.168.178.254 'sh -c "cryptsetup-askpass"'
   '';
   nm-connection-sync = pkgs.writeShellScriptBin "nm-connection-sync" ''
-    if [ -z "$DEVSHELL_ROOT" ]; then
-        printf "ERROR: DEVSHELL_ROOT not set\n" >&2
+    if [ -z "$PRJ_ROOT" ]; then
+        printf "ERROR: PRJ_ROOT not set\n" >&2
         exit 1
     fi
-    conn_file="$DEVSHELL_ROOT"/secrets/nm-connections.tar
+    conn_file="$PRJ_ROOT"/secrets/nm-connections.tar
     system_conn_dir=/etc/NetworkManager/system-connections
     tmp_dir="$(mktemp -d)"
 

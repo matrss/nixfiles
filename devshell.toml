@@ -24,7 +24,7 @@ help = "unlock ara over ssh"
 
 [[commands]]
 name = "fmt-nix"
-command = "nixpkgs-fmt ${@} $DEVSHELL_ROOT"
+command = "nixpkgs-fmt ${@} $PRJ_ROOT"
 category = "lint"
 help = "format nix source files"
 
