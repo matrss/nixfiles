@@ -69,8 +69,7 @@
               referrerPolicy = "same-origin";
               permissionsPolicy = "camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';";
               customResponseHeaders = {
-                X-Robots-Tag = "none,noarchive,nosnippet,notranslate,noimageindex,";
-                server = "";
+                X-Robots-Tag = "none";
               };
             }
             overwrites;
@@ -78,6 +77,7 @@
         {
           public.chain.middlewares = [ "rate-limit" "secure-headers" ];
           public_style-src-unsafe-inline.chain.middlewares = [ "rate-limit" "secure-headers_style-src-unsafe-inline" ];
+          public_no-csp.chain.middlewares = [ "rate-limit" "secure-headers_no-csp" ];
           secured.chain.middlewares = [ "rate-limit" "secure-headers" "authelia" ];
           secured_style-src-unsafe-inline.chain.middlewares = [ "rate-limit" "secure-headers_style-src-unsafe-inline" "authelia" ];
           secured_no-csp.chain.middlewares = [ "rate-limit" "secure-headers_no-csp" "authelia" ];
@@ -98,7 +98,11 @@
           secure-headers_style-src-unsafe-inline.headers = secureHeadersWith {
             contentSecurityPolicy = "upgrade-insecure-requests; default-src 'none'; frame-ancestors 'self'; object-src 'none'; require-sri-for script style; base-uri 'self'; form-action 'self'; manifest-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; worker-src 'self' blob:; font-src 'self'; connect-src 'self' wss:;";
           };
-          secure-headers_no-csp.headers = secureHeadersWith { };
+          secure-headers_no-csp.headers = secureHeadersWith {
+            customResponseHeaders = {
+              X-Frame-Options = "SAMEORIGIN";
+            };
+          };
         };
 
       http.routers.traefik = {
