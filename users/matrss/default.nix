@@ -130,6 +130,7 @@
       enable = true;
       enableSshSupport = true;
       enableScDaemon = true;
+      pinentryFlavor = "qt";
     };
 
     services.syncthing.enable = true;

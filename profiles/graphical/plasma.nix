@@ -14,23 +14,13 @@
   # This is set by default by enabling services.xserver.desktopManager.plasma5
   # nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
 
-  networking.firewall =
-    let
-      kdeconnectPorts = {
-        from = 1714;
-        to = 1764;
-      };
-    in
-    {
-      allowedTCPPortRanges = [ kdeconnectPorts ];
-      allowedUDPPortRanges = [ kdeconnectPorts ];
-    };
+  programs.kdeconnect.enable = true;
   networking.networkmanager.enable = true;
 
   # Enable solaar udev rule for logitech devices
   services.udev.packages = [ pkgs.solaar ];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; with plasma5Packages; [
     firefox
     thunderbird
     vlc
@@ -56,7 +46,12 @@
     gwenview
     skanlite
     krita
-    kdeconnect
+    akonadi
+    # kdepim-runtime
+    kaccounts-integration
+    kaccounts-providers
+    korganizer
+    kontact
   ];
 
   programs.steam.enable = true;
