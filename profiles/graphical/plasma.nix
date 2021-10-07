@@ -40,6 +40,7 @@
     teams
 
     # KDE/Plasma apps
+    plasma5Packages.thirdParty.plasma-applet-virtual-desktop-bar
     syncthingtray
     skanlite
     krita
