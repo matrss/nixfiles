@@ -20,7 +20,7 @@
   # Enable solaar udev rule for logitech devices
   services.udev.packages = [ pkgs.solaar ];
 
-  environment.systemPackages = with pkgs; with plasma5Packages; [
+  environment.systemPackages = with pkgs; [
     firefox
     thunderbird
     vlc
@@ -41,18 +41,11 @@
 
     # KDE/Plasma apps
     syncthingtray
-    okular
-    ark
-    gwenview
     skanlite
     krita
-    akonadi
-    # kdepim-runtime
-    kaccounts-integration
-    kaccounts-providers
-    korganizer
-    kontact
-  ];
+  ] ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeGear)
+    ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeFrameworks);
+    # ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.plasma5);
 
   programs.steam.enable = true;
 }
