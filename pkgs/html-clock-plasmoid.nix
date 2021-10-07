@@ -18,16 +18,16 @@ mkDerivation rec {
   buildInputs = [ plasma-framework ];
 
   buildPhase = ''
-  runHook preBuild
-  sh -c 'export ROOT_DIR=$(pwd); source bin/common.sh; dumpMeta > src/contents/js/meta.js'
-  runHook postBuild
+    runHook preBuild
+    sh -c 'export ROOT_DIR=$(pwd); source bin/common.sh; dumpMeta > src/contents/js/meta.js'
+    runHook postBuild
   '';
 
   installPhase = ''
-  runHook preInstall
-  mkdir -p $out/share/plasma/plasmoids/com.marcinorlowski.htmlclock
-  cp -r src/* $out/share/plasma/plasmoids/com.marcinorlowski.htmlclock
-  runHook postInstall
+    runHook preInstall
+    mkdir -p $out/share/plasma/plasmoids/com.marcinorlowski.htmlclock
+    cp -r src/* $out/share/plasma/plasmoids/com.marcinorlowski.htmlclock
+    runHook postInstall
   '';
 
   meta = with lib; {

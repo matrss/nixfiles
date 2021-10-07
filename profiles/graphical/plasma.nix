@@ -46,8 +46,8 @@
     skanlite
     krita
   ] ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeGear)
-    ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeFrameworks);
-    # ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.plasma5);
+  ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeFrameworks);
+  # ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.plasma5);
 
   programs.steam.enable = true;
 }
