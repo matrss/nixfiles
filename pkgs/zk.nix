@@ -16,7 +16,7 @@ buildGoModule {
 
   buildInputs = [ icu ];
 
-  buildFlagsArray = [ "-tags=icu fts5" ];
+  tags = [ "icu" "fts5" ];
 
   runVend = true;
 
