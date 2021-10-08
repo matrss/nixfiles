@@ -110,7 +110,7 @@
         };
     in
     recursiveUpdate
-      (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" "i686-linux" "aarch64-linux" ]
+      (flake-utils.lib.eachSystem [ "x86_64-linux" "i686-linux" "aarch64-linux" ]
         (system:
           let pkgs = nixpkgsFor inputs.large system;
           in
