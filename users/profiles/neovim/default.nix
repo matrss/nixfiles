@@ -7,7 +7,6 @@
 
   programs.neovim = rec {
     enable = true;
-    package = pkgs.neovim;
 
     vimAlias = true;
     viAlias = true;

@@ -31,7 +31,7 @@
     spotify
     libreoffice
     xournalpp
-    nixpkgs.discord
+    discord
     bitwarden
     solaar
     gimp

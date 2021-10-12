@@ -201,12 +201,12 @@ in
     keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGFjDIcea7ScFIv87nevx9ShfPGEoWedQ6JNRoqVPLg root@andromeda" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJeFg7nYVjzT1v6umYLpJaFfvvHqyxiixbWOX7EaOn6Y root@ara" ];
   };
 
-  services.f2b-miner = {
-    enable = true;
-    logFile = "/home/matrss/public/data/f2b-bans.csv";
-    user = "matrss";
-    group = "users";
-  };
+  # services.f2b-miner = {
+  #   enable = true;
+  #   logFile = "/home/matrss/public/data/f2b-bans.csv";
+  #   user = "matrss";
+  #   group = "users";
+  # };
 
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
