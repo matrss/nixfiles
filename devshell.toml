@@ -47,5 +47,5 @@ help = "run all lint tools"
 
 [devshell]
 packages = [
-  "git", "nixFlakes", "sops", "sops-import-keys-hook", "nixpkgs-fmt"
+  "git", "nixFlakes", "fup-repl", "sops", "sops-import-keys-hook", "nixpkgs-fmt"
 ]
