@@ -51,9 +51,15 @@
     ];
 
     outputsBuilder = channels: {
+      packages = flake-utils.lib.exportPackages self.overlays channels;
+
       devShell = channels.nixpkgs.devshell.mkShell {
         imports = [ (channels.nixpkgs.devshell.importTOML ./devshell.toml) ];
       };
+    };
+
+    overlays = flake-utils.lib.exportOverlays {
+      inherit (self) pkgs inputs;
     };
 
     overlay = import ./pkgs;
