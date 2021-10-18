@@ -23,6 +23,8 @@
   outputs = inputs@{ self, flake-utils, ... }: flake-utils.lib.mkFlake {
     inherit self inputs;
 
+    supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
+
     channelsConfig.allowUnfree = true;
 
     sharedOverlays = [
