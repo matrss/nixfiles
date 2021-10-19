@@ -6,14 +6,47 @@ workflow:
 
 stages:
   - lint
+  - build
   - test
+
+default:
+  tags: [ nixFlakes ]
+  before_script:
+    - |-
+      cat >> /etc/nix/nix.conf << EOF
+      substituters = ssh://nix-ssh@ara.matrss.de https://cache.nixos.org
+      trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+      require-sigs = true
+      EOF
+      eval $(ssh-agent -s)
+      echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+      mkdir -p ~/.ssh
+      chmod 700 ~/.ssh
+      cat .known-hosts_ara.matrss.de >> ~/.ssh/known_hosts
 
 lint:
   stage: lint
   image: nixpkgs/nix-flakes:latest
   script: nix develop --command lint
 
-flake check:
-  tags: [ nixFlakes ]
+.build-nixos-configuration: &build-nixos-configuration
+  stage: build
+  image: nixpkgs/nix-flakes:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+build-andromeda:
+  <<: *build-nixos-configuration
+  script:
+    - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
+    - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.andromeda.config.system.build.toplevel
+
+build-ara:
+  <<: *build-nixos-configuration
+  script:
+    - nix build .#nixosConfigurations.ara.config.system.build.toplevel
+    - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.ara.config.system.build.toplevel
+
+flake-check:
   stage: test
   script: nix flake check
