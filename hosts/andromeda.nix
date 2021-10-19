@@ -144,7 +144,7 @@
   ];
 
   # Enable ara as substituter
-  nix.trustedBinaryCaches = [ "ssh://ara-binary-cache" ];
+  nix.binaryCaches = [ "ssh://ara-binary-cache" ];
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
