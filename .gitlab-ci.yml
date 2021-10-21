@@ -10,7 +10,6 @@ stages:
   - test
 
 default:
-  tags: [ nixFlakes ]
   before_script:
     - |-
       cat >> /etc/nix/nix.conf << EOF
