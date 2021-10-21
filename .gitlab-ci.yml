@@ -38,14 +38,14 @@ build-andromeda:
   <<: *build-nixos-configuration
   script:
     - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
-    - nix store sign -k "$NIX_SIGNATURE_KEY" .#nixosConfigurations.andromeda.config.system.build.toplevel
+    - nix store sign -k "$NIX_SIGNATURE_KEY" -r .#nixosConfigurations.andromeda.config.system.build.toplevel
     - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.andromeda.config.system.build.toplevel
 
 build-ara:
   <<: *build-nixos-configuration
   script:
     - nix build .#nixosConfigurations.ara.config.system.build.toplevel
-    - nix store sign -k "$NIX_SIGNATURE_KEY" .#nixosConfigurations.ara.config.system.build.toplevel
+    - nix store sign -k "$NIX_SIGNATURE_KEY" -r .#nixosConfigurations.ara.config.system.build.toplevel
     - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.ara.config.system.build.toplevel
 
 flake-check:
