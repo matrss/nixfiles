@@ -26,6 +26,7 @@
     # gc.automatic = true;
     optimise.automatic = true;
     trustedUsers = [ "@wheel" ];
+    binaryCachePublicKeys = [ "ara.matrss.de-1:ZQzhLCE7akrXB8TvU7Nts3tn7oDujt/GMXQPo5gGYsU=" ];
   };
 
   # Just very convenient.

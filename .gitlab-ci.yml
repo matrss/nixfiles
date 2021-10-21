@@ -14,7 +14,7 @@ default:
     - |-
       cat >> /etc/nix/nix.conf << EOF
       substituters = ssh://nix-ssh@ara.matrss.de https://cache.nixos.org
-      trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+      trusted-public-keys = ara.matrss.de-1:ZQzhLCE7akrXB8TvU7Nts3tn7oDujt/GMXQPo5gGYsU= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
       require-sigs = true
       EOF
       eval $(ssh-agent -s)
@@ -38,12 +38,14 @@ build-andromeda:
   <<: *build-nixos-configuration
   script:
     - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
+    - nix store sign -k "$NIX_SIGNATURE_KEY" .#nixosConfigurations.andromeda.config.system.build.toplevel
     - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.andromeda.config.system.build.toplevel
 
 build-ara:
   <<: *build-nixos-configuration
   script:
     - nix build .#nixosConfigurations.ara.config.system.build.toplevel
+    - nix store sign -k "$NIX_SIGNATURE_KEY" .#nixosConfigurations.ara.config.system.build.toplevel
     - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.ara.config.system.build.toplevel
 
 flake-check:
