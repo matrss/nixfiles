@@ -15,6 +15,7 @@
           # `CI_SERVER_URL`
           # `REGISTRATION_TOKEN`
           registrationConfigFile = config.sops.secrets.gitlab-runner-env.path;
+          registrationFlags = [ "--locked=false" ];
           dockerImage = "debian:stable";
         }; in
       {
