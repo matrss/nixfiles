@@ -1,15 +1,14 @@
 workflow:
   rules:
-    - if: '$CI_MERGE_REQUEST_IID'
+    # - if: '$CI_MERGE_REQUEST_IID'
     - if: '$CI_COMMIT_TAG'
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 stages:
-  - lint
-  - build
-  - test
+  - nix-ci
 
-default:
+nix-ci:
+  stage: nix-ci
   image: nixpkgs/nix-flakes:latest
   before_script:
     - |-
@@ -23,30 +22,15 @@ default:
       mkdir -p ~/.ssh
       chmod 700 ~/.ssh
       cat .known-hosts_ara.matrss.de >> ~/.ssh/known_hosts
-
-lint:
-  stage: lint
-  script: nix develop --command lint
-
-.build-nixos-configuration: &build-nixos-configuration
-  stage: build
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-
-build-andromeda:
-  <<: *build-nixos-configuration
   script:
+    - nix flake check
+    - nix develop --command lint
     - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
-    - nix store sign -k "$NIX_SIGNATURE_KEY" -r .#nixosConfigurations.andromeda.config.system.build.toplevel
-    - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.andromeda.config.system.build.toplevel
-
-build-ara:
-  <<: *build-nixos-configuration
-  script:
     - nix build .#nixosConfigurations.ara.config.system.build.toplevel
-    - nix store sign -k "$NIX_SIGNATURE_KEY" -r .#nixosConfigurations.ara.config.system.build.toplevel
-    - nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.ara.config.system.build.toplevel
-
-flake-check:
-  stage: test
-  script: nix flake check
+    - |-
+      if [ "$CI_COMMIT_BRANCH" = "$CI_DEFAULT_BRANCH" ]; then
+        nix store sign -k "$NIX_SIGNATURE_KEY" -r .#nixosConfigurations.andromeda.config.system.build.toplevel
+        nix store sign -k "$NIX_SIGNATURE_KEY" -r .#nixosConfigurations.ara.config.system.build.toplevel
+        nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.andromeda.config.system.build.toplevel
+        nix copy --to ssh://nix-ssh@ara.matrss.de .#nixosConfigurations.ara.config.system.build.toplevel
+      fi
