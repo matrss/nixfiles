@@ -2,23 +2,23 @@
 
 {
   services.xserver.enable = true;
-  # services.xserver.wacom.enable = true;
   services.xserver.libinput.enable = true;
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sessionPackages = [
-    (pkgs.plasma-workspace.overrideAttrs
-      (old: { passthru.providedSessions = [ "plasmawayland" ]; }))
-  ];
   services.xserver.desktopManager.plasma5.enable = true;
-
-  # This is set by default by enabling services.xserver.desktopManager.plasma5
-  # nixpkgs.config.firefox.enablePlasmaBrowserIntegration = true;
+  services.xserver.desktopManager.plasma5.runUsingSystemd = true;
 
   programs.kdeconnect.enable = true;
   networking.networkmanager.enable = true;
 
-  # Enable solaar udev rule for logitech devices
-  services.udev.packages = [ pkgs.solaar ];
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
+
+  environment.variables = {
+    MOZ_ENABLE_WAYLAND = "1";
+    GTK_USE_PORTAL = "1";
+  };
+
+  programs.steam.enable = true;
 
   environment.systemPackages = with pkgs; [
     firefox
@@ -40,14 +40,12 @@
     teams
 
     # KDE/Plasma apps
-    plasma5Packages.thirdParty.plasma-applet-virtual-desktop-bar
-    html-clock-plasmoid
     syncthingtray
     skanlite
     krita
-  ] ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeGear)
-  ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeFrameworks);
-  # ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.plasma5);
 
-  programs.steam.enable = true;
+    ark
+  ] ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeFrameworks);
+  # ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.kdeGear);
+  # ++ builtins.filter lib.isDerivation (builtins.attrValues plasma5Packages.plasma5);
 }
