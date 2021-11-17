@@ -50,6 +50,7 @@
 
     home.homeDirectory = "/home/matrss";
 
+    xsession.enable = true;
     home.sessionVariables = {
       # Native wayland support for firefox
       MOZ_ENABLE_WAYLAND = "1";
