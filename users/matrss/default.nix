@@ -52,9 +52,6 @@
 
     xsession.enable = true;
     home.sessionVariables = {
-      # Native wayland support for firefox
-      MOZ_ENABLE_WAYLAND = "1";
-      # EDITOR = "neovide --geometry=195x45";
       EDITOR = "nvim";
       ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/Sync/zettelkasten";
     };
