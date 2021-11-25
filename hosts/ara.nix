@@ -19,6 +19,7 @@ in
     ../profiles/oci-container/whoami.nix
     ../profiles/oci-container/publicfiles.nix
     ../profiles/oci-container/seafile.nix
+    ../profiles/oci-container/cells.nix
     ../profiles/nixos-container/jellyfin.nix
     ../profiles/nixos-container/nextcloud.nix
     ../profiles/nixos-container/sonarr.nix
