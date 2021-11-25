@@ -25,6 +25,8 @@
     thunderbird
     vlc
 
+    barrier
+
     anki
     zoom-us
     zotero
