@@ -126,7 +126,7 @@
       enable = true;
       enableSshSupport = true;
       enableScDaemon = true;
-      pinentryFlavor = "qt";
+      pinentryFlavor = "gnome3";
     };
 
     services.syncthing.enable = true;

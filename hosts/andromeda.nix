@@ -4,7 +4,7 @@
   imports = [
     ../users/matrss
     ../users/root
-    ../profiles/graphical/plasma.nix
+    ../profiles/graphical/gnome.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
