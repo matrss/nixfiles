@@ -18,9 +18,9 @@ buildGoModule {
 
   tags = [ "icu" "fts5" ];
 
-  runVend = true;
+  proxyVendor = true;
 
-  vendorSha256 = "sha256-FGdM++cGYxdqPgFuffPSH/oyVmm0LuoJDhw+M0bs+to=";
+  vendorSha256 = "sha256-O07Lqz0ak70xKMqc2DnSCqtdB9gv35WEZICZESji1zk=";
 
   doCheck = false;
 }
