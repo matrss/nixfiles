@@ -142,8 +142,8 @@
     # samsung-unified-linux-driver_1_00_37
   ];
 
-  # Enable ara as substituter
-  nix.binaryCaches = [ "ssh://ara-binary-cache" ];
+  # Enable ara as a substituter
+  nix.settings.substituters = [ "ssh://ara-binary-cache" ];
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;

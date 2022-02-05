@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   # Set your time zone.
@@ -17,17 +17,18 @@
     doas
   ];
 
-  # Enable flakes support.
   nix = {
-    package = pkgs.nixFlakes;
+    # Enable flakes support.
+    package = pkgs.nixUnstable;
     generateRegistryFromInputs = true;
-    extraOptions = ''
+    # mkForce needed because flake-utils-plus adds ca-references option otherwise.
+    extraOptions = lib.mkForce ''
       experimental-features = nix-command flakes
     '';
     # gc.automatic = true;
     optimise.automatic = true;
-    trustedUsers = [ "@wheel" ];
-    binaryCachePublicKeys = [ "ara.matrss.de-1:ZQzhLCE7akrXB8TvU7Nts3tn7oDujt/GMXQPo5gGYsU=" ];
+    settings.trusted-users = [ "@wheel" ];
+    settings.trusted-public-keys = [ "ara.matrss.de-1:ZQzhLCE7akrXB8TvU7Nts3tn7oDujt/GMXQPo5gGYsU=" ];
   };
 
   # Just very convenient.
