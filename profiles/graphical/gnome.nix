@@ -15,6 +15,11 @@
 
   programs.steam.enable = true;
 
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
   environment.systemPackages = with pkgs; [
     noto-fonts
 
