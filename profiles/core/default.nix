@@ -20,6 +20,7 @@
   # Enable flakes support.
   nix = {
     package = pkgs.nixFlakes;
+    generateRegistryFromInputs = true;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
