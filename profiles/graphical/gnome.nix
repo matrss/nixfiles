@@ -29,7 +29,9 @@
 
     barrier
 
-    anki
+    lutris
+
+    anki-bin
     zoom-us
     zotero
     spotify
@@ -39,6 +41,7 @@
     bitwarden
     gimp
     nextcloud-client
+    owncloud-client
     teams
     krita
 
