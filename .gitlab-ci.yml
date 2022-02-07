@@ -17,7 +17,7 @@ nix-ci:
         substituters = ssh://nix-ssh@ara.matrss.de https://cache.nixos.org
         trusted-public-keys = ara.matrss.de-1:ZQzhLCE7akrXB8TvU7Nts3tn7oDujt/GMXQPo5gGYsU= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
         require-sigs = true
-        EOF
+      EOF
         eval $(ssh-agent -s)
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
         mkdir -p ~/.ssh
