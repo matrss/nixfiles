@@ -11,7 +11,7 @@ buildGoModule {
     owner = "mickael-menu";
     repo = "zk";
     rev = "v${version}";
-    hash = "sha256-s39CjqsHhXeG7iOENBbo5LEFUY/0basidRIieLnVixY=";
+    hash = "sha256-EFVNEkBYkhArtUfULZVRPxFCVaPHamadqFxi7zV7y8g=";
   };
 
   buildInputs = [ icu ];
