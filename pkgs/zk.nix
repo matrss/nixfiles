@@ -20,7 +20,7 @@ buildGoModule {
 
   proxyVendor = true;
 
-  vendorSha256 = "sha256-O07Lqz0ak70xKMqc2DnSCqtdB9gv35WEZICZESji1zk=";
+  vendorSha256 = "sha256-Ez31wKe1XkyKu9ieKbY4r9eV2CCONvUT+YNbD0+vSkQ=";
 
   doCheck = false;
 }
