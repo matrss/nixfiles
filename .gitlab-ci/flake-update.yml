@@ -11,7 +11,7 @@ flake-update:
     - git config user.name "git-robot"
     - git remote set-url origin git@gitlab.com:matrss/nixfiles.git
   script:
-    - git checkout -b flake-update
+    - git checkout -B flake-update
     - nix flake update --commit-lock-file
     - >
       git push --force
