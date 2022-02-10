@@ -1,0 +1,20 @@
+flake-update:
+  stage: periodic
+  image: nixpkgs/nix-flakes:latest
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$ROBOT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - cat .known-hosts_gitlab.com >> ~/.ssh/known_hosts
+    - git config --global user.email "matthias.risze@t-online.de"
+    - git config --global user.name "git-robot"
+  script:
+    - git checkout -b flake-update
+    - nix flake update --commit-lock-file
+    - >
+      git push --force
+      --set-upstream
+      -o merge_request.create
+      -o merge_request.target=main
+      origin flake-update
