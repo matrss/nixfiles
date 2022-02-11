@@ -54,14 +54,14 @@
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ self.overlay ]; };
             modules = baseModules ++ [
-              ./hosts/andromeda.nix
+              ./profiles/hosts/andromeda.nix
             ];
           };
           ara = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ self.overlay ]; };
             modules = baseModules ++ [
-              ./hosts/ara.nix
+              ./profiles/hosts/ara.nix
             ];
           };
         };

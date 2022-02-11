@@ -13,16 +13,16 @@ in
   imports = [
     ../users/root
     ../users/matrss-ara
-    ../profiles/gitlab-runner.nix
-    ../profiles/traefik.nix
-    ../profiles/oci-container/authelia
-    ../profiles/oci-container/whoami.nix
-    ../profiles/oci-container/publicfiles.nix
-    ../profiles/nixos-container/jellyfin.nix
-    ../profiles/nixos-container/nextcloud.nix
-    ../profiles/nixos-container/sonarr.nix
-    ../profiles/nixos-container/radarr.nix
-    # ../profiles/nixos-container/bazarr.nix
+    ../gitlab-runner.nix
+    ../traefik.nix
+    ../oci-container/authelia
+    ../oci-container/whoami.nix
+    ../oci-container/publicfiles.nix
+    ../nixos-container/jellyfin.nix
+    ../nixos-container/nextcloud.nix
+    ../nixos-container/sonarr.nix
+    ../nixos-container/radarr.nix
+    # ../nixos-container/bazarr.nix
   ];
 
   networking.hostName = "ara";
@@ -178,7 +178,7 @@ in
   services.avahi.publish.addresses = true;
 
   # Default sops file for secrets.
-  sops.defaultSopsFile = ../secrets/ara/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/ara/secrets.yaml;
 
   environment.systemPackages = with pkgs; [
     vim

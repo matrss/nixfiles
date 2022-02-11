@@ -33,7 +33,7 @@
       sumneko-lua-language-server
       rust-analyzer
       # fortls
-      pyright
+      # pyright
       clang-tools
       rnix-lsp
       nodePackages.bash-language-server

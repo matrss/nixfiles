@@ -2,7 +2,7 @@
 
 {
   sops.secrets.nixfiles-deploy-token = {
-    sopsFile = ../secrets/secrets.yaml;
+    sopsFile = ../../secrets/secrets.yaml;
   };
 
   system.autoUpgrade = {
