@@ -42,11 +42,10 @@
       };
 
       services.redis.servers.nextcloud.enable = true;
-      services.redis.servers.nextcloud.unixSocket = "/run/redis/redis.sock";
       services.redis.servers.nextcloud.unixSocketPerm = 770;
 
-      users.users.nginx.extraGroups = [ "redis" ];
-      users.users.nextcloud.extraGroups = [ "redis" ];
+      users.users.nginx.extraGroups = [ "redis-nextcloud" ];
+      users.users.nextcloud.extraGroups = [ "redis-nextcloud" ];
 
       networking.firewall.allowedTCPPorts = [ 80 ];
 
