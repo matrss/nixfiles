@@ -17,7 +17,6 @@ nix-ci:
       fi
   script:
     - nix flake check
-    - nix develop --command lint
     - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
     - nix build .#nixosConfigurations.ara.config.system.build.toplevel
     - |-
