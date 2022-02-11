@@ -20,9 +20,7 @@
   nix = {
     # Enable flakes support.
     package = pkgs.nixUnstable;
-    generateRegistryFromInputs = true;
-    # mkForce needed because flake-utils-plus adds ca-references option otherwise.
-    extraOptions = lib.mkForce ''
+    extraOptions = ''
       experimental-features = nix-command flakes
     '';
     # gc.automatic = true;
