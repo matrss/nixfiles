@@ -41,9 +41,9 @@
         ensureDatabases = [ "nextcloud" ];
       };
 
-      services.redis.enable = true;
-      services.redis.unixSocket = "/run/redis/redis.sock";
-      services.redis.unixSocketPerm = 770;
+      services.redis.servers.nextcloud.enable = true;
+      services.redis.servers.nextcloud.unixSocket = "/run/redis/redis.sock";
+      services.redis.servers.nextcloud.unixSocketPerm = 770;
 
       users.users.nginx.extraGroups = [ "redis" ];
       users.users.nextcloud.extraGroups = [ "redis" ];

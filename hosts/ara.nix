@@ -201,7 +201,7 @@ in
     keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIWXOgpAWXNPVnq9pw3qmtUPl+yynT9GCmG0JxWPsJt4 gitlab-ci" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGFjDIcea7ScFIv87nevx9ShfPGEoWedQ6JNRoqVPLg root@andromeda" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJeFg7nYVjzT1v6umYLpJaFfvvHqyxiixbWOX7EaOn6Y root@ara" ];
   };
 
-  nix.trustedUsers = [ "nix-ssh" ];
+  nix.settings.trusted-users = [ "nix-ssh" ];
 
   # services.f2b-miner = {
   #   enable = true;
