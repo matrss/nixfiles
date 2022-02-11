@@ -91,5 +91,12 @@
           };
         };
       };
+
+      ciJobs = {
+        build.andromeda = self.nixosConfigurations.andromeda.config.system.build.toplevel;
+        build.ara = self.nixosConfigurations.ara.config.system.build.toplevel;
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
     };
 }
