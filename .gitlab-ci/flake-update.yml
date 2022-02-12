@@ -12,7 +12,7 @@ flake-update:
     - git remote set-url origin git@gitlab.com:matrss/nixfiles.git
   script:
     - git checkout -B flake-update
-    - git rebase main
+    - git rebase origin/main
     - nix flake update --commit-lock-file
     - >
       git push --force
