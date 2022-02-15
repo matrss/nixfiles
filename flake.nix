@@ -92,11 +92,24 @@
         };
       };
 
-      ciJobs = {
-        build.andromeda = self.nixosConfigurations.andromeda.config.system.build.toplevel;
-        build.ara = self.nixosConfigurations.ara.config.system.build.toplevel;
-      };
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+      checks =
+        let
+          checksFor = system:
+            let
+              pkgs = inputs.nixpkgs.legacyPackages.${system};
+            in
+            {
+              "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint_nixpkgs-fmt" { } ''
+                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} > $out
+              '';
+              "lint/editorconfig-checker" = pkgs.runCommandLocal "lint_editorconfig-checker" { } ''
+                cd ${./.}
+                ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
+              '';
+            };
+        in
+        inputs.nixpkgs.lib.recursiveUpdate
+          (forAllSystems checksFor)
+          (builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib);
     };
 }
