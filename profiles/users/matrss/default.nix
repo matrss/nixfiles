@@ -34,21 +34,6 @@
 
       bitwarden-cli
 
-      pandoc
-      texlive.combined.scheme-full
-      (rstudioWrapper.override {
-        packages = with rPackages; [
-          itsmr
-          tseries
-          forecast
-          mnormt
-          vars
-          TSA
-          astsa
-          fGarch
-        ];
-      })
-
       nodePackages.tiddlywiki
 
       # (vscode-with-extensions.override {
