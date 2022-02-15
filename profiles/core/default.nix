@@ -19,9 +19,9 @@
 
   nix = {
     # Enable flakes support.
-    package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
+      flake-registry = ${pkgs.writeText "flake-registry.json" (builtins.toJSON { flakes = []; version = 2; })}
     '';
     # gc.automatic = true;
     optimise.automatic = true;

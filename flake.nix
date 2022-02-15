@@ -15,7 +15,7 @@
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, ... }@inputs:
+  outputs = inputs:
     let
       systems = [ "aarch64-linux" "x86_64-linux" ];
       forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems (system: f system);
@@ -26,7 +26,7 @@
         let
           pkgs = import inputs.nixpkgs {
             inherit system; overlays = [
-            self.overlay
+            inputs.self.overlay
             inputs.deploy-rs.overlay
             inputs.sops-nix.overlay
           ];
@@ -37,6 +37,9 @@
           buildInputs = with pkgs; [ git nixUnstable sops sops-import-keys-hook nixpkgs-fmt deploy-rs.deploy-rs ];
         });
 
+      legacyPackages = forAllSystems (system:
+          import inputs.nixpkgs { inherit system; overlays = [ inputs.self.overlay ]; });
+
       nixosConfigurations =
         let
           baseModules = [
@@ -46,20 +49,23 @@
             {
               home-manager.useGlobalPkgs = true;
             }
+            {
+              nix.registry.self.flake = inputs.self;
+            }
             ./profiles/core
           ];
         in
         {
           andromeda = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
-            pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ self.overlay ]; };
+            pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ inputs.self.overlay ]; };
             modules = baseModules ++ [
               ./profiles/hosts/andromeda.nix
             ];
           };
           ara = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
-            pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ self.overlay ]; };
+            pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ inputs.self.overlay ]; };
             modules = baseModules ++ [
               ./profiles/hosts/ara.nix
             ];
@@ -76,7 +82,7 @@
           profiles.system = {
             user = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.andromeda;
+              inputs.self.nixosConfigurations.andromeda;
           };
         };
 
@@ -87,7 +93,7 @@
           profiles.system = {
             user = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.ara;
+              inputs.self.nixosConfigurations.ara;
           };
         };
       };
@@ -110,6 +116,6 @@
         in
         inputs.nixpkgs.lib.recursiveUpdate
           (forAllSystems checksFor)
-          (builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib);
+          (builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib);
     };
 }
