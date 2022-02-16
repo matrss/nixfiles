@@ -38,7 +38,7 @@
         });
 
       legacyPackages = forAllSystems (system:
-          import inputs.nixpkgs { inherit system; overlays = [ inputs.self.overlay ]; });
+        import inputs.nixpkgs { inherit system; overlays = [ inputs.self.overlay ]; });
 
       nixosConfigurations =
         let
