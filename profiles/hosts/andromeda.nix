@@ -129,7 +129,7 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   programs.singularity.enable = true;
-  environment.systemPackages = with pkgs; [ docker-compose virt-manager ];
+  environment.systemPackages = with pkgs; [ docker-compose_2 virt-manager ];
 
   # virtualisation.podman.enable = true;
 
