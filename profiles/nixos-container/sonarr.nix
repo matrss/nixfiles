@@ -14,6 +14,7 @@
     config = {
       services.sonarr.enable = true;
       networking.firewall.allowedTCPPorts = [ 8989 ];
+      system.stateVersion = "21.11";
     };
   };
 

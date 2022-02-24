@@ -17,6 +17,7 @@
       ];
       services.bazarr.enable = true;
       networking.firewall.allowedTCPPorts = [ 6767 ];
+      system.stateVersion = "21.11";
     };
   };
 

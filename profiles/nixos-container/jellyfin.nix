@@ -15,6 +15,7 @@
     config = {
       services.jellyfin.enable = true;
       networking.firewall.allowedTCPPorts = [ 8096 ];
+      system.stateVersion = "21.11";
     };
   };
 
