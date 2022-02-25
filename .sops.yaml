@@ -1,18 +1,21 @@
 keys: &all
-  - &matrss D4E6EEB5AE9313B44A2CBA0341A52B3BE0CC4FF1
-  - &andromeda 83A5F8B61E07083FC1AEA887B9EE9491A27E95A2
-  - &ara BA6847C91B50DF3F7E79BFAD945645C450F686ED
+  - &matrss age1d84zfp3p9r2jg9fxfp0kf557ct36ppc7s7e3zwnuc00uy4q90uqsqwh3cy
+  - &andromeda age1ma5ky80m5ngqptnu5vd5eh0a8sj2ftllhxzxreq0ddg4cekjkq2su4kmt6
+  - &ara age15rc2xk90qs50n5msp970kpme90u4kjjvh9z34v7n94hax5myjpfqs5ymxe
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
-      - pgp: *all
+      - age:
+        - *matrss
+        - *andromeda
+        - *ara
   - path_regex: secrets/andromeda/[^/]+\.yaml$
     key_groups:
-      - pgp:
+      - age:
         - *matrss
         - *andromeda
   - path_regex: secrets/ara/[^/]+\.yaml$
     key_groups:
-      - pgp:
+      - age:
         - *matrss
         - *ara

@@ -34,7 +34,7 @@
         in
         pkgs.mkShell {
           name = "nixfiles";
-          buildInputs = with pkgs; [ git nixUnstable sops sops-import-keys-hook nixpkgs-fmt deploy-rs.deploy-rs ];
+          buildInputs = with pkgs; [ git nixUnstable sops age ssh-to-age nixpkgs-fmt deploy-rs.deploy-rs ];
         });
 
       legacyPackages = forAllSystems (system:
