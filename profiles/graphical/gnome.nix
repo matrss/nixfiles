@@ -44,6 +44,7 @@
     owncloud-client
     teams
     krita
+    rnote
 
     gnome.gnome-tweaks
   ];
