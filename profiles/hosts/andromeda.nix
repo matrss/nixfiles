@@ -11,7 +11,9 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.systemd-boot.configurationLimit = 100;
+  boot.loader.efi.canTouchEfiVariables = false;
 
   # Kernel modules to include.
   boot.initrd.availableKernelModules =
