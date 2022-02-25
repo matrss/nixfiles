@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    # neovide
-  ];
-
   programs.neovim = rec {
     enable = true;
 
@@ -23,20 +19,8 @@
       fd
       ripgrep
 
-      # Cool zettels
-      # neuron-notes
-
       # To compile tree-sitter grammars
       gcc
-
-      # Language servers
-      sumneko-lua-language-server
-      rust-analyzer
-      # fortls
-      # pyright
-      clang-tools
-      rnix-lsp
-      nodePackages.bash-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -49,5 +33,4 @@
   };
 
   xdg.configFile."nvim/init_.lua".source = ./init.lua;
-  # xdg.configFile."nvim/lua".source = ./nvim/lua;
 }

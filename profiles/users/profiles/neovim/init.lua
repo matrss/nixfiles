@@ -1,245 +1,35 @@
 require('packer').startup {
     function(use)
+
         use 'tpope/vim-vinegar'
+
         use 'airblade/vim-rooter'
+
         use 'editorconfig/editorconfig-vim'
-        use 'freitass/todo.txt-vim'
-        use {
-            'sudormrfbin/cheatsheet.nvim',
-            requires = {
-                -- 'nvim-telescope/telescope.nvim',
-            },
-            after = {
-                'telescope.nvim',
-            },
-        }
-
-        use 'vim-pandoc/vim-pandoc'
-        use 'vim-pandoc/vim-pandoc-syntax'
-
-        use {
-            'TimUntersberger/neogit',
-            requires = {
-                -- 'nvim-lua/plenary.nvim',
-            },
-            after = {
-                'plenary.nvim',
-            },
-        }
-
-        use {
-            'neovim/nvim-lspconfig',
-            ft = { 'pandoc', 'lua', 'rust', 'python', 'c', 'cpp', 'nix', 'sh', 'bash', },
-            cmd = { 'LspStart', 'LspRestart', },
-            config = function()
-                local lspc = require('lspconfig')
-                local configs = require('lspconfig/configs')
-                configs.zk = {
-                    default_config = {
-                        cmd = {'zk', 'lsp', '--log', '/tmp/zk-lsp.log'},
-                        filetypes = {'pandoc'},
-                        root_dir = function()
-                            return vim.loop.cwd()
-                        end,
-                        settings = {}
-                    };
-                }
-                lspc.zk.setup {}
-                lspc.sumneko_lua.setup {
-                    cmd = { "lua-language-server" },
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                version = 'LuaJIT',
-                                path = vim.split(package.path, ';'),
-                            },
-                            diagnostics = {
-                                globals = {'vim'},
-                            },
-                            workspace = {
-                                library = {
-                                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                                },
-                            },
-                        },
-                    },
-                }
-                lspc.rust_analyzer.setup {}
-                -- lspc.fortls.setup {}
-                lspc.pyright.setup {}
-                lspc.clangd.setup {}
-                lspc.rnix.setup {}
-                lspc.bashls.setup {}
-            end,
-        }
-        -- use {
-        --     -- 'kabouzeid/nvim-lspinstall',
-        --     'matrss/nvim-lspinstall',
-        --     branch = 'fix-absolute-paths',
-        --     requires = {
-        --         -- 'neovim/nvim-lspconfig',
-        --     },
-        --     config = function()
-        --         local function setup_servers()
-        --             local lspi = require('lspinstall')
-        --             lspi.setup {}
-        --             local servers = lspi.installed_servers()
-        --             for _, server in pairs(servers) do
-        --                 require('lspconfig')[server].setup {}
-        --             end
-        --         end
-        --         setup_servers()
-        --         require('lspinstall').post_install_hook = function ()
-        --             -- reload installed servers
-        --             setup_servers()
-        --             -- this triggers the FileType autocmd that starts the server
-        --             vim.cmd("bufdo e")
-        --         end
-        --     end,
-        -- }
-
-        use {
-            'hrsh7th/nvim-compe',
-            config = function()
-                require('compe').setup {
-                    enabled = true,
-                    autocomplete = false,
-                    debug = false,
-                    min_length = 0,
-                    preselect = 'enable',
-                    -- throttle_time = 80,
-                    -- source_timeout = 200,
-                    -- incomplete_delay = 400,
-                    -- max_abbr_width = 100,
-                    -- max_kind_width = 100,
-                    -- max_menu_width = 100,
-                    documentation = true,
-
-                    source = {
-                        nvim_lsp = {
-                            priority = 5,
-                            sort = true,
-                        },
-                        nvim_lua = {
-                            priority = 4,
-                            sort = true,
-                        },
-                        path = {
-                            priority = 3,
-                            sort = true,
-                        },
-                        nvim_treesitter = {
-                            priority = 2,
-                            sort = true,
-                        },
-                        buffer = {
-                            priority = 1,
-                            sort = true,
-                        },
-                    },
-                }
-                vim.api.nvim_set_keymap('i', '<c-space>', [[compe#complete()]], { noremap = true, expr = true, silent = true })
-            end,
-        }
 
         use {
             'rmagatti/auto-session',
             config = function()
                 require('auto-session').setup {
-                    auto_session_suppress_dirs = { "~" },
+                    auto_session_suppress_dirs = { "~/" },
                 }
             end,
         }
-        use {
-            'rmagatti/session-lens',
-            requires = {
-                'rmagatti/auto-session',
-                -- 'nvim-telescope/telescope.nvim',
-            },
-            after = {
-                'auto-session',
-                'telescope.nvim',
-            },
-        }
-        -- use {
-        --     'glepnir/galaxyline.nvim',
-        --     branch = 'main',
-        --     config = function()
-        --         require('galaxyline_settings')
-        --     end,
-        -- }
-        use {
-            'megalithic/zk.nvim',
-            requires = {
-                -- 'nvim-telescope/telescope.nvim'
-            },
-            config = function()
-                require('zk').setup {
-                    -- not yet implemented:
-                    -- fuzzy_finder = 'telescope',
-                    link_format = 'wiki',
-                }
-            end,
-        }
-        -- use {
-        --     'oberblastmeister/neuron.nvim',
-        --     requires = {
-        --         'nvim-lua/plenary.nvim',
-        --         -- 'nvim-telescope/telescope.nvim',
-        --     },
-        --     config = function()
-        --         require('neuron').setup {
-        --             neuron_dir = "~/Sync/neuron",
-        --         }
-        --     end,
-        -- }
-        use {
-            'nvim-telescope/telescope.nvim',
-            requires = {
-                'nvim-lua/popup.nvim',
-                'nvim-lua/plenary.nvim',
-            },
-            after = {
-                'popup.nvim',
-                'plenary.nvim',
-            },
-            config = function()
-                require('telescope').setup {
-                    defaults = {
-                        layout_strategy = "bottom_pane",
-                        layout_config = {
-                            vertical = {
-                                mirror = true,
-                            },
-                        },
-                        border = true,
-                        borderchars = {'▄', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                    },
-                }
-            end,
-        }
-        use {
-            'nvim-telescope/telescope-symbols.nvim',
-            requires = {
-                -- 'nvim-telescope/telescope.nvim',
-            },
-            after = {
-                'telescope.nvim',
-            },
-        }
+
         use {
             'folke/which-key.nvim',
             config = function ()
                 require('which-key').setup {}
             end,
         }
+
         use {
             'RRethy/nvim-base16',
             config = function()
                 vim.cmd('colorscheme base16-eighties')
             end,
         }
+
         use {
             'nvim-treesitter/nvim-treesitter',
             run = function()
@@ -252,15 +42,8 @@ require('packer').startup {
                 }
             end,
         }
+
         use 'nvim-treesitter/nvim-treesitter-textobjects'
-        use {
-            'AckslD/nvim-anywise-reg.lua',
-            config = function()
-                require("anywise_reg").setup {}
-            end,
-        }
-        use 'junegunn/goyo.vim'
-        use 'junegunn/limelight.vim'
     end
 }
 
@@ -311,28 +94,14 @@ wo.relativenumber = true
 wo.signcolumn = 'auto'
 
 
--- Set nix filetype, somehow that does not happen automatically...
-vim.cmd([[
-augroup nix_filetype
-    autocmd! BufNewFile,BufFilePre,BufRead *.nix set filetype=nix
-augroup end
-]])
-
 -- Remember the view state, e.g. open and closed folds
-vim.opt.viewoptions = vim.opt.viewoptions - { 'options' }
-vim.cmd([[
-augroup remember_view
-    autocmd! BufWinLeave * mkview
-    autocmd! BufWinEnter * silent! loadview
-augroup end
-]])
-
--- Unmap help on <f1> so that it does not open when using neovide and switching
--- virtual desktops
-vim.api.nvim_set_keymap('n', '<f1>', '<nop>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<f1>', '<nop>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<m-f1>', '<nop>', { noremap = true })
-vim.api.nvim_set_keymap('i', '<m-f1>', '<nop>', { noremap = true })
+-- vim.opt.viewoptions = vim.opt.viewoptions - { 'options' }
+-- vim.cmd([[
+-- augroup remember_view
+--     autocmd! BufWinLeave * mkview
+--     autocmd! BufWinEnter * silent! loadview
+-- augroup end
+-- ]])
 
 -- Reasonable way to get back into normal mode
 vim.api.nvim_set_keymap('t', '<leader><esc>', [[<c-\><c-n>]], { noremap = true })
