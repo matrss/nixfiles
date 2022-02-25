@@ -45,5 +45,7 @@
   security.apparmor.enable = true;
   security.apparmor.killUnconfinedConfinables = true;
 
+  security.sudo.execWheelOnly = true;
+
   sops.secrets.root-ssh-key = { };
 }
