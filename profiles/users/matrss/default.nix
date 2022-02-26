@@ -17,7 +17,6 @@
       unrar
       conda
       mpv
-      todo-txt-cli
       sshuttle
       ripgrep
       fd
@@ -133,8 +132,6 @@
     services.syncthing.enable = true;
 
     programs.bash.enable = true;
-
-    xdg.configFile."todotxt/todo.cfg".source = ./todotxt/todo.cfg;
 
     home.stateVersion = "20.09";
   };
