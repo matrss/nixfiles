@@ -8,100 +8,23 @@
     ];
 
     home.packages = with pkgs; [
-      # datalad
       git-annex
-      # (python3.withPackages (ps: with ps; [ pip ]))
-
-      cargo
-
       unrar
       conda
-      mpv
       sshuttle
       ripgrep
       fd
       git
-      gitsh
       tig
-
-      neuron-notes
-      zk
-
-      et
-
-      youtube-dl
-
       bitwarden-cli
-
       nodePackages.tiddlywiki
-
-      # (vscode-with-extensions.override {
-      #   vscodeExtensions = with vscode-extensions; [
-      #     vscodevim.vim
-      #     ms-vsliveshare.vsliveshare
-      #     ms-python.python
-      #     ms-toolsai.jupyter
-      #   ];
-      # })
-      # dcraw
-      # filebot
-      # tinymediamanager
     ];
 
     home.homeDirectory = "/home/matrss";
-
-    xsession.enable = true;
-    home.sessionVariables = {
-      EDITOR = "nvim";
-      ZK_NOTEBOOK_DIR = "${config.home.homeDirectory}/Sync/zettelkasten";
-    };
+    home.sessionVariables.EDITOR = "nvim";
 
     xdg.enable = true;
     xdg.userDirs.enable = true;
-
-    # xdg.mime.enable = true;
-    # xdg.mimeApps.enable = true;
-    # xdg.mimeApps.defaultApplications = {
-    #   # Open PDF files with xournalpp
-    #   # "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-    #   "application/pdf" = [ "com.github.xournalpp.xournalpp.desktop" ];
-
-    #   # Use feh as image viewer
-    #   "image/png" = [ "feh.desktop" ];
-    #   "image/jpeg" = [ "feh.desktop" ];
-
-    #   # Firefox as default browser
-    #   "text/html" = [ "firefox.desktop" ];
-    #   "text/xml" = [ "firefox.desktop" ];
-    #   "application/xhtml+xml" = [ "firefox.desktop" ];
-    #   "x-scheme-handler/http" = [ "firefox.desktop" ];
-    #   "x-scheme-handler/https" = [ "firefox.desktop" ];
-    #   "x-scheme-handler/ftp" = [ "firefox.desktop" ];
-    #   "x-scheme-handler/about" = [ "firefox.desktop" ];
-    #   "x-scheme-handler/unknown" = [ "firefox.desktop" ];
-
-    #   # Thunderbird as default mail client
-    #   "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
-    #   "message/rfc822" = [ "thunderbird.desktop" ];
-    # };
-
-    # fonts.fontconfig.enable = true;
-
-    # gtk = {
-    #   enable = true;
-    #   theme = {
-    #     name = "Numix";
-    #     package = pkgs.numix-gtk-theme;
-    #   };
-    #   iconTheme = {
-    #     name = "Numix";
-    #     package = pkgs.numix-icon-theme;
-    #   };
-    #   font = {
-    #     name = "Noto Sans 11";
-    #     package = pkgs.noto-fonts;
-    #   };
-    # };
 
     programs.git = {
       enable = true;
