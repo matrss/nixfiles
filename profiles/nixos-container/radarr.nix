@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   containers.radarr = {
@@ -13,6 +13,8 @@
     };
     config = {
       services.radarr.enable = true;
+      ids.uids.radarr = lib.mkForce 1000;
+      users.users.radarr.isSystemUser = true;
       networking.firewall.allowedTCPPorts = [ 7878 ];
       system.stateVersion = "21.11";
     };
