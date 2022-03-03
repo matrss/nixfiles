@@ -45,6 +45,7 @@
     teams
     krita
     rnote
+    helvum
 
     gnome.gnome-tweaks
   ];
