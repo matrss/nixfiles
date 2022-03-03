@@ -25,11 +25,12 @@
       devShell = forAllSystems (system:
         let
           pkgs = import inputs.nixpkgs {
-            inherit system; overlays = [
-            inputs.self.overlay
-            inputs.deploy-rs.overlay
-            inputs.sops-nix.overlay
-          ];
+            inherit system;
+            overlays = [
+              inputs.self.overlay
+              inputs.deploy-rs.overlay
+              inputs.sops-nix.overlay
+            ];
           };
         in
         pkgs.mkShell {
@@ -58,14 +59,25 @@
         {
           andromeda = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
-            pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ inputs.self.overlay ]; };
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              config = {
+                allowUnfree = true;
+                firefox.enableGnomeExtensions = true;
+              };
+              overlays = [ inputs.self.overlay ];
+            };
             modules = baseModules ++ [
               ./profiles/hosts/andromeda.nix
             ];
           };
           ara = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
-            pkgs = import inputs.nixpkgs { inherit system; config = { allowUnfree = true; }; overlays = [ inputs.self.overlay ]; };
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              config = { allowUnfree = true; };
+              overlays = [ inputs.self.overlay ];
+            };
             modules = baseModules ++ [
               ./profiles/hosts/ara.nix
             ];
