@@ -45,15 +45,47 @@
 
   # Filesystems to be mounted.
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ff54ccee-9cdb-4347-8434-26ba318e01dc";
-    fsType = "ext4";
-    # Supposedly better for the SSD.
-    options = [ "noatime" "nodiratime" "discard" ];
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=2G" "mode=755" ];
+    neededForBoot = true;
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/77E6-E940";
     fsType = "vfat";
+    neededForBoot = true;
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/ff54ccee-9cdb-4347-8434-26ba318e01dc";
+    fsType = "ext4";
+    # Supposedly better for the SSD.
+    options = [ "noatime" "nodiratime" "discard" ];
+    neededForBoot = true;
+  };
+
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    directories = [
+      "/etc/NetworkManager/system-connections"
+      "/home"
+      "/nix"
+      "/root"
+      "/var/lib/bluetooth"
+      "/var/lib/colord"
+      "/var/lib/cups"
+      "/var/lib/systemd/backlight"
+      "/var/lib/systemd/coredump"
+      "/var/log"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
   };
 
   # Swap partitions to use.

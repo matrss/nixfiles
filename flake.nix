@@ -8,6 +8,8 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    impermanence.url = "github:nix-community/impermanence/master";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -46,6 +48,7 @@
           baseModules = [
             inputs.nixpkgs.nixosModules.notDetected
             inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
             inputs.sops-nix.nixosModules.sops
             {
               home-manager.useGlobalPkgs = true;
