@@ -14,8 +14,9 @@
       "/var/lib/postgresql" = { hostPath = "/srv/data/nextcloud/pg-data"; isReadOnly = false; };
       "${config.sops.secrets.nextcloud-admin-password.path}" = { hostPath = "${config.sops.secrets.nextcloud-admin-password.path}"; isReadOnly = true; };
     };
-    config = {
+    config = { pkgs, ... }: {
       services.nextcloud.enable = true;
+      services.nextcloud.package = pkgs.nextcloud23;
       services.nextcloud.hostName = "nextcloud.ara.matrss.de";
       services.nextcloud.https = true;
       services.nextcloud.caching.redis = true;
