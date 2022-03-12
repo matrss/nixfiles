@@ -129,29 +129,17 @@ in
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
   };
 
+  fileSystems."/srv/data" = {
+    device = "LABEL=data";
+    fsType = "btrfs";
+    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/data" ];
+  };
+
   fileSystems."/volumes" = {
     device = "LABEL=data";
     fsType = "btrfs";
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/volumes" ];
   };
-
-  fileSystems."/persist" = {
-    device = "LABEL=data";
-    fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/persist" ];
-  };
-
-  # fileSystems."/persist/volumes" = {
-  #   device = "LABEL=data";
-  #   fsType = "btrfs";
-  #   options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/volumes" ];
-  # };
-
-  # fileSystems."/var/lib" = {
-  #   device = "LABEL=data";
-  #   fsType = "btrfs";
-  #   options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/varlib" ];
-  # };
 
   swapDevices = [ ];
 

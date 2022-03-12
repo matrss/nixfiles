@@ -10,8 +10,8 @@
     hostAddress = "10.11.0.10";
     localAddress = "10.11.1.10";
     bindMounts = {
-      "/var/lib/nextcloud" = { hostPath = "/volumes/nextcloud-data"; isReadOnly = false; };
-      "/var/lib/postgresql" = { hostPath = "/volumes/nextcloud-db-data"; isReadOnly = false; };
+      "/var/lib/nextcloud" = { hostPath = "/srv/data/nextcloud/data"; isReadOnly = false; };
+      "/var/lib/postgresql" = { hostPath = "/srv/data/nextcloud/pg-data"; isReadOnly = false; };
       "${config.sops.secrets.nextcloud-admin-password.path}" = { hostPath = "${config.sops.secrets.nextcloud-admin-password.path}"; isReadOnly = true; };
     };
     config = {

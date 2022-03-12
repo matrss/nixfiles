@@ -8,8 +8,8 @@
     hostAddress = "10.11.0.30";
     localAddress = "10.11.1.30";
     bindMounts = {
-      "/var/lib/jellyfin" = { hostPath = "/volumes/jellyfin-config"; isReadOnly = false; };
-      "/var/cache/jellyfin" = { hostPath = "/volumes/jellyfin-cache"; isReadOnly = false; };
+      "/var/lib/jellyfin" = { hostPath = "/srv/data/jellyfin/config"; isReadOnly = false; };
+      "/var/cache/jellyfin" = { hostPath = "/srv/data/jellyfin/cache"; isReadOnly = false; };
       "/media" = { hostPath = "/srv/media"; isReadOnly = true; };
     };
     config = {

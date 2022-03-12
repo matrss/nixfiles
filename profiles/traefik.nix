@@ -4,7 +4,7 @@
   services.traefik = {
     enable = true;
     group = "docker";
-    dataDir = "/volumes/traefik-data";
+    dataDir = "/srv/data/traefik/data";
 
     staticConfigOptions = {
       global.sendAnonymousUsage = false;

@@ -8,7 +8,7 @@
     hostAddress = "10.11.0.21";
     localAddress = "10.11.1.21";
     bindMounts = {
-      "${config.containers.radarr.config.services.radarr.dataDir}" = { hostPath = "/volumes/radarr-config"; isReadOnly = false; };
+      "${config.containers.radarr.config.services.radarr.dataDir}" = { hostPath = "/srv/data/radarr/config"; isReadOnly = false; };
       "/media" = { hostPath = "/srv/media"; isReadOnly = false; };
     };
     config = {

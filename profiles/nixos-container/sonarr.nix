@@ -8,7 +8,7 @@
     hostAddress = "10.11.0.20";
     localAddress = "10.11.1.20";
     bindMounts = {
-      "${config.containers.sonarr.config.services.sonarr.dataDir}" = { hostPath = "/volumes/sonarr-config"; isReadOnly = false; };
+      "${config.containers.sonarr.config.services.sonarr.dataDir}" = { hostPath = "/srv/data/sonarr/config"; isReadOnly = false; };
       "/media" = { hostPath = "/srv/media"; isReadOnly = false; };
     };
     config = {
