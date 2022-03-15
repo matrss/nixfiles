@@ -48,5 +48,6 @@
     helvum
 
     gnome.gnome-tweaks
+    gnome.gnome-boxes
   ];
 }
