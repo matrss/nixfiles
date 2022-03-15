@@ -120,12 +120,16 @@
               pkgs = inputs.nixpkgs.legacyPackages.${system};
             in
             {
-              "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint_nixpkgs-fmt" { } ''
-                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} > $out
-              '';
               "lint/editorconfig-checker" = pkgs.runCommandLocal "lint_editorconfig-checker" { } ''
                 cd ${./.}
                 ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
+              '';
+              "lint/gitleaks" = pkgs.runCommandLocal "lint_gitleaks" { } ''
+                cd ${./.}
+                ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
+              '';
+              "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint_nixpkgs-fmt" { } ''
+                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} > $out
               '';
             };
         in
