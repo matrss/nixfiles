@@ -16,8 +16,6 @@ in
     ../gitlab-runner.nix
     ../traefik.nix
     ../oci-container/authelia
-    ../oci-container/whoami.nix
-    ../oci-container/publicfiles.nix
     ../nixos-container/jellyfin.nix
     ../nixos-container/nextcloud.nix
     ../nixos-container/sonarr.nix
