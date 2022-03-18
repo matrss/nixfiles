@@ -1,6 +1,6 @@
 keys: &all
   - &matrss age1d84zfp3p9r2jg9fxfp0kf557ct36ppc7s7e3zwnuc00uy4q90uqsqwh3cy
-  - &andromeda age1ma5ky80m5ngqptnu5vd5eh0a8sj2ftllhxzxreq0ddg4cekjkq2su4kmt6
+  - &andromeda age1a2v5p3u4tlad6v4d4jd3h9hcwxkz0up5jye4nh5u6xvrznml9dcqxpc8x0
   - &ara age15rc2xk90qs50n5msp970kpme90u4kjjvh9z34v7n94hax5myjpfqs5ymxe
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
