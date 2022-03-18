@@ -22,10 +22,6 @@ access_control:
       policy: two_factor
       subject: "group:admins"
 
-    - domain: whoami.ara.matrss.de
-      policy: two_factor
-      subject: "group:users"
-
     - domain: jellyfin.ara.matrss.de
       policy: bypass
       # policy: two_factor
