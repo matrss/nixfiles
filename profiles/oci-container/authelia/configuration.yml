@@ -34,16 +34,6 @@ access_control:
     - domain: nextcloud.ara.matrss.de
       policy: bypass
 
-    - domain: vaultwarden.ara.matrss.de
-      resources:
-        - "^/api/.*$"
-        - "^/identity/connect/token$"
-      policy: bypass
-
-    - domain: vaultwarden.ara.matrss.de
-      policy: two_factor
-      subject: "group:users"
-
     - domain: sonarr.ara.matrss.de
       policy: two_factor
       subject: "user:matrss"
