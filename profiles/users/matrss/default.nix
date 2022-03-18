@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home-manager.users.matrss = { config, pkgs, ... }: {
@@ -59,10 +59,16 @@
     home.stateVersion = "20.09";
   };
 
+  sops.secrets.user-password-matrss = {
+    sopsFile = ../../../secrets/secrets.yaml;
+    neededForUsers = true;
+  };
+
   users.users.matrss = {
     uid = 1000;
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    passwordFile = config.sops.secrets.user-password-matrss.path;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgAt4vG44X0LcB5Xcxzhx+Yxug7z5QbD7YRjKONBTVn Matthias Riße"
     ];

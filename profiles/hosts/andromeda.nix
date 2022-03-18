@@ -185,9 +185,13 @@
 
   services.xserver.wacom.enable = lib.mkDefault config.services.xserver.enable;
 
+  users.mutableUsers = false;
+
   sops.defaultSopsFile = ../../secrets/andromeda/secrets.yaml;
   sops.age.keyFile = "/persist/sops-nix/key.txt";
   sops.age.generateKey = true;
+  sops.age.sshKeyPaths = [ ];
+  sops.gnupg.sshKeyPaths = [ ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
