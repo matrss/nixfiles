@@ -23,9 +23,8 @@ access_control:
       subject: "group:admins"
 
     - domain: jellyfin.ara.matrss.de
-      policy: bypass
-      # policy: two_factor
-      # subject: "group:users"
+      policy: two_factor
+      subject: "group:users"
 
     - domain: nextcloud.ara.matrss.de
       policy: bypass
