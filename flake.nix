@@ -56,7 +56,7 @@
             {
               nix.registry.self.flake = inputs.self;
             }
-            ./profiles/core
+            ./profiles/core.nix
           ];
         in
         {
