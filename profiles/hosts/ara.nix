@@ -200,6 +200,17 @@ in
 
   # virtualisation.podman.enable = true;
   # virtualisation.oci-containers.backend = "podman";
+  sops.secrets.acme-dns-env-matrss_de = { };
+
+  security.acme.acceptTerms = true;
+  security.acme.defaults.email = "matthias.risze@t-online.de";
+
+  security.acme.certs."nextcloud.matrss.de" = {
+    dnsProvider = "cloudflare";
+    credentialsFile = config.sops.secrets.acme-dns-env-matrss_de.path;
+  };
+
+  # users.users.nginx.extraGroups = [ config.users.groups.acme.name ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
