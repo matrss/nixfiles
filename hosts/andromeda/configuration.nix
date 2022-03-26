@@ -104,15 +104,10 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    # jack.enable = true;
 
     wireplumber.enable = false;
     media-session.enable = true;
   };
-
-  # Enable opengl for wayland.
-  hardware.opengl.enable = true;
 
   # Enable bluetooth for pen
   hardware.bluetooth.enable = true;
@@ -125,9 +120,7 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   programs.singularity.enable = true;
-  environment.systemPackages = with pkgs; [ docker-compose_2 virt-manager ];
-
-  # virtualisation.podman.enable = true;
+  environment.systemPackages = with pkgs; [ docker-compose_2 ];
 
   # Enable adb
   programs.adb.enable = true;
@@ -137,13 +130,7 @@
   hardware.sane.extraBackends = with pkgs; [
     sane-airscan
     hplip
-    # samsung-unified-linux-driver_1_00_37
   ];
-
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-
-  services.xserver.wacom.enable = lib.mkDefault config.services.xserver.enable;
 
   users.mutableUsers = false;
 

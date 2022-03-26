@@ -152,9 +152,6 @@ in
     vim
     btrfs-progs
     smartmontools
-    mkvtoolnix
-    mediainfo
-    ffmpeg
   ];
 
   # Enable dynamic dns updating.
@@ -164,13 +161,6 @@ in
     configFile = config.sops.secrets.ddclient-config.path;
   };
 
-  # services.f2b-miner = {
-  #   enable = true;
-  #   logFile = "/home/matrss/public/data/f2b-bans.csv";
-  #   user = "matrss";
-  #   group = "users";
-  # };
-
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
 
@@ -178,8 +168,6 @@ in
   networking.nat.internalInterfaces = [ "ve-+" ];
   networking.nat.externalInterface = "enp0s25";
 
-  # virtualisation.podman.enable = true;
-  # virtualisation.oci-containers.backend = "podman";
   sops.secrets.acme-dns-env-matrss_de = { };
 
   security.acme.acceptTerms = true;
