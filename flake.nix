@@ -71,7 +71,7 @@
               overlays = [ inputs.self.overlay ];
             };
             modules = baseModules ++ [
-              ./profiles/hosts/andromeda.nix
+              ./hosts/andromeda
             ];
           };
           ara = inputs.nixpkgs.lib.nixosSystem rec {
@@ -82,7 +82,7 @@
               overlays = [ inputs.self.overlay ];
             };
             modules = baseModules ++ [
-              ./profiles/hosts/ara.nix
+              ./hosts/ara
             ];
           };
         };

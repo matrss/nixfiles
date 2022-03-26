@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../users/matrss
-    ../users/root
-    ../graphical/gnome.nix
+    ../../profiles/users/matrss
+    ../../profiles/users/root
+    ../../profiles/graphical/gnome.nix
   ];
 
   networking.hostName = "andromeda";

@@ -11,16 +11,16 @@ let
 in
 {
   imports = [
-    ../users/root
-    ../users/matrss-ara
-    ../gitlab-runner.nix
-    ../traefik.nix
-    ../oci-container/authelia
-    ../nixos-container/jellyfin.nix
-    ../nixos-container/nextcloud.nix
-    ../nixos-container/sonarr.nix
-    ../nixos-container/radarr.nix
-    # ../nixos-container/bazarr.nix
+    ../../profiles/users/root
+    ../../profiles/users/matrss-ara
+    ../../profiles/gitlab-runner.nix
+    ../../profiles/traefik.nix
+    ../../profiles/oci-container/authelia
+    ../../profiles/nixos-container/jellyfin.nix
+    ../../profiles/nixos-container/nextcloud.nix
+    ../../profiles/nixos-container/sonarr.nix
+    ../../profiles/nixos-container/radarr.nix
+    # ../profiles/nixos-container/bazarr.nix
   ];
 
   networking.hostName = "ara";
