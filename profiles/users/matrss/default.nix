@@ -9,6 +9,7 @@
 
     home.packages = with pkgs; [
       git-annex
+      datalad
       unrar
       conda
       sshuttle
