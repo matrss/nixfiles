@@ -20,14 +20,4 @@
       system.stateVersion = "21.11";
     };
   };
-
-  services.traefik.dynamicConfigOptions.http = {
-    routers.bazarr = {
-      rule = "Host(`bazarr.ara.matrss.de`)";
-      entryPoints = [ "websecure" ];
-      middlewares = [ "secured" ];
-      service = "bazarr";
-    };
-    services.bazarr.loadBalancer.servers = [{ url = "http://${config.containers.bazarr.localAddress}:6767"; }];
-  };
 }

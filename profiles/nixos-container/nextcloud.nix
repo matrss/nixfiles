@@ -53,14 +53,4 @@
       system.stateVersion = "21.11";
     };
   };
-
-  services.traefik.dynamicConfigOptions.http = {
-    routers.nextcloud = {
-      rule = "Host(`nextcloud.ara.matrss.de`)";
-      entryPoints = [ "websecure" ];
-      middlewares = [ "secured_no-csp" ];
-      service = "nextcloud";
-    };
-    services.nextcloud.loadBalancer.servers = [{ url = "http://${config.containers.nextcloud.localAddress}:80"; }];
-  };
 }

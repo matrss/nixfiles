@@ -14,7 +14,6 @@ in
     ../../profiles/users/root
     ../../profiles/users/matrss-ara
     ../../profiles/gitlab-runner.nix
-    ../../profiles/traefik.nix
     ../../profiles/oci-container/authelia
     ../../profiles/nixos-container/jellyfin.nix
     ../../profiles/nixos-container/nextcloud.nix

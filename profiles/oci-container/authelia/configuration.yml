@@ -18,10 +18,6 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
-    - domain: traefik.ara.matrss.de
-      policy: two_factor
-      subject: "group:admins"
-
     - domain: jellyfin.ara.matrss.de
       policy: two_factor
       subject: "group:users"

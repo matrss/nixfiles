@@ -19,14 +19,4 @@
       system.stateVersion = "21.11";
     };
   };
-
-  services.traefik.dynamicConfigOptions.http = {
-    routers.radarr = {
-      rule = "Host(`radarr.ara.matrss.de`)";
-      entryPoints = [ "websecure" ];
-      middlewares = [ "secured_style-src-unsafe-inline" ];
-      service = "radarr";
-    };
-    services.radarr.loadBalancer.servers = [{ url = "http://${config.containers.radarr.localAddress}:7878"; }];
-  };
 }

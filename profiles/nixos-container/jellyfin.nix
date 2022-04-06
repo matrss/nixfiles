@@ -18,14 +18,4 @@
       system.stateVersion = "21.11";
     };
   };
-
-  services.traefik.dynamicConfigOptions.http = {
-    routers.jellyfin = {
-      rule = "Host(`jellyfin.ara.matrss.de`)";
-      entryPoints = [ "websecure" ];
-      middlewares = [ "secured_style-src-unsafe-inline" ];
-      service = "jellyfin";
-    };
-    services.jellyfin.loadBalancer.servers = [{ url = "http://${config.containers.jellyfin.localAddress}:8096"; }];
-  };
 }

@@ -17,14 +17,4 @@
       system.stateVersion = "21.11";
     };
   };
-
-  services.traefik.dynamicConfigOptions.http = {
-    routers.sonarr = {
-      rule = "Host(`sonarr.ara.matrss.de`)";
-      entryPoints = [ "websecure" ];
-      middlewares = [ "secured_style-src-unsafe-inline" ];
-      service = "sonarr";
-    };
-    services.sonarr.loadBalancer.servers = [{ url = "http://${config.containers.sonarr.localAddress}:8989"; }];
-  };
 }

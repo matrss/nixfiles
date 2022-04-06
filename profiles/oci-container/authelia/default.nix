@@ -30,13 +30,5 @@
     ports = [ "127.0.0.1:9091:9091" ];
 
     cmd = [ "--config" "/configuration.yml" ];
-
-    extraOptions = [
-      "--network=web"
-      "--label=traefik.enable=true"
-      "--label=traefik.http.routers.authelia.rule=Host(`auth.ara.matrss.de`)"
-      "--label=traefik.http.routers.authelia.entrypoints=websecure"
-      "--label=traefik.http.routers.authelia.middlewares=public_style-src-unsafe-inline@file"
-    ];
   };
 }
