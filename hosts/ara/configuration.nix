@@ -13,6 +13,8 @@ in
   imports = [
     ../../profiles/users/root
     ../../profiles/users/matrss-ara
+    ./acme.nix
+    ../../profiles/nginx.nix
     ../../profiles/gitlab-runner.nix
     ../../profiles/oci-container/authelia
     ../../profiles/nixos-container/jellyfin.nix
@@ -166,18 +168,6 @@ in
   networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "ve-+" ];
   networking.nat.externalInterface = "enp0s25";
-
-  sops.secrets.acme-dns-env-matrss_de = { };
-
-  security.acme.acceptTerms = true;
-  security.acme.defaults.email = "matthias.risze@t-online.de";
-
-  security.acme.certs."nextcloud.matrss.de" = {
-    dnsProvider = "cloudflare";
-    credentialsFile = config.sops.secrets.acme-dns-env-matrss_de.path;
-  };
-
-  # users.users.nginx.extraGroups = [ config.users.groups.acme.name ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

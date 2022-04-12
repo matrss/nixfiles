@@ -31,4 +31,13 @@
 
     cmd = [ "--config" "/configuration.yml" ];
   };
+
+  services.nginx.virtualHosts."idp.ara.matrss.de" = {
+    forceSSL = true;
+    useACMEHost = "ara.matrss.de";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:9091";
+    };
+    default = true;
+  };
 }
