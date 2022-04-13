@@ -1,16 +1,20 @@
-final: prev: {
-  python38Packages = prev.python38Packages // rec {
-    datalad = final.python38Packages.callPackage ./datalad.nix { };
-    datalad-container = final.python38Packages.callPackage ./datalad-container.nix { inherit datalad; };
+final: prev:
+let
+  dataladFor = pythonPackages: rec {
+    datalad = pythonPackages.callPackage ./datalad.nix { };
+    datalad-container = pythonPackages.callPackage ./datalad-container.nix { inherit datalad; };
   };
+in
+{
+  python39Packages = prev.python39Packages // (dataladFor final.python39Packages);
 
   datalad = final.callPackage
-    ({ lib, python38Packages, extraPackages ? [ ] }: with python38Packages; (toPythonApplication datalad).overrideAttrs (old: {
+    ({ lib, pythonPackages, extraPackages ? [ ] }: with pythonPackages; (toPythonApplication datalad).overrideAttrs (old: {
       preFixup = ''
         wrapProgram $out/bin/datalad --suffix PYTHONPATH : ${lib.makeSearchPath python.sitePackages (datalad.requiredPythonModules ++ extraPackages ++ (builtins.concatMap (p: p.requiredPythonModules) extraPackages))}:$out/${python.sitePackages}
       '';
     }))
-    { extraPackages = [ final.python38Packages.datalad-container ]; };
+    { pythonPackages = final.python39Packages; extraPackages = [ final.python39Packages.datalad-container ]; };
 
   scripts = prev.symlinkJoin {
     name = "scripts";

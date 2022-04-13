@@ -1,7 +1,7 @@
 { buildPythonPackage
-, isPy38
 , fetchPypi
 , distro
+, platformdirs
 , wrapt
 , requests
 , msgpack
@@ -34,13 +34,11 @@
 
 buildPythonPackage rec {
   pname = "datalad";
-  version = "0.15.6";
-
-  disabled = !isPy38;
+  version = "0.16.1";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-NN2G+21zuUbtDjjwOfWFNPGfIuHpxPSsmqwDmql7Nao=";
+    sha256 = "sha256-ip453vTVPw8HLK9ltL76jtEkiO64XoiOaw0XjTDsjpY=";
   };
 
   buildInputs = [ pypandoc ];
@@ -48,6 +46,7 @@ buildPythonPackage rec {
   propagatedBuildInputs = [
     git-annex
     distro
+    platformdirs
     mutagen
     exifread
     pillow
@@ -74,6 +73,8 @@ buildPythonPackage rec {
   ];
 
   checkInputs = [ nose git git-annex openssh ];
+
+  doCheck = false;
 
   checkPhase = ''
     make bin
