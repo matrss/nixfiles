@@ -108,16 +108,10 @@ in
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
   };
 
-  fileSystems."/srv/data" = {
+  fileSystems."/srv" = {
     device = "LABEL=data";
     fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/data" ];
-  };
-
-  fileSystems."/volumes" = {
-    device = "LABEL=data";
-    fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/volumes" ];
+    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/srv" ];
   };
 
   swapDevices = [ ];
