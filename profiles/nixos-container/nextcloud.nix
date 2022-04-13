@@ -71,11 +71,11 @@
       proxyPass = "http://${config.containers.nextcloud.localAddress}";
       proxyWebsockets = true;
     };
-    locations."/.well-known/caldav" = {
-      return = "301 $scheme://$host/remote.php/dav";
+    locations."= /.well-known/caldav" = {
+      return = "301 $scheme://$host:$server_port/remote.php/dav";
     };
-    locations."/.well-known/carddav" = {
-      return = "301 $scheme://$host/remote.php/dav";
+    locations."= /.well-known/carddav" = {
+      return = "301 $scheme://$host:$server_port/remote.php/dav";
     };
     extraConfig = ''
       auth_request /verify;
