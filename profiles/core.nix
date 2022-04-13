@@ -9,12 +9,11 @@
   environment.systemPackages = with pkgs; [
     pciutils
     usbutils
-    vim
+    neovim
     gnumake
     htop
     tree
     opensc
-    doas
   ];
 
   nix = {

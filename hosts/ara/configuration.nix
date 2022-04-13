@@ -150,7 +150,6 @@ in
   sops.defaultSopsFile = ../../secrets/ara/secrets.yaml;
 
   environment.systemPackages = with pkgs; [
-    vim
     btrfs-progs
     smartmontools
   ];
