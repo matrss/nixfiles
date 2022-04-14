@@ -24,7 +24,7 @@
       "${config.sops.secrets.authelia-notifier-smtp-password.path}:${config.sops.secrets.authelia-notifier-smtp-password.path}:ro"
       "${config.sops.secrets.authelia-storage-encryption-key.path}:${config.sops.secrets.authelia-storage-encryption-key.path}:ro"
       "${./configuration.yml}:/configuration.yml:ro"
-      "/srv/authelia/config:/config:rw"
+      "/var/lib/authelia:/config:rw"
     ];
 
     ports = [ "127.0.0.1:9091:9091" ];

@@ -1,25 +1,7 @@
-{ config, ... }:
-
 {
-  containers.jellyfin = {
-    autoStart = true;
-    ephemeral = true;
-    privateNetwork = true;
-    hostAddress = "10.11.0.30";
-    localAddress = "10.11.1.30";
-    bindMounts = {
-      "/var/lib/jellyfin" = { hostPath = "/srv/jellyfin/config"; isReadOnly = false; };
-      "/var/cache/jellyfin" = { hostPath = "/srv/jellyfin/cache"; isReadOnly = false; };
-      "/media" = { hostPath = "/srv/media"; isReadOnly = true; };
-    };
-    config = {
-      services.jellyfin.enable = true;
-      networking.firewall.allowedTCPPorts = [ 8096 ];
-      system.stateVersion = "21.11";
-    };
-  };
+  services.radarr.enable = true;
 
-  services.nginx.virtualHosts."jellyfin.ara.matrss.de" = {
+  services.nginx.virtualHosts."radarr.ara.matrss.de" = {
     forceSSL = true;
     useACMEHost = "ara.matrss.de";
     locations."/verify" = {
@@ -31,7 +13,7 @@
       '';
     };
     locations."/" = {
-      proxyPass = "http://${config.containers.jellyfin.localAddress}:8096";
+      proxyPass = "http://127.0.0.1:7878";
       proxyWebsockets = true;
     };
     extraConfig = ''

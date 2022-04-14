@@ -1,24 +1,7 @@
-{ config, ... }:
-
 {
-  containers.sonarr = {
-    autoStart = true;
-    ephemeral = true;
-    privateNetwork = true;
-    hostAddress = "10.11.0.20";
-    localAddress = "10.11.1.20";
-    bindMounts = {
-      "${config.containers.sonarr.config.services.sonarr.dataDir}" = { hostPath = "/srv/sonarr/config"; isReadOnly = false; };
-      "/media" = { hostPath = "/srv/media"; isReadOnly = false; };
-    };
-    config = {
-      services.sonarr.enable = true;
-      networking.firewall.allowedTCPPorts = [ 8989 ];
-      system.stateVersion = "21.11";
-    };
-  };
+  services.bazarr.enable = true;
 
-  services.nginx.virtualHosts."sonarr.ara.matrss.de" = {
+  services.nginx.virtualHosts."bazarr.ara.matrss.de" = {
     forceSSL = true;
     useACMEHost = "ara.matrss.de";
     locations."/verify" = {
@@ -30,7 +13,7 @@
       '';
     };
     locations."/" = {
-      proxyPass = "http://${config.containers.sonarr.localAddress}:8989";
+      proxyPass = "http://127.0.0.1:6767";
       proxyWebsockets = true;
     };
     extraConfig = ''

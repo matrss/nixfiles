@@ -14,14 +14,15 @@ in
     ../../profiles/users/root
     ../../profiles/users/matrss-ara
     ./acme.nix
-    ../../profiles/nginx.nix
-    ../../profiles/gitlab-runner.nix
-    ../../profiles/oci-container/authelia
-    ../../profiles/nixos-container/jellyfin.nix
-    ../../profiles/nixos-container/nextcloud.nix
-    ../../profiles/nixos-container/sonarr.nix
-    ../../profiles/nixos-container/radarr.nix
-    # ../../profiles/nixos-container/bazarr.nix
+    ./postgresql.nix
+    ./nginx.nix
+    ./nextcloud.nix
+    ./jellyfin.nix
+    ./sonarr.nix
+    ./radarr.nix
+    ./bazarr.nix
+    ./gitlab-runner.nix
+    ./authelia
   ];
 
   networking.hostName = "ara";
@@ -102,16 +103,22 @@ in
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/home" ];
   };
 
+  fileSystems."/media" = {
+    device = "LABEL=data";
+    fsType = "btrfs";
+    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
+  };
+
   fileSystems."/srv/media" = {
     device = "LABEL=data";
     fsType = "btrfs";
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
   };
 
-  fileSystems."/srv" = {
+  fileSystems."/var/lib" = {
     device = "LABEL=data";
     fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/srv" ];
+    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/varlib" ];
   };
 
   swapDevices = [ ];

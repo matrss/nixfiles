@@ -15,6 +15,7 @@
       "jellyfin.ara.matrss.de"
       "radarr.ara.matrss.de"
       "sonarr.ara.matrss.de"
+      "bazarr.ara.matrss.de"
     ];
   };
 
