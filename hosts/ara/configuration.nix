@@ -51,6 +51,11 @@ in
         device = "/dev/disk/by-id/ata-HGST_HUS728T8TALE6L4_VGJKAE1G";
         preLVM = true;
       };
+
+      WCC7K2PT4SFH = {
+        device = "/dev/disk/by-id/ata-WDC_WD40EFRX-68N32N0_WD-WCC7K2PT4SFH";
+        preLVM = true;
+      };
     };
     reusePassphrases = true;
   };
@@ -107,6 +112,12 @@ in
     device = "LABEL=data";
     fsType = "btrfs";
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/varlib" ];
+  };
+
+  fileSystems."/backup" = {
+    device = "LABEL=backup";
+    fsType = "ext4";
+    options = [ "defaults" ];
   };
 
   swapDevices = [ ];
