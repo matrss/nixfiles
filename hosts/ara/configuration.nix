@@ -55,18 +55,6 @@ in
     reusePassphrases = true;
   };
 
-  # Early ssh so that the disk can be decrypted.
-  sops.secrets.initrd-ssh-key = { };
-  boot.kernelParams = [
-    "ip=${hosts.ara.ip.lan}::${hosts.router.ip.lan}:255.255.255.0::enp0s25:off"
-  ];
-  boot.initrd.network.enable = true;
-  boot.initrd.network.ssh = {
-    enable = true;
-    port = 2222;
-    hostKeys = [ config.sops.secrets.initrd-ssh-key.path ];
-  };
-
   # Don't swap as much; should be better for the SSD.
   boot.kernel.sysctl."vm.swappiness" = 1;
 
