@@ -24,24 +24,26 @@
     in
     {
 
-      devShell = forAllSystems (system:
+      devShells = forAllSystems (system:
         let
           pkgs = import inputs.nixpkgs {
             inherit system;
             overlays = [
-              inputs.self.overlay
+              inputs.self.overlays.default
               inputs.deploy-rs.overlay
               inputs.sops-nix.overlay
             ];
           };
         in
-        pkgs.mkShell {
-          name = "nixfiles";
-          buildInputs = with pkgs; [ git nixUnstable sops age ssh-to-age nixpkgs-fmt deploy-rs.deploy-rs ];
+        {
+          default = pkgs.mkShell {
+            name = "nixfiles";
+            buildInputs = with pkgs; [ git nixUnstable sops age ssh-to-age nixpkgs-fmt deploy-rs.deploy-rs ];
+          };
         });
 
       legacyPackages = forAllSystems (system:
-        import inputs.nixpkgs { inherit system; overlays = [ inputs.self.overlay ]; });
+        import inputs.nixpkgs { inherit system; overlays = [ inputs.self.overlays.default ]; });
 
       nixosConfigurations =
         let
@@ -67,7 +69,7 @@
                 allowUnfree = true;
                 firefox.enableGnomeExtensions = true;
               };
-              overlays = [ inputs.self.overlay ];
+              overlays = [ inputs.self.overlays.default ];
             };
             modules = baseModules ++ [
               ./hosts/andromeda
@@ -78,7 +80,7 @@
             pkgs = import inputs.nixpkgs {
               inherit system;
               config = { allowUnfree = true; };
-              overlays = [ inputs.self.overlay ];
+              overlays = [ inputs.self.overlays.default ];
             };
             modules = baseModules ++ [
               ./hosts/ara
@@ -86,7 +88,7 @@
           };
         };
 
-      overlay = import ./pkgs;
+      overlays.default = import ./pkgs;
 
       deploy.nodes = {
         andromeda = {
