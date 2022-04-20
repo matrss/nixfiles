@@ -9,6 +9,9 @@
 
   networking.hostName = "andromeda";
 
+  networking.interfaces.enp0s31f6.useDHCP = false;
+  networking.interfaces.wlp0s20f3.useDHCP = false;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
