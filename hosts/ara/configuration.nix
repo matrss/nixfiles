@@ -64,13 +64,6 @@ in
   boot.kernel.sysctl."vm.swappiness" = 1;
 
   networking.interfaces.enp3s0.useDHCP = false;
-  networking.interfaces.enp0s25.ipv4.addresses = [{
-    address = hosts.ara.ip.lan;
-    prefixLength = 24;
-  }];
-
-  networking.defaultGateway = hosts.router.ip.lan;
-  networking.nameservers = [ hosts.router.ip.lan ];
 
   # Filesystems to be mounted.
   fileSystems."/" = {
