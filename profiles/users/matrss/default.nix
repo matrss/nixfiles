@@ -48,7 +48,6 @@
     programs.gpg.enable = true;
     services.gpg-agent = {
       enable = true;
-      enableSshSupport = true;
       enableScDaemon = true;
       pinentryFlavor = "gnome3";
     };
