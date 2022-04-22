@@ -40,4 +40,12 @@
     };
     default = true;
   };
+
+  systemd.services.before-restic-backups-local-backup.preStart = ''
+    systemctl stop docker-authelia.service
+  '';
+
+  systemd.services.after-restic-backups-local-backup.postStart = ''
+    systemctl start docker-authelia.service
+  '';
 }

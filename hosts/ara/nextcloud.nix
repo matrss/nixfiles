@@ -63,4 +63,12 @@
       error_page 401 =302 https://idp.ara.matrss.de/?rd=$target_url;
     '';
   };
+
+  systemd.services.before-restic-backups-local-backup.preStart = ''
+    nextcloud-occ maintenance:mode --on
+  '';
+
+  systemd.services.after-restic-backups-local-backup.postStart = ''
+    nextcloud-occ maintenance:mode --off
+  '';
 }

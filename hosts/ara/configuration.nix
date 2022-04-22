@@ -1,19 +1,12 @@
 { lib, pkgs, config, ... }:
 
-let
-  hosts = {
-    # Homeserver
-    ara.ip.lan = "192.168.178.254";
-
-    # FRITZ!Box
-    router.ip.lan = "192.168.178.1";
-  };
-in
 {
   imports = [
     ../../profiles/users/root
     ../../profiles/users/matrss-ara
+    ./restic.nix
     ./acme.nix
+    ./fail2ban.nix
     ./postgresql.nix
     ./nginx.nix
     ./nextcloud.nix
@@ -122,15 +115,6 @@ in
     passwordAuthentication = false;
     # Required for fail2ban
     logLevel = "VERBOSE";
-  };
-
-  # Ban attackers.
-  services.fail2ban = {
-    enable = true;
-    bantime-increment = {
-      enable = true;
-      maxtime = "48h";
-    };
   };
 
   # Auto discovery.

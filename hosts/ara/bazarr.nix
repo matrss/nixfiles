@@ -30,4 +30,12 @@
       error_page 401 =302 https://idp.ara.matrss.de/?rd=$target_url;
     '';
   };
+
+  systemd.services.before-restic-backups-local-backup.preStart = ''
+    systemctl stop bazarr.service
+  '';
+
+  systemd.services.after-restic-backups-local-backup.postStart = ''
+    systemctl start bazarr.service
+  '';
 }
