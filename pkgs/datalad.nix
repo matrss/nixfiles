@@ -2,6 +2,7 @@
 , fetchPypi
 , distro
 , platformdirs
+, packaging
 , wrapt
 , requests
 , msgpack
@@ -47,6 +48,7 @@ buildPythonPackage rec {
     git-annex
     distro
     platformdirs
+    packaging
     mutagen
     exifread
     pillow
