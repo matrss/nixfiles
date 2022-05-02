@@ -34,11 +34,11 @@
 
 buildPythonPackage rec {
   pname = "datalad";
-  version = "0.16.1";
+  version = "0.16.2";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-ip453vTVPw8HLK9ltL76jtEkiO64XoiOaw0XjTDsjpY=";
+    sha256 = "sha256-H6stkrvRtoPuhkA6xjeVp1kgjUPX/yyC6SjGPyFP+HY=";
   };
 
   buildInputs = [ pypandoc ];
