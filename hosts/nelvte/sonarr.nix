@@ -1,9 +1,9 @@
 {
-  services.radarr.enable = true;
+  services.sonarr.enable = true;
 
-  services.nginx.virtualHosts."radarr.ara.matrss.de" = {
+  services.nginx.virtualHosts."sonarr.nelvte.matrss.de" = {
     forceSSL = true;
-    useACMEHost = "ara.matrss.de";
+    useACMEHost = "nelvte.matrss.de";
     locations."/verify" = {
       proxyPass = "http://127.0.0.1:9091/api/verify";
       extraConfig = ''
@@ -13,7 +13,7 @@
       '';
     };
     locations."/" = {
-      proxyPass = "http://127.0.0.1:7878";
+      proxyPass = "http://127.0.0.1:8989";
       proxyWebsockets = true;
     };
     extraConfig = ''
@@ -27,15 +27,15 @@
       proxy_set_header Remote-Groups $groups;
       proxy_set_header Remote-Name $name;
       proxy_set_header Remote-Email $email;
-      error_page 401 =302 https://idp.ara.matrss.de/?rd=$target_url;
+      error_page 401 =302 https://idp.nelvte.matrss.de/?rd=$target_url;
     '';
   };
 
   systemd.services.before-restic-backups-local-backup.preStart = ''
-    systemctl stop radarr.service
+    systemctl stop sonarr.service
   '';
 
   systemd.services.after-restic-backups-local-backup.postStart = ''
-    systemctl start radarr.service
+    systemctl start sonarr.service
   '';
 }

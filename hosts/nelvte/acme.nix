@@ -6,16 +6,16 @@
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "matthias.risze@t-online.de";
 
-  security.acme.certs."ara.matrss.de" = {
+  security.acme.certs."nelvte.matrss.de" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env-matrss_de.path;
     extraDomainNames = [
-      "idp.ara.matrss.de"
-      "nextcloud.ara.matrss.de"
-      "jellyfin.ara.matrss.de"
-      "radarr.ara.matrss.de"
-      "sonarr.ara.matrss.de"
-      "bazarr.ara.matrss.de"
+      "idp.nelvte.matrss.de"
+      "nextcloud.nelvte.matrss.de"
+      "jellyfin.nelvte.matrss.de"
+      "radarr.nelvte.matrss.de"
+      "sonarr.nelvte.matrss.de"
+      "bazarr.nelvte.matrss.de"
     ];
   };
 

@@ -7,7 +7,7 @@
     ../../profiles/graphical/gnome.nix
   ];
 
-  networking.hostName = "andromeda";
+  networking.hostName = "ipsmin";
 
   networking.interfaces.enp0s31f6.useDHCP = false;
   networking.interfaces.wlp0s20f3.useDHCP = false;
@@ -137,7 +137,7 @@
 
   users.mutableUsers = false;
 
-  sops.defaultSopsFile = ../../secrets/andromeda/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/ipsmin/secrets.yaml;
   sops.age.keyFile = "/persist/sops-nix/key.txt";
   sops.age.generateKey = true;
   sops.age.sshKeyPaths = [ ];

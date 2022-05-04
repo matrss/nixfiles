@@ -16,7 +16,5 @@ in
     }))
     { pythonPackages = final.python39Packages; extraPackages = [ final.python39Packages.datalad-container ]; };
 
-  ara-remote-unlock = prev.callPackage (import ./scripts.nix).ara-remote-unlock { };
-  nm-connection-sync = prev.callPackage (import ./scripts.nix).nm-connection-sync { };
   generate-hostnames = prev.callPackage (import ./scripts.nix).generate-hostnames { };
 }

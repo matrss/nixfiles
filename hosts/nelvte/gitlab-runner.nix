@@ -21,8 +21,8 @@
       {
         # runners for building in docker via host's nix-daemon
         # nix store will be readable in runner, might be insecure
-        docker = lib.recursiveUpdate dockerRunner { protected = false; registrationFlags = [ "--name=ara-docker" ]; };
-        dockerProtected = lib.recursiveUpdate dockerRunner { protected = true; registrationFlags = [ "--name=ara-docker-protected" ]; };
+        docker = lib.recursiveUpdate dockerRunner { protected = false; registrationFlags = [ "--name=nelvte-docker" ]; };
+        dockerProtected = lib.recursiveUpdate dockerRunner { protected = true; registrationFlags = [ "--name=nelvte-docker-protected" ]; };
       };
   };
 }

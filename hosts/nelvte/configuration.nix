@@ -3,7 +3,7 @@
 {
   imports = [
     ../../profiles/users/root
-    ../../profiles/users/matrss-ara
+    ../../profiles/users/matrss-nelvte
     ./restic.nix
     ./acme.nix
     ./fail2ban.nix
@@ -18,7 +18,7 @@
     ./authelia
   ];
 
-  networking.hostName = "ara";
+  networking.hostName = "nelvte";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -124,7 +124,7 @@
   services.avahi.publish.addresses = true;
 
   # Default sops file for secrets.
-  sops.defaultSopsFile = ../../secrets/ara/secrets.yaml;
+  sops.defaultSopsFile = ../../secrets/nelvte/secrets.yaml;
 
   environment.systemPackages = with pkgs; [
     btrfs-progs

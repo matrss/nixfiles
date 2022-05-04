@@ -13,5 +13,5 @@ nix-ci:
   interruptible: true
   script:
     - nix flake check
-    - nix build .#nixosConfigurations.andromeda.config.system.build.toplevel
-    - nix build .#nixosConfigurations.ara.config.system.build.toplevel
+    - nix build .#nixosConfigurations.ipsmin.config.system.build.toplevel
+    - nix build .#nixosConfigurations.nelvte.config.system.build.toplevel

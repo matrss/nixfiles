@@ -18,22 +18,22 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
-    - domain: jellyfin.ara.matrss.de
+    - domain: jellyfin.nelvte.matrss.de
       policy: two_factor
       subject: "group:users"
 
-    - domain: nextcloud.ara.matrss.de
+    - domain: nextcloud.nelvte.matrss.de
       policy: bypass
 
-    - domain: sonarr.ara.matrss.de
+    - domain: sonarr.nelvte.matrss.de
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: radarr.ara.matrss.de
+    - domain: radarr.nelvte.matrss.de
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: bazarr.ara.matrss.de
+    - domain: bazarr.nelvte.matrss.de
       policy: two_factor
       subject: "user:matrss"
 
@@ -43,7 +43,7 @@ session:
   # secret:
   expiration: 3600 # 1 hour
   inactivity: 300 # 5 minutes
-  domain: ara.matrss.de # Should match whatever your root protected domain is
+  domain: nelvte.matrss.de # Should match whatever your root protected domain is
 
 regulation:
   max_retries: 3

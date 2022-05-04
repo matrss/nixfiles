@@ -61,7 +61,7 @@
           ];
         in
         {
-          andromeda = inputs.nixpkgs.lib.nixosSystem rec {
+          ipsmin = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
@@ -72,10 +72,10 @@
               overlays = [ inputs.self.overlays.default ];
             };
             modules = baseModules ++ [
-              ./hosts/andromeda
+              ./hosts/ipsmin
             ];
           };
-          ara = inputs.nixpkgs.lib.nixosSystem rec {
+          nelvte = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
@@ -83,7 +83,7 @@
               overlays = [ inputs.self.overlays.default ];
             };
             modules = baseModules ++ [
-              ./hosts/ara
+              ./hosts/nelvte
             ];
           };
         };
@@ -91,25 +91,25 @@
       overlays.default = import ./pkgs;
 
       deploy.nodes = {
-        andromeda = {
-          hostname = "andromeda";
+        ipsmin = {
+          hostname = "ipsmin";
           sshUser = "root";
 
           profiles.system = {
             user = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              inputs.self.nixosConfigurations.andromeda;
+              inputs.self.nixosConfigurations.ipsmin;
           };
         };
 
-        ara = {
-          hostname = "ara.matrss.de";
+        nelvte = {
+          hostname = "nelvte.matrss.de";
           sshUser = "root";
 
           profiles.system = {
             user = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              inputs.self.nixosConfigurations.ara;
+              inputs.self.nixosConfigurations.nelvte;
           };
         };
       };

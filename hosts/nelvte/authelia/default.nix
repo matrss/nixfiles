@@ -32,9 +32,9 @@
     cmd = [ "--config" "/configuration.yml" ];
   };
 
-  services.nginx.virtualHosts."idp.ara.matrss.de" = {
+  services.nginx.virtualHosts."idp.nelvte.matrss.de" = {
     forceSSL = true;
-    useACMEHost = "ara.matrss.de";
+    useACMEHost = "nelvte.matrss.de";
     locations."/" = {
       proxyPass = "http://127.0.0.1:9091";
     };

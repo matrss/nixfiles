@@ -8,7 +8,7 @@
 
   services.nextcloud.enable = true;
   services.nextcloud.package = pkgs.nextcloud23;
-  services.nextcloud.hostName = "nextcloud.ara.matrss.de";
+  services.nextcloud.hostName = "nextcloud.nelvte.matrss.de";
   services.nextcloud.https = true;
   services.nextcloud.webfinger = true;
   services.nextcloud.caching.redis = true;
@@ -38,9 +38,9 @@
   users.users.nginx.extraGroups = [ "redis-nextcloud" ];
   users.users.nextcloud.extraGroups = [ "redis-nextcloud" ];
 
-  services.nginx.virtualHosts."nextcloud.ara.matrss.de" = {
+  services.nginx.virtualHosts."nextcloud.nelvte.matrss.de" = {
     forceSSL = true;
-    useACMEHost = "ara.matrss.de";
+    useACMEHost = "nelvte.matrss.de";
     locations."/verify" = {
       proxyPass = "http://127.0.0.1:9091/api/verify";
       extraConfig = ''
@@ -60,7 +60,7 @@
       proxy_set_header Remote-Groups $groups;
       proxy_set_header Remote-Name $name;
       proxy_set_header Remote-Email $email;
-      error_page 401 =302 https://idp.ara.matrss.de/?rd=$target_url;
+      error_page 401 =302 https://idp.nelvte.matrss.de/?rd=$target_url;
     '';
   };
 
