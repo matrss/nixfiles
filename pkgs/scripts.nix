@@ -26,8 +26,15 @@
     sudo -E rm -r "$tmp_dir"
   '';
 
-  generate-hostname = { writeShellScriptBin, python3 }: writeShellScriptBin "generate-hostname" ''
-    ${python3}/bin/python3 \
-      -c 'import string; import random; print("".join(random.choices(string.ascii_lowercase, k=6)))'
+  generate-hostnames = { writeShellScriptBin, python3 }: writeShellScriptBin "generate-hostnames" ''
+    ${python3}/bin/python3 << EOF
+    import string
+    import random
+
+    columns = 5
+
+    for i in range(100):
+        print("".join(random.choices(string.ascii_lowercase, k=6)), end="\n" if i % columns == (columns-1) else "\t")
+    EOF
   '';
 }

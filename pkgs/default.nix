@@ -18,5 +18,5 @@ in
 
   ara-remote-unlock = prev.callPackage (import ./scripts.nix).ara-remote-unlock { };
   nm-connection-sync = prev.callPackage (import ./scripts.nix).nm-connection-sync { };
-  generate-hostname = prev.callPackage (import ./scripts.nix).generate-hostname { };
+  generate-hostnames = prev.callPackage (import ./scripts.nix).generate-hostnames { };
 }
