@@ -16,8 +16,7 @@ in
     }))
     { pythonPackages = final.python39Packages; extraPackages = [ final.python39Packages.datalad-container ]; };
 
-  scripts = prev.symlinkJoin {
-    name = "scripts";
-    paths = builtins.attrValues (import ./scripts.nix { pkgs = prev; });
-  };
+  ara-remote-unlock = prev.callPackage (import ./scripts.nix).ara-remote-unlock { };
+  nm-connection-sync = prev.callPackage (import ./scripts.nix).nm-connection-sync { };
+  generate-hostname = prev.callPackage (import ./scripts.nix).generate-hostname { };
 }
