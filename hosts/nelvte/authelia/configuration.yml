@@ -22,9 +22,6 @@ access_control:
       policy: two_factor
       subject: "group:users"
 
-    - domain: cloud.matrss.de
-      policy: bypass
-
     - domain: sonarr.matrss.de
       policy: two_factor
       subject: "user:matrss"
