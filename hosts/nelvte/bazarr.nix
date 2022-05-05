@@ -1,7 +1,7 @@
 {
   services.bazarr.enable = true;
 
-  services.nginx.virtualHosts."bazarr.nelvte.matrss.de" = {
+  services.nginx.virtualHosts."bazarr.matrss.de" = {
     forceSSL = true;
     useACMEHost = "nelvte.matrss.de";
     locations."/verify" = {
@@ -27,7 +27,7 @@
       proxy_set_header Remote-Groups $groups;
       proxy_set_header Remote-Name $name;
       proxy_set_header Remote-Email $email;
-      error_page 401 =302 https://idp.nelvte.matrss.de/?rd=$target_url;
+      error_page 401 =302 https://idp.matrss.de/?rd=$target_url;
     '';
   };
 

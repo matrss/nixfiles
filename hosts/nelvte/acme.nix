@@ -10,12 +10,12 @@
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env-matrss_de.path;
     extraDomainNames = [
-      "idp.nelvte.matrss.de"
-      "nextcloud.nelvte.matrss.de"
-      "jellyfin.nelvte.matrss.de"
-      "radarr.nelvte.matrss.de"
-      "sonarr.nelvte.matrss.de"
-      "bazarr.nelvte.matrss.de"
+      "idp.matrss.de"
+      "cloud.matrss.de"
+      "media.matrss.de"
+      "radarr.matrss.de"
+      "sonarr.matrss.de"
+      "bazarr.matrss.de"
     ];
   };
 

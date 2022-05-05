@@ -32,7 +32,7 @@
     cmd = [ "--config" "/configuration.yml" ];
   };
 
-  services.nginx.virtualHosts."idp.nelvte.matrss.de" = {
+  services.nginx.virtualHosts."idp.matrss.de" = {
     forceSSL = true;
     useACMEHost = "nelvte.matrss.de";
     locations."/" = {
