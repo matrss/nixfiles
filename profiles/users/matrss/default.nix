@@ -52,8 +52,6 @@
       pinentryFlavor = "gnome3";
     };
 
-    services.syncthing.enable = true;
-
     programs.bash.enable = true;
 
     home.stateVersion = "20.09";

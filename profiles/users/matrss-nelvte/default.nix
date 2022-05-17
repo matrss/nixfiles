@@ -3,12 +3,7 @@
 {
   home-manager.users.matrss = {
     home.packages = with pkgs; [ unrar ];
-
-    services.syncthing.enable = true;
   };
-
-  # Allow syncthing webui.
-  networking.firewall.allowedTCPPorts = [ 8384 ];
 
   users.users.matrss = {
     uid = 1000;
