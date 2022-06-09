@@ -18,19 +18,23 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
+    - domain: bazarr.matrss.de
+      policy: two_factor
+      subject: "user:matrss"
+
+    - domain: edms.matrss.de
+      policy: two_factor
+      subject: "user:matrss"
+
     - domain: media.matrss.de
       policy: two_factor
       subject: "group:users"
-
-    - domain: sonarr.matrss.de
-      policy: two_factor
-      subject: "user:matrss"
 
     - domain: radarr.matrss.de
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: bazarr.matrss.de
+    - domain: sonarr.matrss.de
       policy: two_factor
       subject: "user:matrss"
 

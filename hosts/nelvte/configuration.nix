@@ -15,6 +15,7 @@
     ./radarr.nix
     ./bazarr.nix
     ./gitlab-runner.nix
+    ./paperless-ngx.nix
     ./authelia
   ];
 

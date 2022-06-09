@@ -10,12 +10,13 @@
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env-matrss_de.path;
     extraDomainNames = [
-      "idp.matrss.de"
+      "bazarr.matrss.de"
       "cloud.matrss.de"
+      "edms.matrss.de"
+      "idp.matrss.de"
       "media.matrss.de"
       "radarr.matrss.de"
       "sonarr.matrss.de"
-      "bazarr.matrss.de"
     ];
   };
 
