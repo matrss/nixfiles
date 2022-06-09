@@ -123,7 +123,7 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   programs.singularity.enable = true;
-  environment.systemPackages = with pkgs; [ docker-compose_2 ];
+  environment.systemPackages = with pkgs; [ docker-compose ];
 
   # Enable adb
   programs.adb.enable = true;
