@@ -7,7 +7,7 @@
   };
 
   services.nextcloud.enable = true;
-  services.nextcloud.package = pkgs.nextcloud23;
+  services.nextcloud.package = pkgs.nextcloud24;
   services.nextcloud.hostName = "cloud.matrss.de";
   services.nextcloud.https = true;
   services.nextcloud.webfinger = true;
