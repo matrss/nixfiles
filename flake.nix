@@ -132,10 +132,8 @@
               "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint_nixpkgs-fmt" { } ''
                 ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} > $out
               '';
-            };
+            } // (builtins.mapAttrs (_: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib).${system};
         in
-        inputs.nixpkgs.lib.recursiveUpdate
-          (forAllSystems checksFor)
-          (builtins.mapAttrs (system: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib);
+        forAllSystems checksFor;
     };
 }
