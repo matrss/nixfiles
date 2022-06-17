@@ -12,7 +12,6 @@
     extraDomainNames = [
       "bazarr.matrss.de"
       "cloud.matrss.de"
-      "edms.matrss.de"
       "idp.matrss.de"
       "media.matrss.de"
       "radarr.matrss.de"

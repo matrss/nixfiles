@@ -22,10 +22,6 @@ access_control:
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: edms.matrss.de
-      policy: two_factor
-      subject: "user:matrss"
-
     - domain: media.matrss.de
       policy: two_factor
       subject: "group:users"
