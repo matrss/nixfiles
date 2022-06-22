@@ -130,7 +130,7 @@
                 ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
               '';
               "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint_nixpkgs-fmt" { } ''
-                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} > $out
+                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
               '';
             } // (builtins.mapAttrs (_: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib).${system};
         in
