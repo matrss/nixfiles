@@ -17,7 +17,8 @@
           registrationConfigFile = config.sops.secrets.gitlab-runner-env.path;
           registrationFlags = [ "--locked=false" ];
           dockerImage = "debian:stable";
-        }; in
+        };
+      in
       {
         # runners for building in docker via host's nix-daemon
         # nix store will be readable in runner, might be insecure
