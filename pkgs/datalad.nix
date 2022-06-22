@@ -21,6 +21,7 @@
 , patool
 , iso8601
 , setuptools
+, chardet
 , git-annex
 , python-gitlab
 , mutagen
@@ -72,6 +73,7 @@ buildPythonPackage rec {
     patool
     iso8601
     setuptools
+    chardet
   ];
 
   checkInputs = [ nose git git-annex openssh ];
