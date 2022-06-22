@@ -3,6 +3,8 @@
 {
   home-manager.users.matrss = {
     home.packages = with pkgs; [ unrar ];
+
+    home.stateVersion = "20.09";
   };
 
   users.users.matrss = {
