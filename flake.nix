@@ -114,6 +114,12 @@
         };
       };
 
+      hydraJobs = {
+        test-job.x86_64-linux = (inputs.nixpkgs.legacyPackages.x86_64-linux).runCommandLocal "test-job" { } ''
+          echo "Test Job!" | tee $out
+        '';
+      };
+
       checks =
         let
           checksFor = system:
