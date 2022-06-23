@@ -151,6 +151,11 @@
             inputs.self.nixosConfigurations;
         };
 
-      checks = (builtins.mapAttrs (_: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib);
+      checks = forAllSystems
+        (system:
+          (builtins.mapAttrs
+            (_: deployLib: deployLib.deployChecks inputs.self.deploy)
+            inputs.deploy-rs.lib
+          ).${system});
     };
 }
