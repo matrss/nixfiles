@@ -3,7 +3,6 @@
     enable = true;
     hydraURL = "https://hydra.matrss.de";
     notificationSender = "";
-    buildMachinesFiles = [ ];
     useSubstitutes = true;
     listenHost = "localhost";
   };
@@ -22,4 +21,13 @@
   nix.extraOptions = ''
     allowed-uris = https://
   '';
+
+  nix.buildMachines = [
+    {
+      hostName = "localhost";
+      system = "x86_64-linux";
+      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+      maxJobs = 8;
+    }
+  ];
 }
