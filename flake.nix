@@ -119,6 +119,7 @@
           nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
         in
         {
+
           lint.editorconfig-checker = forAllSystems (system:
             let
               pkgs = nixpkgsFor system;
@@ -127,6 +128,7 @@
               cd ${./.}
               ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
             '');
+
           lint.gitleaks = forAllSystems (system:
             let
               pkgs = nixpkgsFor system;
@@ -135,6 +137,7 @@
               cd ${./.}
               ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
             '');
+
           lint.nixpkgs-fmt = forAllSystems (system:
             let
               pkgs = nixpkgsFor system;
@@ -142,6 +145,10 @@
             pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
               ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
             '');
+
+          build.nixosConfigurations = builtins.mapAttrs
+            (_: nixosConfiguration: nixosConfiguration.config.system.build.toplevel)
+            inputs.self.nixosConfigurations;
         };
 
       checks = (builtins.mapAttrs (_: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib);
