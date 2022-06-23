@@ -114,32 +114,36 @@
         };
       };
 
-      hydraJobs = {
-        test-job.x86_64-linux = (inputs.nixpkgs.legacyPackages.x86_64-linux).runCommandLocal "test-job" { } ''
-          echo "Test Job!" | tee $out
-        '';
-      };
-
-      checks =
+      hydraJobs =
         let
-          checksFor = system:
-            let
-              pkgs = inputs.nixpkgs.legacyPackages.${system};
-            in
-            {
-              "lint/editorconfig-checker" = pkgs.runCommandLocal "lint_editorconfig-checker" { } ''
-                cd ${./.}
-                ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
-              '';
-              "lint/gitleaks" = pkgs.runCommandLocal "lint_gitleaks" { } ''
-                cd ${./.}
-                ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
-              '';
-              "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint_nixpkgs-fmt" { } ''
-                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
-              '';
-            } // (builtins.mapAttrs (_: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib).${system};
+          nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
         in
-        forAllSystems checksFor;
+        {
+          lint.editorconfig-checker = forAllSystems (system:
+            let
+              pkgs = nixpkgsFor system;
+            in
+            pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
+              cd ${./.}
+              ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
+            '');
+          lint.gitleaks = forAllSystems (system:
+            let
+              pkgs = nixpkgsFor system;
+            in
+            pkgs.runCommandLocal "lint.gitleaks" { } ''
+              cd ${./.}
+              ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
+            '');
+          lint.nixpkgs-fmt = forAllSystems (system:
+            let
+              pkgs = nixpkgsFor system;
+            in
+            pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
+              ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
+            '');
+        };
+
+      checks = (builtins.mapAttrs (_: deployLib: deployLib.deployChecks inputs.self.deploy) inputs.deploy-rs.lib);
     };
 }
