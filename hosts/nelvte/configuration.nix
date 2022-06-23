@@ -10,6 +10,7 @@
     ./postgresql.nix
     ./nginx.nix
     ./nextcloud.nix
+    ./hydra.nix
     ./jellyfin.nix
     ./sonarr.nix
     ./radarr.nix

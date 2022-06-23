@@ -13,6 +13,7 @@
       "bazarr.matrss.de"
       "cloud.matrss.de"
       "home.matrss.de"
+      "hydra.matrss.de"
       "idp.matrss.de"
       "media.matrss.de"
       "radarr.matrss.de"
