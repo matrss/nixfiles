@@ -118,7 +118,7 @@
         let
           nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
         in
-        {
+        inputs.nixpkgs.lib.mapDerivationAttrset (_: inputs.nixpkgs.lib.hydraJob) {
 
           lint.editorconfig-checker = forAllSystems (system:
             let
