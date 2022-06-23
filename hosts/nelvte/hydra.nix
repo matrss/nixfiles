@@ -16,4 +16,10 @@
       proxyWebsockets = true;
     };
   };
+
+  # This fixes issues with fetching flake-compat
+  # src: https://github.com/NixOS/hydra/issues/1183
+  nix.extraOptions = ''
+    allowed-uris = https://
+  '';
 }
