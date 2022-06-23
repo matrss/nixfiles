@@ -120,31 +120,25 @@
         in
         inputs.nixpkgs.lib.mapDerivationAttrset (_: inputs.nixpkgs.lib.hydraJob) {
 
-          lint.editorconfig-checker = forAllSystems (system:
+          lint =
             let
-              pkgs = nixpkgsFor system;
+              pkgs = nixpkgsFor "x86_64-linux";
             in
-            pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
-              cd ${./.}
-              ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
-            '');
+            {
+              editorconfig-checker = pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
+                cd ${./.}
+                ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
+              '';
 
-          lint.gitleaks = forAllSystems (system:
-            let
-              pkgs = nixpkgsFor system;
-            in
-            pkgs.runCommandLocal "lint.gitleaks" { } ''
-              cd ${./.}
-              ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
-            '');
+              gitleaks = pkgs.runCommandLocal "lint.gitleaks" { } ''
+                cd ${./.}
+                ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
+              '';
 
-          lint.nixpkgs-fmt = forAllSystems (system:
-            let
-              pkgs = nixpkgsFor system;
-            in
-            pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
-              ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
-            '');
+              nixpkgs-fmt = pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
+                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
+              '';
+            };
 
           build.nixosConfigurations = builtins.mapAttrs
             (_: nixosConfiguration: nixosConfiguration.config.system.build.toplevel)
