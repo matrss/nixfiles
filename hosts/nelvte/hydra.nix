@@ -3,7 +3,7 @@
     enable = true;
     hydraURL = "https://hydra.matrss.de";
     notificationSender = "";
-    buildMachinesFiles = [];
+    buildMachinesFiles = [ ];
     useSubstitutes = true;
     listenHost = "localhost";
   };
