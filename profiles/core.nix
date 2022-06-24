@@ -25,6 +25,7 @@
     # gc.automatic = true;
     optimise.automatic = true;
     settings.trusted-users = [ "@wheel" ];
+    settings.substituters = [ "https://hydra.matrss.de/" ];
   };
 
   # Just very convenient.
