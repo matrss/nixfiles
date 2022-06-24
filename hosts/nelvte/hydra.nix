@@ -1,10 +1,17 @@
+{ config, ... }:
+
 {
+  sops.secrets."hydra/secret-key" = { };
+
   services.hydra = {
     enable = true;
     hydraURL = "https://hydra.matrss.xyz";
     notificationSender = "";
     useSubstitutes = true;
     listenHost = "localhost";
+    extraConfig = ''
+      binary_cache_secret_key_file = ${config.sops.secrets."hydra/secret-key".path}
+    '';
   };
 
   services.nginx.virtualHosts."hydra.matrss.xyz" = {
