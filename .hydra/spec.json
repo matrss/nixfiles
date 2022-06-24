@@ -1,0 +1,24 @@
+{
+    "enabled": 1,
+    "hidden": false,
+    "description": "jobsets",
+    "nixexprinput": "nixfiles",
+    "nixexprpath": ".hydra/jobsets.nix",
+    "checkinterval": 60,
+    "schedulingshares": 100,
+    "enableemail": false,
+    "emailoverride": "",
+    "keepnr": 3,
+    "inputs": {
+        "nixfiles": {
+            "type": "git",
+            "value": "https://gitlab.com/matrss/nixfiles main",
+            "emailresponsible": false
+        },
+        "nixpkgs": {
+            "type": "git",
+            "value": "https://github.com/NixOS/nixpkgs nixos-unstable",
+            "emailresponsible": false
+        }
+    }
+}
