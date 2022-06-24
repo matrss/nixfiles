@@ -8,7 +8,7 @@
 
   services.nextcloud.enable = true;
   services.nextcloud.package = pkgs.nextcloud24;
-  services.nextcloud.hostName = "cloud.matrss.de";
+  services.nextcloud.hostName = "cloud.matrss.xyz";
   services.nextcloud.https = true;
   services.nextcloud.webfinger = true;
   services.nextcloud.caching.redis = true;
@@ -38,9 +38,9 @@
   users.users.nginx.extraGroups = [ "redis-nextcloud" ];
   users.users.nextcloud.extraGroups = [ "redis-nextcloud" ];
 
-  services.nginx.virtualHosts."cloud.matrss.de" = {
+  services.nginx.virtualHosts."cloud.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.de";
+    useACMEHost = "nelvte.matrss.xyz";
   };
 
   systemd.services.before-restic-backups-local-backup.preStart = ''

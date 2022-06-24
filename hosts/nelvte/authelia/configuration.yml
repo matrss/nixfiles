@@ -18,23 +18,23 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
-    - domain: bazarr.matrss.de
+    - domain: bazarr.matrss.xyz
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: home.matrss.de
+    - domain: home.matrss.xyz
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: media.matrss.de
+    - domain: media.matrss.xyz
       policy: two_factor
       subject: "group:users"
 
-    - domain: radarr.matrss.de
+    - domain: radarr.matrss.xyz
       policy: two_factor
       subject: "user:matrss"
 
-    - domain: sonarr.matrss.de
+    - domain: sonarr.matrss.xyz
       policy: two_factor
       subject: "user:matrss"
 
@@ -44,7 +44,7 @@ session:
   # secret:
   expiration: 3600 # 1 hour
   inactivity: 300 # 5 minutes
-  domain: matrss.de # Should match whatever your root protected domain is
+  domain: matrss.xyz # Should match whatever your root protected domain is
 
 regulation:
   max_retries: 3
@@ -62,4 +62,4 @@ notifier:
     # password:
     host: smtp.gmail.com
     port: 587
-    sender: admin@matrss.de
+    sender: admin@idp.matrss.xyz

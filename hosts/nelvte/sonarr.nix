@@ -1,9 +1,9 @@
 {
   services.sonarr.enable = true;
 
-  services.nginx.virtualHosts."sonarr.matrss.de" = {
+  services.nginx.virtualHosts."sonarr.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.de";
+    useACMEHost = "nelvte.matrss.xyz";
     locations."/verify" = {
       proxyPass = "http://127.0.0.1:9091/api/verify";
       extraConfig = ''
@@ -27,7 +27,7 @@
       proxy_set_header Remote-Groups $groups;
       proxy_set_header Remote-Name $name;
       proxy_set_header Remote-Email $email;
-      error_page 401 =302 https://idp.matrss.de/?rd=$target_url;
+      error_page 401 =302 https://idp.matrss.xyz/?rd=$target_url;
     '';
   };
 

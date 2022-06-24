@@ -1,23 +1,23 @@
 { config, ... }:
 
 {
-  sops.secrets.acme-dns-env-matrss_de = { };
+  sops.secrets.acme-dns-env-matrss_xyz = { };
 
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "matthias.risze@t-online.de";
 
-  security.acme.certs."nelvte.matrss.de" = {
+  security.acme.certs."nelvte.matrss.xyz" = {
     dnsProvider = "cloudflare";
-    credentialsFile = config.sops.secrets.acme-dns-env-matrss_de.path;
+    credentialsFile = config.sops.secrets.acme-dns-env-matrss_xyz.path;
     extraDomainNames = [
-      "bazarr.matrss.de"
-      "cloud.matrss.de"
-      "home.matrss.de"
-      "hydra.matrss.de"
-      "idp.matrss.de"
-      "media.matrss.de"
-      "radarr.matrss.de"
-      "sonarr.matrss.de"
+      "bazarr.matrss.xyz"
+      "cloud.matrss.xyz"
+      "home.matrss.xyz"
+      "hydra.matrss.xyz"
+      "idp.matrss.xyz"
+      "media.matrss.xyz"
+      "radarr.matrss.xyz"
+      "sonarr.matrss.xyz"
     ];
   };
 
