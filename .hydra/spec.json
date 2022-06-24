@@ -15,6 +15,11 @@
             "value": "https://gitlab.com/matrss/nixfiles main",
             "emailresponsible": false
         },
+        "pulls": {
+            "type": "gitlabpulls",
+            "value": "https://gitlab.com 26127804",
+            "emailresponsible": false
+        },
         "nixpkgs": {
             "type": "git",
             "value": "https://github.com/NixOS/nixpkgs nixos-unstable",
