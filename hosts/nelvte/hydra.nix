@@ -1,7 +1,10 @@
 { config, ... }:
 
 {
-  sops.secrets."hydra/secret-key" = { };
+  sops.secrets."hydra/secret-key" = {
+    owner = config.users.users.hydra-www.name;
+    group = config.users.users.hydra-www.group;
+  };
 
   services.hydra = {
     enable = true;
