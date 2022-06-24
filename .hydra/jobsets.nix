@@ -32,11 +32,19 @@ let
       flake = "gitlab:matrss/nixfiles/main";
     };
   };
+  log = {
+    pulls = mrs;
+    jobsets = jobsets;
+  };
 in
 {
   jobsets = pkgs.runCommand "spec-jobsets.json" { } ''
-    cat > $out <<EOF
+    cat > $out << EOF
     ${builtins.toJSON jobsets}
     EOF
+    cat > log << EOF
+    ${builtins.toJSON log}
+    EOF
+    ${pkgs.jq}/bin/jq . log
   '';
 }
