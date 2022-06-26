@@ -13,6 +13,7 @@
       "/var/lib/postgresql"
       "/var/lib/radarr"
       "/var/lib/sonarr"
+      "/var/lib/tiddlywiki"
     ];
     passwordFile = config.sops.secrets."restic/repository-password".path;
   };

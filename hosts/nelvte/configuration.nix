@@ -18,6 +18,7 @@
     ./gitlab-runner.nix
     ./home-assistant.nix
     ./authelia
+    ./tiddlywiki.nix
   ];
 
   networking.hostName = "nelvte";

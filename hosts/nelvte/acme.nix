@@ -18,6 +18,7 @@
       "media.matrss.xyz"
       "radarr.matrss.xyz"
       "sonarr.matrss.xyz"
+      "wiki.matrss.xyz"
     ];
   };
 
