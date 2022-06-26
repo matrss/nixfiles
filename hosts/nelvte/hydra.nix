@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   sops.secrets."hydra/secret-key" = {
@@ -40,4 +40,24 @@
       maxJobs = 8;
     }
   ];
+
+  systemd.services.before-restic-backups-local-backup.preStart = lib.mkAfter ''
+    systemctl stop \
+      hydra-init.service \
+      hydra-evaluator.service \
+      hydra-notify.service \
+      hydra-queue-runner.service \
+      hydra-send-stats.service \
+      hydra-server.service
+  '';
+
+  systemd.services.after-restic-backups-local-backup.postStart = lib.mkBefore ''
+    systemctl start \
+      hydra-init.service \
+      hydra-evaluator.service \
+      hydra-notify.service \
+      hydra-queue-runner.service \
+      hydra-send-stats.service \
+      hydra-server.service
+  '';
 }

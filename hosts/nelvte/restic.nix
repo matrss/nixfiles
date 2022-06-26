@@ -8,6 +8,7 @@
     paths = [
       "/var/lib/authelia"
       "/var/lib/bazarr"
+      "/var/lib/hydra"
       "/var/lib/jellyfin"
       "/var/lib/nextcloud"
       "/var/lib/postgresql"
