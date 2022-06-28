@@ -133,6 +133,10 @@
               pkgs = nixpkgsFor "x86_64-linux";
             in
             {
+              deadnix = pkgs.runCommandLocal "lint.deadnix" { } ''
+                ${pkgs.deadnix}/bin/deadnix --fail --hidden ${./.} && touch $out
+              '';
+
               editorconfig-checker = pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
                 cd ${./.}
                 ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
