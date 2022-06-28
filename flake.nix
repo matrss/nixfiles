@@ -150,6 +150,10 @@
               nixpkgs-fmt = pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
                 ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
               '';
+
+              statix = pkgs.runCommandLocal "lint.statix" { } ''
+                ${pkgs.statix}/bin/statix check ${./.} && touch $out
+              '';
             };
 
           build.nixosConfigurations = builtins.mapAttrs
