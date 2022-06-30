@@ -35,7 +35,7 @@
   nix.buildMachines = [
     {
       hostName = "localhost";
-      system = "x86_64-linux";
+      systems = [ "x86_64-linux" "i686-linux" ];
       supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
       maxJobs = 8;
     }
