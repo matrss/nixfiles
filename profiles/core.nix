@@ -22,7 +22,7 @@
       experimental-features = nix-command flakes
       flake-registry = ${pkgs.writeText "flake-registry.json" (builtins.toJSON { flakes = []; version = 2; })}
     '';
-    # gc.automatic = true;
+    gc.automatic = true;
     optimise.automatic = true;
     settings.trusted-users = [ "@wheel" ];
     settings.substituters = [ "https://hydra.matrss.xyz/" ];
