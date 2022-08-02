@@ -37,13 +37,24 @@ require('packer').startup {
             end,
             config = function()
                 require('nvim-treesitter.configs').setup {
-                    ensure_installed = 'maintained',
+                    ensure_installed = 'all',
                     highlight = { enable = true }
                 }
             end,
         }
 
         use 'nvim-treesitter/nvim-treesitter-textobjects'
+
+        use {
+            'lervag/vimtex',
+            opt = true,
+            ft = 'tex',
+            config = function()
+                vim.g.vimtex_view_general_viewer = 'evince'
+                vim.g.vimtex_compiler_method = 'latexrun'
+                vim.g.vimtex_fold_enabled = 1
+            end,
+        }
     end
 }
 

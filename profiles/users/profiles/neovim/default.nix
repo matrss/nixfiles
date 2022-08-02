@@ -21,6 +21,9 @@
 
       # To compile tree-sitter grammars
       gcc
+
+      # For vimtex
+      neovim-remote
     ];
 
     plugins = with pkgs.vimPlugins; [
