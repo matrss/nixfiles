@@ -53,6 +53,10 @@
     };
 
     programs.bash.enable = true;
+    programs.tmux.enable = true;
+    programs.tmux.baseIndex = 1;
+    programs.tmux.clock24 = true;
+    programs.tmux.newSession = true;
 
     home.stateVersion = "20.09";
   };
