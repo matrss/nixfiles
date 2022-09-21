@@ -29,6 +29,7 @@
 , pillow
 , python-xmp-toolkit
 , pypandoc
+, pytest
 , nose
 , git
 , openssh
@@ -36,11 +37,11 @@
 
 buildPythonPackage rec {
   pname = "datalad";
-  version = "0.16.2";
+  version = "0.17.5";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "sha256-H6stkrvRtoPuhkA6xjeVp1kgjUPX/yyC6SjGPyFP+HY=";
+    sha256 = "sha256-oiExLFiwubV2BcwaIoiDjySTJJGy5QR13XqUAVHK/M0=";
   };
 
   buildInputs = [ pypandoc ];
@@ -76,7 +77,11 @@ buildPythonPackage rec {
     chardet
   ];
 
-  checkInputs = [ nose git git-annex openssh ];
+  checkInputs = [ pytest nose git git-annex openssh ];
+
+  prePatch = ''
+    sed -i 's/chardet>=3.0.4, <5.0.0/chardet/g' setup.py
+  '';
 
   doCheck = false;
 
