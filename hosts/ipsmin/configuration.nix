@@ -125,7 +125,13 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   programs.singularity.enable = true;
-  environment.systemPackages = with pkgs; [ docker-compose ];
+  environment.systemPackages = with pkgs; [
+    docker-compose
+    hunspell
+    hunspellDicts.en-us
+    hunspellDicts.en-us-large
+    hunspellDicts.de-de
+  ];
 
   # Enable adb
   programs.adb.enable = true;
