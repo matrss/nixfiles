@@ -112,6 +112,8 @@
     media-session.enable = true;
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   # Enable bluetooth for pen
   hardware.bluetooth.enable = true;
 
