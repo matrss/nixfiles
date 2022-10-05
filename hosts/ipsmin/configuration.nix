@@ -143,6 +143,8 @@
     hplip
   ];
 
+  nix.daemonCPUSchedPolicy = "idle";
+
   users.mutableUsers = false;
 
   sops.defaultSopsFile = ../../secrets/ipsmin/secrets.yaml;
