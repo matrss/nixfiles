@@ -6,6 +6,7 @@
     ../../profiles/users/matrss-nelvte
     ./restic.nix
     ./acme.nix
+    ./cloudflare-dyndns.nix
     ./fail2ban.nix
     ./postgresql.nix
     ./nginx.nix
@@ -139,13 +140,6 @@
     btrfs-progs
     smartmontools
   ];
-
-  # Enable dynamic dns updating.
-  sops.secrets.ddclient-config = { };
-  services.ddclient = {
-    enable = true;
-    configFile = config.sops.secrets.ddclient-config.path;
-  };
 
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
