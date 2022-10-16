@@ -58,6 +58,30 @@
     programs.tmux.clock24 = true;
     programs.tmux.newSession = true;
 
+    programs.vscode.enable = true;
+    programs.vscode.package = pkgs.vscodium;
+    programs.vscode.extensions = with pkgs.vscode-extensions; [
+      vscodevim.vim
+      ms-vscode-remote.remote-ssh
+      mkhl.direnv
+      james-yu.latex-workshop
+      bbenoist.nix
+      ms-python.python
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "signageos-vscode-sops";
+        publisher = "signageos";
+        version = "0.6.1";
+        sha256 = "sha256-fHXiIfc+EXGzR1nl9x87nyKVvLGS1zW6hV5D0CxvUCg=";
+      }
+      {
+        name = "base16-themes";
+        publisher = "AndrsDC";
+        version = "1.4.5";
+        sha256 = "sha256-molx+cRKSB6os7pDr0U1v/Qbaklps+OvBkZCkSWEvWM=";
+      }
+    ];
+
     home.stateVersion = "20.09";
   };
 
