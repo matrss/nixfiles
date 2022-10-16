@@ -145,6 +145,9 @@
 
   nix.daemonCPUSchedPolicy = "idle";
 
+  services.ananicy.enable = true;
+  services.ananicy.package = pkgs.ananicy-cpp;
+
   users.mutableUsers = false;
 
   sops.defaultSopsFile = ../../secrets/ipsmin/secrets.yaml;
