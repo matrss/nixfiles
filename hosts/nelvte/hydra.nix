@@ -32,14 +32,15 @@
     allowed-uris = https://
   '';
 
-  nix.buildMachines = [
-    {
-      hostName = "localhost";
-      systems = [ "x86_64-linux" "i686-linux" ];
-      supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-      maxJobs = 8;
-    }
-  ];
+  # nix.buildMachines = [
+  #   {
+  #     hostName = "localhost";
+  #     systems = [ "x86_64-linux" "i686-linux" ];
+  #     supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
+  #     maxJobs = 8;
+  #   }
+  # ];
+  nix.settings.system-features = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
 
   systemd.services.before-restic-backups-local-backup.preStart = lib.mkAfter ''
     systemctl stop \
