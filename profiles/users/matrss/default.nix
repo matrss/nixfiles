@@ -62,8 +62,12 @@
     programs.vscode.package = pkgs.vscodium;
     programs.vscode.extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
+      streetsidesoftware.code-spell-checker
       ms-vscode-remote.remote-ssh
       mkhl.direnv
+      editorconfig.editorconfig
+      donjayamanne.githistory
+      alefragnani.project-manager
       james-yu.latex-workshop
       bbenoist.nix
       ms-python.python
@@ -79,6 +83,18 @@
         publisher = "AndrsDC";
         version = "1.4.5";
         sha256 = "sha256-molx+cRKSB6os7pDr0U1v/Qbaklps+OvBkZCkSWEvWM=";
+      }
+      {
+        name = "code-spell-checker-german";
+        publisher = "streetsidesoftware";
+        version = "2.1.0";
+        sha256 = "sha256-9IX7Vl7wqeDyJ5f6+HVpndfmIOQadvRmtogvNLfGCvw=";
+      }
+      {
+        name = "code-spell-checker-scientific-terms";
+        publisher = "streetsidesoftware";
+        version = "0.1.6";
+        sha256 = "sha256-g6GD8ie9E5SmImxe9hBQe8ZSF+nKQMlZzoK7dm2NIW4=";
       }
     ];
 
