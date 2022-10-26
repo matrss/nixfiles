@@ -9,7 +9,7 @@ in
   python39Packages = prev.python39Packages // (dataladFor final.python39Packages);
 
   datalad = final.callPackage
-    ({ lib, pythonPackages, extraPackages ? [ ] }: with pythonPackages; (toPythonApplication datalad).overrideAttrs (old: {
+    ({ lib, pythonPackages, extraPackages ? [ ] }: with pythonPackages; (toPythonApplication datalad).overrideAttrs (_: {
       preFixup = ''
         wrapProgram $out/bin/datalad --suffix PYTHONPATH : ${lib.makeSearchPath python.sitePackages (datalad.requiredPythonModules ++ extraPackages ++ (builtins.concatMap (p: p.requiredPythonModules) extraPackages))}:$out/${python.sitePackages}
       '';

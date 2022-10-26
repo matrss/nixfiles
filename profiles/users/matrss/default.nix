@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
-  home-manager.users.matrss = { config, pkgs, ... }: {
+  home-manager.users.matrss = { pkgs, ... }: {
     imports = [
       ../profiles/neovim
       ../profiles/direnv

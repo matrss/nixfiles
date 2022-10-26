@@ -29,7 +29,7 @@
     plugins = with pkgs.vimPlugins; [
       {
         # This override is necessary as packer.nvim hardcodes this name in its load script.
-        plugin = packer-nvim.overrideAttrs (old: { pname = "packer.nvim"; });
+        plugin = packer-nvim.overrideAttrs (_: { pname = "packer.nvim"; });
         optional = true;
       }
     ];

@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, config, ... }:
 
 {
   sops.secrets.gitlab-runner-env = { };
