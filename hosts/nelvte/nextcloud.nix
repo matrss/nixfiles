@@ -3,7 +3,7 @@
 {
   sops.secrets.nextcloud-admin-password = {
     owner = config.users.users.nextcloud.name;
-    group = config.users.users.nextcloud.group;
+    inherit (config.users.users.nextcloud) group;
   };
 
   services.nextcloud.enable = true;

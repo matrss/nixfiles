@@ -34,7 +34,7 @@ let
   };
   log = {
     pulls = mrs;
-    jobsets = jobsets;
+    inherit jobsets;
   };
 in
 {

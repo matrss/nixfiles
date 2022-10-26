@@ -20,7 +20,7 @@
   outputs = inputs:
     let
       systems = [ "x86_64-linux" ];
-      forAllSystems = f: inputs.nixpkgs.lib.genAttrs systems (system: f system);
+      forAllSystems = inputs.nixpkgs.lib.genAttrs systems;
     in
     {
 
