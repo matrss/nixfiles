@@ -50,5 +50,6 @@
 
     gnome.gnome-tweaks
     gnome.gnome-boxes
+    gnome.gnome-terminal
   ];
 }
