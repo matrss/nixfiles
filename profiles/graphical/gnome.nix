@@ -34,7 +34,6 @@
     lutris
 
     anki-bin
-    zoom-us
     zotero
     spotify
     libreoffice
