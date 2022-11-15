@@ -7,7 +7,7 @@
   virtualisation.docker.enable = true;
   services.gitlab-runner = {
     enable = true;
-    concurrent = 8;
+    settings.concurrent = 8;
     services =
       let
         dockerRunner = with lib; {
