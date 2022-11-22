@@ -11,6 +11,7 @@
   services.nextcloud.hostName = "cloud.matrss.xyz";
   services.nextcloud.https = true;
   services.nextcloud.webfinger = true;
+  services.nextcloud.enableBrokenCiphersForSSE = false;
   services.nextcloud.caching.redis = true;
   services.nextcloud.config = {
     adminuser = "admin";
