@@ -4,6 +4,7 @@
   imports = [
     ../../profiles/users/root
     ../../profiles/users/matrss-nelvte
+    ./monitoring.nix
     ./restic.nix
     ./acme.nix
     ./cloudflare-dyndns.nix
