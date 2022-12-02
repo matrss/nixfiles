@@ -18,9 +18,19 @@
 
   nix = {
     # Enable flakes support.
-    extraOptions = ''
+    extraOptions =
+      let
+        flake-registry = builtins.toJSON
+          {
+            flakes = [{
+              from = { type = "indirect"; id = "templates"; };
+              to = { type = "github"; owner = "NixOS"; repo = "templates"; };
+            }];
+            version = 2;
+          }
+          in ''
       experimental-features = nix-command flakes
-      flake-registry = ${pkgs.writeText "flake-registry.json" (builtins.toJSON { flakes = []; version = 2; })}
+      flake-registry = ${pkgs.writeText "flake-registry.json" flake-registry}
     '';
     gc.automatic = true;
     optimise.automatic = true;
