@@ -28,10 +28,11 @@
             }];
             version = 2;
           };
-          in ''
-      experimental-features = nix-command flakes
-      flake-registry = ${pkgs.writeText "flake-registry.json" flake-registry}
-    '';
+      in
+      ''
+        experimental-features = nix-command flakes
+        flake-registry = ${pkgs.writeText "flake-registry.json" flake-registry}
+      '';
     gc.automatic = true;
     optimise.automatic = true;
     settings.trusted-users = [ "@wheel" ];
