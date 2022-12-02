@@ -27,7 +27,7 @@
               to = { type = "github"; owner = "NixOS"; repo = "templates"; };
             }];
             version = 2;
-          }
+          };
           in ''
       experimental-features = nix-command flakes
       flake-registry = ${pkgs.writeText "flake-registry.json" flake-registry}
