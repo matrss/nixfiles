@@ -71,6 +71,9 @@
       james-yu.latex-workshop
       bbenoist.nix
       ms-python.python
+      rust-lang.rust-analyzer
+      tamasfe.even-better-toml
+      vadimcn.vscode-lldb
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "signageos-vscode-sops";
