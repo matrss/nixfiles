@@ -14,6 +14,7 @@
       "cloud.matrss.xyz"
       "home.matrss.xyz"
       "hydra.matrss.xyz"
+      "idm.matrss.xyz"
       "idp.matrss.xyz"
       "media.matrss.xyz"
       "radarr.matrss.xyz"

@@ -4,6 +4,7 @@
   imports = [
     ../../profiles/users/root
     ../../profiles/users/matrss-nelvte
+    ./kanidm.nix
     ./monitoring.nix
     ./restic.nix
     ./acme.nix
