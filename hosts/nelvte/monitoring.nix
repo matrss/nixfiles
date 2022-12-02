@@ -20,7 +20,7 @@
     enable = true;
     listenAddress = "127.0.0.1";
     port = 9000;
-    retentionTime = "1000y";
+    retentionTime = "100y";
 
     scrapeConfigs = [
       {
