@@ -7,6 +7,15 @@
     settings.server.http_port = 9999;
   };
 
+  services.nginx.virtualHosts."status.matrss.xyz" = {
+    forceSSL = true;
+    useACMEHost = "nelvte.matrss.xyz";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:9999";
+      proxyWebsockets = true;
+    };
+  };
+
   services.prometheus = {
     enable = true;
     listenAddress = "127.0.0.1";
