@@ -34,7 +34,7 @@
 
   services.nginx.virtualHosts."idp.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.xyz";
+    useACMEHost = "nelvte.m.matrss.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:9091";
     };

@@ -41,7 +41,7 @@
 
   services.nginx.virtualHosts."cloud.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.xyz";
+    useACMEHost = "nelvte.m.matrss.xyz";
   };
 
   systemd.services.before-restic-backups-local-backup.preStart = ''

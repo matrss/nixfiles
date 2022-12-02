@@ -111,7 +111,7 @@
         };
 
         nelvte = {
-          hostname = "nelvte.matrss.xyz";
+          hostname = "nelvte.m.matrss.xyz";
           sshUser = "root";
 
           profiles.system = {

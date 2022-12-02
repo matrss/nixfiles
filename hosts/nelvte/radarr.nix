@@ -3,7 +3,7 @@
 
   services.nginx.virtualHosts."radarr.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.xyz";
+    useACMEHost = "nelvte.m.matrss.xyz";
     locations."/verify" = {
       proxyPass = "http://127.0.0.1:9091/api/verify";
       extraConfig = ''

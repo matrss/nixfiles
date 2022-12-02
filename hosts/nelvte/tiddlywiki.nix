@@ -18,7 +18,7 @@
 
   services.nginx.virtualHosts."wiki.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.xyz";
+    useACMEHost = "nelvte.m.matrss.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:8080";
     };

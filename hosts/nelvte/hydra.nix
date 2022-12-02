@@ -19,7 +19,7 @@
 
   services.nginx.virtualHosts."hydra.matrss.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.matrss.xyz";
+    useACMEHost = "nelvte.m.matrss.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:3000";
       proxyWebsockets = true;
