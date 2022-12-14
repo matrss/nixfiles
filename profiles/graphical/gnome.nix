@@ -43,7 +43,6 @@
     gimp
     nextcloud-client
     owncloud-client
-    teams
     krita
     rnote
     helvum
