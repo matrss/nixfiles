@@ -69,6 +69,17 @@
           ];
         in
         {
+          hazuno = inputs.nixpkgs.lib.nixosSystem rec {
+            system = "x86_64-linux";
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              config = { allowUnfree = true; };
+              overlays = [ inputs.self.overlays.default ];
+            };
+            modules = baseModules ++ [
+              ./hosts/hazuno
+            ];
+          };
           ipsmin = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
@@ -99,6 +110,17 @@
       overlays.default = import ./pkgs;
 
       deploy.nodes = {
+        hazuno = {
+          hostname = "hazuno.m.matrss.xyz";
+          sshUser = "root";
+
+          profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+              inputs.self.nixosConfigurations.hazuno;
+          };
+        };
+
         ipsmin = {
           hostname = "ipsmin";
           sshUser = "root";
