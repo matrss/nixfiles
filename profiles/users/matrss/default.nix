@@ -18,6 +18,7 @@
       git
       tig
       bitwarden-cli
+      autossh
       nodePackages.tiddlywiki
     ];
 
