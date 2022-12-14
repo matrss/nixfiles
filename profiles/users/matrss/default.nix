@@ -44,7 +44,12 @@
       #     };
       #   }
       # ];
-      extraConfig = { pull = { ff = "only"; }; init = { defaultBranch = "main"; }; };
+      extraConfig = {
+        pull.ff = "only";
+        init.defaultBranch = "main";
+        rebase.autosquash = true;
+        rebase.autostash = true;
+      };
     };
 
     programs.gpg.enable = true;
