@@ -144,6 +144,9 @@
     smartmontools
   ];
 
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
+
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "overlay2";
 

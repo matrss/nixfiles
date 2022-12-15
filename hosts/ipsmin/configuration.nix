@@ -139,6 +139,9 @@
   services.ananicy.enable = true;
   # services.ananicy.package = pkgs.ananicy-cpp;
 
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
+
   users.mutableUsers = false;
 
   sops.defaultSopsFile = ../../secrets/ipsmin/secrets.yaml;
