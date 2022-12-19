@@ -60,9 +60,6 @@
     reusePassphrases = true;
   };
 
-  # Don't swap as much; should be better for the SSD.
-  boot.kernel.sysctl."vm.swappiness" = 1;
-
   networking.interfaces.enp3s0.useDHCP = false;
 
   # Filesystems to be mounted.

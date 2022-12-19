@@ -73,9 +73,6 @@
   swapDevices =
     [{ device = "/dev/disk/by-uuid/c68db7c4-cd2d-407a-beae-7025344975f6"; }];
 
-  # Don't swap as much; should be better for the SSD.
-  boot.kernel.sysctl."vm.swappiness" = 1;
-
   # Enable ssh server
   services.openssh.enable = true;
 
