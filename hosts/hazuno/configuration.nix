@@ -1,10 +1,6 @@
 { ... }:
 
 {
-  imports = [
-    ./headscale.nix
-  ];
-
   zramSwap.enable = true;
   networking.hostName = "hazuno";
   networking.domain = "m.matrss.xyz";
