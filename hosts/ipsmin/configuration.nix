@@ -57,11 +57,7 @@
       "/home"
       "/nix"
       "/root"
-      "/var/lib/bluetooth"
-      "/var/lib/colord"
-      "/var/lib/cups"
-      "/var/lib/systemd/backlight"
-      "/var/lib/systemd/coredump"
+      "/var/lib"
       "/var/log"
     ];
     files = [
