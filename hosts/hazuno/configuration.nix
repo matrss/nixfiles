@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   zramSwap.enable = true;
   networking.hostName = "hazuno";
