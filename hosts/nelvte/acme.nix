@@ -10,15 +10,10 @@
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env-matrss_xyz.path;
     extraDomainNames = [
-      "bazarr.matrss.xyz"
       "cloud.matrss.xyz"
       "home.matrss.xyz"
       "hydra.matrss.xyz"
       "idm.matrss.xyz"
-      "idp.matrss.xyz"
-      "media.matrss.xyz"
-      "radarr.matrss.xyz"
-      "sonarr.matrss.xyz"
       "status.matrss.xyz"
       "wiki.matrss.xyz"
     ];
