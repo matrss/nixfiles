@@ -68,7 +68,7 @@
     programs.vscode.enable = true;
     programs.vscode.package = pkgs.vscodium;
     programs.vscode.extensions = with pkgs.vscode-extensions; [
-      vscodevim.vim
+      asvetliakov.vscode-neovim
       streetsidesoftware.code-spell-checker
       ms-vscode-remote.remote-ssh
       mkhl.direnv
