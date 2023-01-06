@@ -132,6 +132,8 @@
   services.ananicy.enable = true;
   services.ananicy.package = pkgs.ananicy-cpp;
 
+  services.opensnitch.enable = true;
+
   users.mutableUsers = false;
 
   sops.defaultSopsFile = ../../secrets/ipsmin/secrets.yaml;

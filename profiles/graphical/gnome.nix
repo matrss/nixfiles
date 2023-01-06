@@ -46,6 +46,7 @@
     krita
     rnote
     helvum
+    opensnitch-ui
 
     gnome.gnome-tweaks
     gnome.gnome-boxes
