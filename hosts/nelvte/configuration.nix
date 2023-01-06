@@ -17,7 +17,6 @@
     ./sonarr.nix
     ./radarr.nix
     ./bazarr.nix
-    ./gitlab-runner.nix
     ./home-assistant.nix
     ./tiddlywiki.nix
   ];
@@ -138,9 +137,6 @@
     btrfs-progs
     smartmontools
   ];
-
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "overlay2";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
