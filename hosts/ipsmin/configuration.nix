@@ -130,7 +130,7 @@
   nix.daemonCPUSchedPolicy = "idle";
 
   services.ananicy.enable = true;
-  # services.ananicy.package = pkgs.ananicy-cpp;
+  services.ananicy.package = pkgs.ananicy-cpp;
 
   users.mutableUsers = false;
 
