@@ -15,7 +15,7 @@
     ];
     config = {
       homeassistant = {
-        external_url = "https://home.matrss.xyz";
+        external_url = "https://home.0px.xyz";
         name = "Home";
         temperature_unit = "C";
         unit_system = "metric";
@@ -42,9 +42,9 @@
     };
   };
 
-  services.nginx.virtualHosts."home.matrss.xyz" = {
+  services.nginx.virtualHosts."home.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.matrss.xyz";
+    useACMEHost = "nelvte.m.0px.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:8123";
       proxyWebsockets = true;

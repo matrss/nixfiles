@@ -8,7 +8,7 @@
   ];
 
   networking.hostName = "ipsmin";
-  networking.domain = "m.matrss.xyz";
+  networking.domain = "m.0px.xyz";
 
   networking.interfaces.enp0s31f6.useDHCP = false;
   networking.interfaces.wlp0s20f3.useDHCP = false;

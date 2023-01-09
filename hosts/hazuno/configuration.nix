@@ -1,7 +1,7 @@
 {
   zramSwap.enable = true;
   networking.hostName = "hazuno";
-  networking.domain = "m.matrss.xyz";
+  networking.domain = "m.0px.xyz";
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgAt4vG44X0LcB5Xcxzhx+Yxug7z5QbD7YRjKONBTVn Matthias Riße"

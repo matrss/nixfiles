@@ -8,7 +8,7 @@
 
   services.hydra = {
     enable = true;
-    hydraURL = "https://hydra.matrss.xyz";
+    hydraURL = "https://hydra.0px.xyz";
     notificationSender = "";
     useSubstitutes = true;
     listenHost = "localhost";
@@ -17,9 +17,9 @@
     '';
   };
 
-  services.nginx.virtualHosts."hydra.matrss.xyz" = {
+  services.nginx.virtualHosts."hydra.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.matrss.xyz";
+    useACMEHost = "nelvte.m.0px.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:3000";
       proxyWebsockets = true;

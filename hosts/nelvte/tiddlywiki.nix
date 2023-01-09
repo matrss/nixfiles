@@ -16,9 +16,9 @@
   systemd.services.tiddlywiki.serviceConfig.LoadCredential =
     "credentials:${config.sops.secrets."tiddlywiki/credentials".path}";
 
-  services.nginx.virtualHosts."wiki.matrss.xyz" = {
+  services.nginx.virtualHosts."wiki.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.matrss.xyz";
+    useACMEHost = "nelvte.m.0px.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:8080";
     };

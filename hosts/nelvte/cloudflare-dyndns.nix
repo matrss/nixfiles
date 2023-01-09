@@ -5,7 +5,7 @@
 
   services.cloudflare-dyndns = {
     enable = true;
-    domains = [ "nelvte.m.matrss.xyz" ];
+    domains = [ "nelvte.m.0px.xyz" ];
     proxied = false;
     ipv4 = true;
     ipv6 = true;

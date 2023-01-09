@@ -111,7 +111,7 @@
 
       deploy.nodes = {
         hazuno = {
-          hostname = "hazuno.m.matrss.xyz";
+          hostname = "hazuno.m.0px.xyz";
           sshUser = "root";
 
           profiles.system = {
@@ -133,7 +133,7 @@
         };
 
         nelvte = {
-          hostname = "nelvte.m.matrss.xyz";
+          hostname = "nelvte.m.0px.xyz";
           sshUser = "root";
 
           profiles.system = {
