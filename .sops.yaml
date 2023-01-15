@@ -1,5 +1,6 @@
 keys: &all
   - &matrss age1d84zfp3p9r2jg9fxfp0kf557ct36ppc7s7e3zwnuc00uy4q90uqsqwh3cy
+  - &hazuno age168pargwepjcvtq87h0p8cct8jtmx04aer5c73zq4mfl0qf63le5s39c3pd
   - &ipsmin age1a2v5p3u4tlad6v4d4jd3h9hcwxkz0up5jye4nh5u6xvrznml9dcqxpc8x0
   - &nelvte age15rc2xk90qs50n5msp970kpme90u4kjjvh9z34v7n94hax5myjpfqs5ymxe
 creation_rules:
@@ -9,6 +10,11 @@ creation_rules:
         - *matrss
         - *ipsmin
         - *nelvte
+  - path_regex: secrets/hazuno/[^/]+\.yaml$
+    key_groups:
+      - age:
+        - *matrss
+        - *hazuno
   - path_regex: secrets/ipsmin/[^/]+\.yaml$
     key_groups:
       - age:
