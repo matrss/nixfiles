@@ -1,6 +1,4 @@
 {
-  imports = [ ./knot ];
-
   zramSwap.enable = true;
   networking.hostName = "hazuno";
   networking.domain = "m.0px.xyz";
