@@ -7,6 +7,44 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgAt4vG44X0LcB5Xcxzhx+Yxug7z5QbD7YRjKONBTVn Matthias Riße"
   ];
 
+  # Filesystems to be mounted.
+  fileSystems."/" = {
+    device = "tmpfs";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=512M" "mode=755" ];
+    neededForBoot = true;
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/8DEA-BE31";
+    fsType = "vfat";
+    neededForBoot = true;
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/sda1";
+    fsType = "ext4";
+    neededForBoot = true;
+  };
+
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    directories = [
+      "/home"
+      "/nix"
+      "/root"
+      "/var/lib"
+      "/var/log"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
+  };
+
   sops.defaultSopsFile = ../../secrets/hazuno/secrets.yaml;
 
   # This value determines the NixOS release from which the default
