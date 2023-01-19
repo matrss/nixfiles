@@ -24,6 +24,14 @@
             "type": "git",
             "value": "https://github.com/NixOS/nixpkgs nixos-unstable",
             "emailresponsible": false
+        },
+        "gitlab_status_repo": {
+            "type": "string",
+            "value": "nixfiles"
+        },
+        "gitlab_project_id": {
+            "type": "string",
+            "value": "26127804"
         }
     }
 }
