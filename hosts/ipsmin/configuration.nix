@@ -19,6 +19,8 @@
   boot.loader.systemd-boot.configurationLimit = 100;
   boot.loader.efi.canTouchEfiVariables = false;
 
+  boot.initrd.systemd.enable = true;
+
   # Decrypt root and swap at boot.
   boot.initrd.luks.devices = {
     root = {
