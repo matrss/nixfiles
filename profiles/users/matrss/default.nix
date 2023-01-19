@@ -83,12 +83,6 @@
       vadimcn.vscode-lldb
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
-        name = "dendron";
-        publisher = "dendron";
-        version = "0.119.0";
-        sha256 = "sha256-fUL5f5Fw6PMc+92++Wj1UfJqRAVXb/MQ+b7grYs0E6M=";
-      }
-      {
         name = "signageos-vscode-sops";
         publisher = "signageos";
         version = "0.6.1";
