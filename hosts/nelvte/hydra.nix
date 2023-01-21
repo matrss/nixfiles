@@ -2,8 +2,13 @@
 
 {
   sops.secrets."hydra/secret-key" = {
-    owner = config.users.users.hydra-www.name;
     inherit (config.users.users.hydra-www) group;
+    mode = "0440";
+  };
+
+  sops.secrets."hydra/gitlab-token/matrss/nixfiles" = {
+    inherit (config.users.users.hydra-www) group;
+    mode = "0440";
   };
 
   services.hydra = {
@@ -14,6 +19,7 @@
     listenHost = "localhost";
     extraConfig = ''
       binary_cache_secret_key_file = ${config.sops.secrets."hydra/secret-key".path}
+      Include ${config.sops.secrets."hydra/gitlab-token/matrss/nixfiles".path}
     '';
   };
 
