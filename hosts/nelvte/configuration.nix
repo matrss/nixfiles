@@ -83,19 +83,7 @@
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/home" ];
   };
 
-  fileSystems."/srv" = {
-    device = "LABEL=data";
-    fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/srv" ];
-  };
-
   fileSystems."/media" = {
-    device = "LABEL=data";
-    fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
-  };
-
-  fileSystems."/srv/media" = {
     device = "LABEL=data";
     fsType = "btrfs";
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
