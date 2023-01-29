@@ -10,6 +10,10 @@ creation_rules:
         - *matrss
         - *ipsmin
         - *nelvte
+  - path_regex: secrets/terraform/[^/]+\.yaml$
+    key_groups:
+      - age:
+        - *matrss
   - path_regex: secrets/hazuno/[^/]+\.yaml$
     key_groups:
       - age:

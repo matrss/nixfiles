@@ -46,6 +46,7 @@
               ssh-to-age
               nixpkgs-fmt
               deploy-rs.deploy-rs
+              terraform
             ];
           };
         });
