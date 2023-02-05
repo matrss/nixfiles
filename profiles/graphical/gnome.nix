@@ -45,7 +45,6 @@
     owncloud-client
     krita
     rnote
-    helvum
     opensnitch-ui
 
     gnome.gnome-tweaks
