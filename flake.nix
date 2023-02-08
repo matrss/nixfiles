@@ -12,9 +12,6 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs:
@@ -30,7 +27,6 @@
             inherit system;
             overlays = [
               inputs.self.overlays.default
-              inputs.deploy-rs.overlay
               inputs.sops-nix.overlay
             ];
           };
@@ -45,8 +41,9 @@
               age
               ssh-to-age
               nixpkgs-fmt
-              deploy-rs.deploy-rs
               terraform
+              generate-hostnames
+              dply
             ];
           };
         });
@@ -110,41 +107,6 @@
 
       overlays.default = import ./pkgs;
 
-      deploy.nodes = {
-        hazuno = {
-          hostname = "hazuno.m.0px.xyz";
-          sshUser = "root";
-
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              inputs.self.nixosConfigurations.hazuno;
-          };
-        };
-
-        ipsmin = {
-          hostname = "ipsmin";
-          sshUser = "root";
-
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              inputs.self.nixosConfigurations.ipsmin;
-          };
-        };
-
-        nelvte = {
-          hostname = "nelvte.m.0px.xyz";
-          sshUser = "root";
-
-          profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos
-              inputs.self.nixosConfigurations.nelvte;
-          };
-        };
-      };
-
       hydraJobs =
         let
           nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
@@ -185,12 +147,5 @@
 
           checks = inputs.self.checks.x86_64-linux;
         };
-
-      checks = forAllSystems
-        (system:
-          (builtins.mapAttrs
-            (_: deployLib: deployLib.deployChecks inputs.self.deploy)
-            inputs.deploy-rs.lib
-          ).${system});
     };
 }

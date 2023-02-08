@@ -22,5 +22,6 @@ in
       ];
     };
 
+  dply = prev.callPackage (import ./scripts.nix).dply { };
   generate-hostnames = prev.callPackage (import ./scripts.nix).generate-hostnames { };
 }
