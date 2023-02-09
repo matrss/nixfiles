@@ -44,7 +44,7 @@
 
   services.nginx.virtualHosts."home.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.0px.xyz";
+    useACMEHost = "mpanra.m.0px.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:8123";
       proxyWebsockets = true;

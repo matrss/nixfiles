@@ -102,6 +102,7 @@
             modules = baseModules ++ [
               ./hosts/nelvte
             ];
+            specialArgs.inputs = inputs;
           };
         };
 

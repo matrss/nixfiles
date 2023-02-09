@@ -6,7 +6,7 @@
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "matthias.risze@t-online.de";
 
-  security.acme.certs."nelvte.m.0px.xyz" = {
+  security.acme.certs."mpanra.m.0px.xyz" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env.path;
     extraDomainNames = [

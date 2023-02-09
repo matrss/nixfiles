@@ -18,17 +18,9 @@
 
   services.nginx.virtualHosts."wiki.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.0px.xyz";
+    useACMEHost = "mpanra.m.0px.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:8080";
     };
   };
-
-  systemd.services.before-restic-backups-local-backup.preStart = lib.mkAfter ''
-    systemctl stop tiddlywiki.service
-  '';
-
-  systemd.services.after-restic-backups-local-backup.postStart = lib.mkBefore ''
-    systemctl start tiddlywiki.service
-  '';
 }

@@ -41,14 +41,6 @@
 
   services.nginx.virtualHosts."cloud.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.0px.xyz";
+    useACMEHost = "mpanra.m.0px.xyz";
   };
-
-  systemd.services.before-restic-backups-local-backup.preStart = ''
-    nextcloud-occ maintenance:mode --on
-  '';
-
-  systemd.services.after-restic-backups-local-backup.postStart = ''
-    nextcloud-occ maintenance:mode --off
-  '';
 }

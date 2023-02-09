@@ -3,22 +3,11 @@
 {
   imports = [
     ../../profiles/users/root
-    ./kanidm.nix
-    ./monitoring.nix
-    ./restic.nix
-    ./acme.nix
     ./cloudflare-dyndns.nix
     ./fail2ban.nix
-    ./postgresql.nix
-    ./nginx.nix
-    ./nextcloud.nix
-    ./hydra.nix
-    ./jellyfin.nix
-    ./sonarr.nix
-    ./radarr.nix
-    ./bazarr.nix
-    ./home-assistant.nix
-    ./tiddlywiki.nix
+    ./monitoring.nix
+    ./mpanra
+    ./restic.nix
   ];
 
   networking.hostName = "nelvte";
@@ -71,22 +60,10 @@
     fsType = "vfat";
   };
 
-  fileSystems."/data-root" = {
+  fileSystems."/data" = {
     device = "LABEL=data";
     fsType = "btrfs";
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/" ];
-  };
-
-  fileSystems."/home" = {
-    device = "LABEL=data";
-    fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/home" ];
-  };
-
-  fileSystems."/media" = {
-    device = "LABEL=data";
-    fsType = "btrfs";
-    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/media" ];
   };
 
   fileSystems."/var/lib" = {

@@ -25,7 +25,7 @@
 
   services.nginx.virtualHosts."hydra.0px.xyz" = {
     forceSSL = true;
-    useACMEHost = "nelvte.m.0px.xyz";
+    useACMEHost = "mpanra.m.0px.xyz";
     locations."/" = {
       proxyPass = "http://127.0.0.1:3000";
       proxyWebsockets = true;
@@ -36,6 +36,7 @@
   # src: https://github.com/NixOS/hydra/issues/1183
   nix.extraOptions = ''
     allowed-uris = https://
+    experimental-features = nix-command flakes
   '';
 
   # nix.buildMachines = [
@@ -47,24 +48,4 @@
   #   }
   # ];
   nix.settings.system-features = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-
-  systemd.services.before-restic-backups-local-backup.preStart = lib.mkAfter ''
-    systemctl stop \
-      hydra-init.service \
-      hydra-evaluator.service \
-      hydra-notify.service \
-      hydra-queue-runner.service \
-      hydra-send-stats.service \
-      hydra-server.service
-  '';
-
-  systemd.services.after-restic-backups-local-backup.postStart = lib.mkBefore ''
-    systemctl start \
-      hydra-init.service \
-      hydra-evaluator.service \
-      hydra-notify.service \
-      hydra-queue-runner.service \
-      hydra-send-stats.service \
-      hydra-server.service
-  '';
 }
