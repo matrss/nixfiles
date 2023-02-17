@@ -18,7 +18,9 @@
     serviceConfig.Type = "oneshot";
     script = ''
       systemctl stop container@mpanra.service
+      sleep 5
       btrfs subvolume snapshot -r /data/mpanra-varlib /data/snapshots/mpanra-varlib
+      sleep 5
       systemctl start container@mpanra.service
     '';
   };
