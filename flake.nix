@@ -145,8 +145,6 @@
           build.nixosConfigurations = builtins.mapAttrs
             (_: nixosConfiguration: nixosConfiguration.config.system.build.toplevel)
             inputs.self.nixosConfigurations;
-
-          checks = inputs.self.checks.x86_64-linux;
         };
     };
 }
