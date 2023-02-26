@@ -106,7 +106,7 @@ resource "cloudflare_record" "_spf_0px_xyz" {
 
 resource "cloudflare_record" "services_0px_xyz" {
   zone_id = cloudflare_zone._0px_xyz.id
-  for_each = toset(["cloud", "home", "hydra", "idm", "media", "status", "wiki"])
+  for_each = toset(["cloud", "home", "idm", "media", "status", "wiki"])
   type = "CNAME"
   name = each.key
   value = "nelvte.m.0px.xyz"

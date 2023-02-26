@@ -136,44 +136,5 @@
             ${pkgs.statix}/bin/statix check ${./.} && touch $out
           '';
         });
-
-      hydraJobs =
-        let
-          nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
-        in
-        inputs.nixpkgs.lib.mapDerivationAttrset (_: inputs.nixpkgs.lib.hydraJob) {
-
-          lint =
-            let
-              pkgs = nixpkgsFor "x86_64-linux";
-            in
-            {
-              deadnix = pkgs.runCommandLocal "lint.deadnix" { } ''
-                ${pkgs.deadnix}/bin/deadnix --fail --hidden ${./.} && touch $out
-              '';
-
-              editorconfig-checker = pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
-                cd ${./.}
-                ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
-              '';
-
-              gitleaks = pkgs.runCommandLocal "lint.gitleaks" { } ''
-                cd ${./.}
-                ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
-              '';
-
-              nixpkgs-fmt = pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
-                ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
-              '';
-
-              statix = pkgs.runCommandLocal "lint.statix" { } ''
-                ${pkgs.statix}/bin/statix check ${./.} && touch $out
-              '';
-            };
-
-          build.nixosConfigurations = builtins.mapAttrs
-            (_: nixosConfiguration: nixosConfiguration.config.system.build.toplevel)
-            inputs.self.nixosConfigurations;
-        };
     };
 }

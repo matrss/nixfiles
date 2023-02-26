@@ -36,8 +36,6 @@
     gc.automatic = true;
     optimise.automatic = true;
     settings.trusted-users = [ "@wheel" ];
-    settings.substituters = [ "https://hydra.0px.xyz/" ];
-    settings.trusted-public-keys = [ "hydra.0px.xyz-1:6VVxZxMIFDV2x1Vo9rV/GKfqZS9fPJbXVTD9AGxM9pw=" ];
   };
 
   # Just very convenient.

@@ -24,7 +24,6 @@
         ./bazarr.nix
         ./cloudflare-dyndns.nix
         ./home-assistant.nix
-        ./hydra.nix
         ./jellyfin.nix
         ./kanidm.nix
         ./nextcloud.nix
