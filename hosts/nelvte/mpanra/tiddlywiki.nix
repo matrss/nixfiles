@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 {
   sops.secrets."tiddlywiki/credentials" = { };
