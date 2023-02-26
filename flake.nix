@@ -108,6 +108,35 @@
 
       overlays.default = import ./pkgs;
 
+      checks = forAllSystems (system:
+        let
+          nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
+          pkgs = nixpkgsFor system;
+        in
+        {
+          "lint/deadnix" = pkgs.runCommandLocal "lint.deadnix" { } ''
+            ${pkgs.deadnix}/bin/deadnix --fail --hidden ${./.} && touch $out
+          '';
+
+          "lint/editorconfig-checker" = pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
+            cd ${./.}
+            ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
+          '';
+
+          "lint/gitleaks" = pkgs.runCommandLocal "lint.gitleaks" { } ''
+            cd ${./.}
+            ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
+          '';
+
+          "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
+            ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
+          '';
+
+          "lint/statix" = pkgs.runCommandLocal "lint.statix" { } ''
+            ${pkgs.statix}/bin/statix check ${./.} && touch $out
+          '';
+        });
+
       hydraJobs =
         let
           nixpkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
