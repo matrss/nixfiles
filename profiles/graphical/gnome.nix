@@ -45,7 +45,6 @@
     owncloud-client
     krita
     rnote
-    opensnitch-ui
 
     gnome.gnome-tweaks
     gnome.gnome-boxes
