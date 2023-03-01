@@ -24,4 +24,6 @@ in
 
   dply = prev.callPackage (import ./scripts.nix).dply { };
   generate-hostnames = prev.callPackage (import ./scripts.nix).generate-hostnames { };
+  lint.vulnix = prev.callPackage (import ./scripts.nix).lint.vulnix { };
+  ci = prev.callPackage (import ./scripts.nix).ci { };
 }
