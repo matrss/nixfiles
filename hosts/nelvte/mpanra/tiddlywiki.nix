@@ -5,7 +5,7 @@
 
   services.tiddlywiki.enable = true;
   services.tiddlywiki.listenOptions = {
-    readers = "(anon)";
+    readers = "(authenticated)";
     writers = "(authenticated)";
     admin = "matrss";
     credentials = "/run/credentials/tiddlywiki.service/credentials";
