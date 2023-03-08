@@ -83,10 +83,12 @@
   # Enable ssh server.
   services.openssh = {
     enable = true;
-    permitRootLogin = "prohibit-password";
-    passwordAuthentication = false;
-    # Required for fail2ban
-    logLevel = "VERBOSE";
+    settings = {
+      permitRootLogin = "prohibit-password";
+      passwordAuthentication = false;
+      # Required for fail2ban
+      logLevel = "VERBOSE";
+    };
   };
 
   # Auto discovery.
