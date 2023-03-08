@@ -1,8 +1,0 @@
-stages:
-  - ci
-
-flake-update:
-  stage: ci
-  image: nixpkgs/nix-flakes:latest
-  script:
-    - nix run .#ci
