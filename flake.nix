@@ -27,7 +27,7 @@
             inherit system;
             overlays = [
               inputs.self.overlays.default
-              inputs.sops-nix.overlay
+              inputs.sops-nix.overlays.default
             ];
           };
         in
