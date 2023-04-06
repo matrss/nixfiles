@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -108,8 +108,6 @@
 
   # Enable docker daemon
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
   programs.singularity.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose
@@ -121,6 +119,9 @@
 
   # Enable adb
   programs.adb.enable = true;
+
+  # Required for emulated android devices (HAXM error)
+  systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
 
   # Enable scanner support
   hardware.sane.enable = true;
