@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   sops.secrets."cloudflare-dyndns/api-token" = { };
@@ -12,4 +12,6 @@
     deleteMissing = true;
     apiTokenFile = config.sops.secrets."cloudflare-dyndns/api-token".path;
   };
+
+  systemd.services.cloudflare-dyndns.serviceConfig.Type = lib.mkForce "oneshot";
 }
