@@ -5,7 +5,6 @@
     ../../profiles/users/root
     ./cloudflare-dyndns.nix
     ./fail2ban.nix
-    ./monitoring.nix
     ./mpanra
     ./restic.nix
   ];
