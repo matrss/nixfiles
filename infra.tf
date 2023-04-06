@@ -109,7 +109,7 @@ resource "cloudflare_record" "services_0px_xyz" {
   for_each = toset(["cloud", "home", "idm", "media", "status", "wiki"])
   type = "CNAME"
   name = each.key
-  value = "nelvte.m.0px.xyz"
+  value = "mpanra.m.0px.xyz"
 }
 
 
