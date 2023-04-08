@@ -7,7 +7,7 @@
   };
 
   services.nextcloud.enable = true;
-  services.nextcloud.package = pkgs.nextcloud25;
+  services.nextcloud.package = pkgs.nextcloud26;
   services.nextcloud.hostName = "cloud.0px.xyz";
   services.nextcloud.https = true;
   services.nextcloud.webfinger = true;
