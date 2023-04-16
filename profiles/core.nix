@@ -42,7 +42,7 @@
   programs.command-not-found.enable = true;
 
   # Put /tmp on tmpfs
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 
   # Needed Syncthing errors relating to too many fs watchers.
   boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
