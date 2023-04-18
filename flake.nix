@@ -136,5 +136,17 @@
             ${pkgs.statix}/bin/statix check ${./.} && touch $out
           '';
         });
+
+      hydraJobs =
+        let
+          lib = inputs.nixpkgs.lib;
+        in
+        lib.foldr lib.recursiveUpdate { }
+          [
+            # Add checks
+            (lib.foldr lib.recursiveUpdate { } (lib.flatten (map builtins.attrValues (builtins.attrValues (builtins.mapAttrs (system: check: builtins.mapAttrs (checkName: check: { "checks-${checkName}-${system}" = check; }) check) inputs.self.checks)))))
+            # Add nixosConfigurations
+            (lib.mapAttrs' (hostname: nixosConfiguration: lib.nameValuePair "nixos-${hostname}" nixosConfiguration.config.system.build.toplevel) inputs.self.nixosConfigurations)
+          ];
     };
 }
