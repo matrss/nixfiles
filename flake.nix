@@ -139,7 +139,7 @@
 
       hydraJobs =
         let
-          lib = inputs.nixpkgs.lib;
+          inherit (inputs.nixpkgs) lib;
         in
         lib.foldr lib.recursiveUpdate { }
           [
