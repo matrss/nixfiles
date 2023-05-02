@@ -10,6 +10,7 @@
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env.path;
     extraDomainNames = [
+      "buildbot.0px.xyz"
       "cloud.0px.xyz"
       "home.0px.xyz"
       "idm.0px.xyz"

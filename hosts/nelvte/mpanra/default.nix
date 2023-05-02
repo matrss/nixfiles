@@ -22,6 +22,7 @@
         inputs.sops-nix.nixosModules.sops
         ./acme.nix
         ./bazarr.nix
+        ./buildbot
         ./cloudflare-dyndns.nix
         ./home-assistant.nix
         ./jellyfin.nix
