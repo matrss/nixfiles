@@ -298,6 +298,11 @@ def build_config():
             ],
         ),
         "plugins": dict(waterfall_view={}, console_view={}, grid_view={}, badges={}, wsgi_dashboards={}),
+        "change_hook_dialects": dict(
+            gitlab=dict(
+                secret=(credentials_dir / "gitlab-hook-secret").read_text(),
+            ),
+        ),
     }
 
     c["db"] = {"db_url": "sqlite:///state.sqlite"}

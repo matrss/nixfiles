@@ -2,6 +2,7 @@
 
 {
   sops.secrets."buildbot/users" = { };
+  sops.secrets."buildbot/gitlab-hook-secret" = { };
 
   nix.settings.allowed-users = [ config.services.buildbot-master.user ];
 
@@ -20,6 +21,7 @@
     ];
     serviceConfig.LoadCredential = [
       "users:${config.sops.secrets."buildbot/users".path}"
+      "gitlab-hook-secret:${config.sops.secrets."buildbot/gitlab-hook-secret".path}"
     ];
   };
 
