@@ -128,9 +128,9 @@ class NixEvalCommand(buildstep.ShellMixin, steps.BuildStep):
         return result
 
 
-def nix_eval_config(workernames, repourl):
+def nix_eval_config(workernames):
     factory = util.BuildFactory()
-    factory.addStep(steps.GitLab(repourl=repourl))
+    factory.addStep(steps.GitLab(repourl=util.Property("repository")))
     factory.addStep(
         NixEvalCommand(
             env={},
@@ -244,7 +244,6 @@ def nix_build_config(workernames):
 
 def build_config():
     credentials_dir = Path(os.environ["CREDENTIALS_DIRECTORY"])
-    repourl = "https://gitlab.com/matrss/nixfiles"
 
     c = {}
     c["buildbotNetUsageData"] = None
@@ -260,8 +259,7 @@ def build_config():
             name="default-branch",
             builderNames=["nix-eval"],
             change_filter=util.ChangeFilter(
-                repository=repourl,
-                branch=None,
+                branch="main",
             ),
         ),
         # this is triggered from `nix-eval`
@@ -280,7 +278,7 @@ def build_config():
     ]
 
     c["builders"] = [
-        nix_eval_config(["bot-1"], repourl),
+        nix_eval_config(["bot-1"]),
         nix_build_config(["bot-1"]),
     ]
 
