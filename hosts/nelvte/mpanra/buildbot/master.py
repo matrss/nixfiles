@@ -13,6 +13,15 @@ from buildbot.process.properties import Properties
 from typing import Any, Generator
 
 
+@util.renderer
+def is_trusted_repo(props):
+    """Check if the repository associated with the current build is trusted"""
+    trusted_repos = [
+        "git@gitlab.com:matrss/nixfiles.git",
+    ]
+    return props.getProperty("repository") in trusted_repos
+
+
 # {{{
 # src: https://github.com/Mic92/dotfiles/blob/2e7aa81eb14af118f5c6c1c91111db9775b6090a/nixos/eve/modules/buildbot/buildbot_nix.py
 class BuildTrigger(Trigger):
@@ -130,7 +139,22 @@ class NixEvalCommand(buildstep.ShellMixin, steps.BuildStep):
 
 def nix_eval_config(workernames):
     factory = util.BuildFactory()
-    factory.addStep(steps.GitLab(repourl=util.Property("repository")))
+    factory.addStep(steps.Assert(
+        is_trusted_repo,
+        name="Assert trusted repository",
+        haltOnFailure=True,
+    ))
+    factory.addStep(steps.GitLab(
+        repourl=util.Property("repository"),
+        mode="full",
+        method="clobber",
+        shallow=True,
+        # Transform is necessary since the secrets provider seems to strip newlines too much.
+        # Should be fixed in buildbot 3.8.0
+        sshPrivateKey=util.Transform(lambda x: x + "\n", util.Secret("ssh-private-key")),
+        sshHostKey="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf",
+        haltOnFailure=True,
+    ))
     factory.addStep(
         NixEvalCommand(
             env={},
@@ -248,6 +272,8 @@ def build_config():
     c = {}
     c["buildbotNetUsageData"] = None
 
+    c["secretsProviders"] = [secrets.SecretInAFile(dirname=credentials_dir)]
+
     # configure a janitor which will delete all logs older than one month, and will run on sundays at noon
     c["configurators"] = [
         util.JanitorConfigurator(logHorizon=datetime.timedelta(weeks=4), hour=12, dayOfWeek=6)
@@ -295,10 +321,10 @@ def build_config():
                 util.AnyControlEndpointMatcher(role="admin"),
             ],
         ),
-        "plugins": dict(waterfall_view={}, console_view={}, grid_view={}, badges={}, wsgi_dashboards={}),
+        "plugins": dict(waterfall_view={}, console_view={}, grid_view={}),
         "change_hook_dialects": dict(
             gitlab=dict(
-                secret=(credentials_dir / "gitlab-hook-secret").read_text(),
+                secret=util.Secret("gitlab-hook-secret"),
             ),
         ),
     }

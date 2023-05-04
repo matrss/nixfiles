@@ -3,6 +3,7 @@
 {
   sops.secrets."buildbot/users" = { };
   sops.secrets."buildbot/gitlab-hook-secret" = { };
+  sops.secrets."buildbot/ssh-private-key" = { };
 
   nix.settings.allowed-users = [ config.services.buildbot-master.user ];
 
@@ -18,10 +19,12 @@
   systemd.services.buildbot-master = {
     path = [
       pkgs.nix
+      pkgs.openssh
     ];
     serviceConfig.LoadCredential = [
       "users:${config.sops.secrets."buildbot/users".path}"
       "gitlab-hook-secret:${config.sops.secrets."buildbot/gitlab-hook-secret".path}"
+      "ssh-private-key:${config.sops.secrets."buildbot/ssh-private-key".path}"
     ];
   };
 
