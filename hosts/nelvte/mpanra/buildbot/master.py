@@ -285,7 +285,13 @@ def build_config():
         schedulers.ForceScheduler(name="force", builderNames=["nix-eval"]),
     ]
 
-    c["services"] = []
+    c["services"] = [
+        reporters.GitLabStatusPush(
+            token=util.Secret("gitlab-status-push-token"),
+            context="continuous-integration/buildbot",
+            baseURL="https://gitlab.com",
+        )
+    ]
 
     c["workers"] = [
         worker.LocalWorker("bot-1"),
