@@ -266,13 +266,14 @@ def build_config():
     ]
 
     c["schedulers"] = [
-        # build all pushes to default branch
+        # build all pushes to and merge requests targeting the main branch
         schedulers.SingleBranchScheduler(
-            name="default-branch",
+            name="main",
             builderNames=["nix-eval"],
             change_filter=util.ChangeFilter(
                 branch="main",
-                repository="git@gitlab.com:matrss/nixfiles.git",
+                project="nixfiles",
+                category=["push", "merge_request"]
             ),
         ),
         # this is triggered from `nix-eval`
