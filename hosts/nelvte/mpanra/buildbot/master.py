@@ -13,15 +13,6 @@ from buildbot.process.properties import Properties
 from typing import Any, Generator
 
 
-@util.renderer
-def is_trusted_repo(props):
-    """Check if the repository associated with the current build is trusted"""
-    trusted_repos = [
-        "git@gitlab.com:matrss/nixfiles.git",
-    ]
-    return props.getProperty("repository") in trusted_repos
-
-
 # {{{
 # src: https://github.com/Mic92/dotfiles/blob/2e7aa81eb14af118f5c6c1c91111db9775b6090a/nixos/eve/modules/buildbot/buildbot_nix.py
 class BuildTrigger(Trigger):
@@ -139,11 +130,6 @@ class NixEvalCommand(buildstep.ShellMixin, steps.BuildStep):
 
 def nix_eval_config(workernames):
     factory = util.BuildFactory()
-    factory.addStep(steps.Assert(
-        is_trusted_repo,
-        name="Assert trusted repository",
-        haltOnFailure=True,
-    ))
     factory.addStep(steps.GitLab(
         repourl=util.Property("repository"),
         mode="full",
@@ -286,6 +272,7 @@ def build_config():
             builderNames=["nix-eval"],
             change_filter=util.ChangeFilter(
                 branch="main",
+                repository="git@gitlab.com:matrss/nixfiles.git",
             ),
         ),
         # this is triggered from `nix-eval`
