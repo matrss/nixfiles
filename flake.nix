@@ -135,6 +135,10 @@
           "lint/statix" = pkgs.runCommandLocal "lint.statix" { } ''
             ${pkgs.statix}/bin/statix check ${./.} && touch $out
           '';
+
+          "lint/terraform-fmt" = pkgs.runCommandLocal "lint.terraform-fmt" { } ''
+            ${pkgs.terraform}/bin/terraform fmt -check -recursive -diff ${./.} && touch $out
+          '';
         });
 
       hydraJobs =
