@@ -36,6 +36,8 @@
     gc.automatic = true;
     optimise.automatic = true;
     settings.trusted-users = [ "@wheel" ];
+    settings.substituters = [ "https://nix-cache.0px.xyz/" ];
+    settings.trusted-public-keys = [ "nix-cache.0px.xyz-1:Tbc92c/5IcmniI9IQkOfhyMaiWgyGqBS1BEw4r/XjrY=" ];
   };
 
   # Just very convenient.
