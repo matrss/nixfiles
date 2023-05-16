@@ -135,9 +135,7 @@ def nix_eval_config(workernames):
         mode="full",
         method="clobber",
         shallow=True,
-        # Transform is necessary since the secrets provider seems to strip newlines too much.
-        # Should be fixed in buildbot 3.8.0
-        sshPrivateKey=util.Transform(lambda x: x + "\n", util.Secret("ssh-private-key")),
+        sshPrivateKey=util.Secret("ssh-private-key"),
         sshHostKey="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf",
         haltOnFailure=True,
     ))
