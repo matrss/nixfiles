@@ -20,6 +20,8 @@
 
   systemd.services.buildbot-master = {
     path = [
+      pkgs.bash
+      pkgs.jq
       pkgs.nix
       pkgs.openssh
     ];

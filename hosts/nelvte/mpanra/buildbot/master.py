@@ -115,12 +115,7 @@ class NixEvalCommand(buildstep.ShellMixin, steps.BuildStep):
         result = cmd.results()
         if result == util.SUCCESS:
             # create a ShellCommand for each stage and add them to the build
-            jobs = []
-
-            for line in self.observer.getStdout().split("\n"):
-                if line != "":
-                    job = json.loads(line)
-                    jobs.append(job)
+            jobs = json.loads(self.observer.getStdout())
             self.build.addStepsAfterCurrentStep(
                 [BuildTrigger(scheduler="nix-build", name="nix-build", jobs=jobs)]
             )
@@ -144,32 +139,20 @@ def nix_eval_config(workernames):
             env={},
             name="Eval flake",
             command=[
-                "nix",
-                "run",
-                "--option",
-                "accept-flake-config",
-                "true",
-                "--option",
-                "extra-experimental-features",
-                "nix-command",
-                "--option",
-                "extra-experimental-features",
-                "flakes",
-                "github:nix-community/nix-eval-jobs",
-                "--",
-                "--workers",
-                multiprocessing.cpu_count(),
-                "--option",
-                "accept-flake-config",
-                "true",
-                "--option",
-                "extra-experimental-features",
-                "flakes",
-                "--gc-roots-dir",
-                # FIXME: don't hardcode this
-                "/var/lib/buildbot/gcroot",
-                "--flake",
-                ".#hydraJobs",
+                "sh",
+                "-c",
+                "nix run"
+                " --option accept-flake-config true"
+                " --option extra-experimental-features nix-command"
+                " --option extra-experimental-features flakes"
+                " github:nix-community/nix-eval-jobs"
+                " --"
+                f" --workers {multiprocessing.cpu_count()}"
+                " --option accept-flake-config true"
+                " --option extra-experimental-features flakes"
+                " --gc-roots-dir /var/lib/buildbot/gcroot"
+                " --flake .#hydraJobs"
+                " | jq -s .",
             ],
             haltOnFailure=True,
         )
