@@ -3,9 +3,16 @@
     name = "dply";
     runtimeInputs = [ nixos-rebuild ];
     text = ''
-      nixos-rebuild switch --flake .#"$1" \
-        --target-host root@"$1".m.0px.xyz \
-        --build-host root@"$1".m.0px.xyz
+      nixos-rebuild switch --flake .#"$1" --build-host "root@$1" --target-host "root@$1"
+    '';
+  };
+
+  drv-path = { writeShellApplication, jq }: writeShellApplication {
+    name = "drv-path";
+    runtimeInputs = [ jq ];
+    text = ''
+      nix path-info --json --derivation .#nixosConfigurations.\""$1"\".config.system.build.toplevel |
+        jq '{ "path": .[0].path }'
     '';
   };
 

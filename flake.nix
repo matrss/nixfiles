@@ -44,6 +44,8 @@
               terraform
               generate-hostnames
               dply
+              drv-path
+              jq
             ];
           };
         });
@@ -67,7 +69,7 @@
           ];
         in
         {
-          hazuno = inputs.nixpkgs.lib.nixosSystem rec {
+          "hazuno.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
@@ -78,7 +80,7 @@
               ./hosts/hazuno
             ];
           };
-          ipsmin = inputs.nixpkgs.lib.nixosSystem rec {
+          "ipsmin.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
@@ -92,7 +94,7 @@
               ./hosts/ipsmin
             ];
           };
-          nelvte = inputs.nixpkgs.lib.nixosSystem rec {
+          "nelvte.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;

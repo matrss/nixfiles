@@ -219,3 +219,21 @@ resource "cloudflare_record" "_spf_matrss_xyz" {
   name    = "@"
   value   = "v=spf1 include:mailbox.org ~all"
 }
+
+data "external" "instantiate" {
+  for_each = toset(["hazuno.m.0px.xyz", "ipsmin.m.0px.xyz", "nelvte.m.0px.xyz"])
+
+  program = ["drv-path", each.key]
+}
+
+resource "null_resource" "deploy" {
+  for_each = data.external.instantiate
+
+  triggers = {
+    derivation = each.value.result["path"]
+  }
+
+  provisioner "local-exec" {
+    command = "dply ${each.key}"
+  }
+}
