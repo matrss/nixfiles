@@ -65,6 +65,12 @@
     options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/" ];
   };
 
+  fileSystems."/nix" = {
+    device = "LABEL=data";
+    fsType = "btrfs";
+    options = [ "defaults" "autodefrag" "compress=zstd" "subvol=/nix" "noatime" ];
+  };
+
   fileSystems."/var/lib" = {
     device = "LABEL=data";
     fsType = "btrfs";
