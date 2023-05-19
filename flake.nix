@@ -59,12 +59,6 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
             inputs.sops-nix.nixosModules.sops
-            {
-              home-manager.useGlobalPkgs = true;
-            }
-            {
-              nix.registry.self.flake = inputs.self;
-            }
             ./profiles/core.nix
           ];
         in
@@ -79,6 +73,7 @@
             modules = baseModules ++ [
               ./hosts/hazuno
             ];
+            specialArgs.inputs = inputs;
           };
           "ipsmin.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
@@ -93,6 +88,7 @@
             modules = baseModules ++ [
               ./hosts/ipsmin
             ];
+            specialArgs.inputs = inputs;
           };
           "nelvte.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";

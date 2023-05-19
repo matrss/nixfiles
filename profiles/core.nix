@@ -1,19 +1,12 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     pciutils
     usbutils
     neovim
-    gnumake
-    htop
-    tree
-    opensc
   ];
 
   nix = {
@@ -35,26 +28,18 @@
       '';
     gc.automatic = true;
     optimise.automatic = true;
+    registry.self.flake = inputs.self;
+    settings.allowed-users = [ "@users" ];
     settings.trusted-users = [ "@wheel" ];
     settings.substituters = [ "https://nix-cache.0px.xyz/" ];
     settings.trusted-public-keys = [ "nix-cache.0px.xyz-1:Tbc92c/5IcmniI9IQkOfhyMaiWgyGqBS1BEw4r/XjrY=" ];
   };
 
-  # Just very convenient.
-  programs.command-not-found.enable = true;
+  home-manager.useGlobalPkgs = true;
 
-  # Put /tmp on tmpfs
   boot.tmp.useTmpfs = true;
-
-  # Needed Syncthing errors relating to too many fs watchers.
-  boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
-
-  services.resolved.domains = [ "local" ];
-
-  services.udev.packages = with pkgs; [ libu2f-host yubikey-personalization ];
 
   security.apparmor.enable = true;
   security.apparmor.killUnconfinedConfinables = true;
-
   security.sudo.execWheelOnly = true;
 }
