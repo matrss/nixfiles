@@ -115,6 +115,7 @@
     hunspellDicts.en-us
     hunspellDicts.en-us-large
     hunspellDicts.de-de
+    opensnitch-ui
   ];
 
   # Enable adb
@@ -134,6 +135,8 @@
 
   services.ananicy.enable = true;
   services.ananicy.package = pkgs.ananicy-cpp;
+
+  services.opensnitch.enable = true;
 
   users.mutableUsers = false;
 
