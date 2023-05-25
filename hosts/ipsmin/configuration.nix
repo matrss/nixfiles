@@ -136,7 +136,17 @@
   services.ananicy.enable = true;
   services.ananicy.package = pkgs.ananicy-cpp;
 
-  services.opensnitch.enable = true;
+  services.opensnitch = {
+    enable = true;
+    settings = {
+      DefaultAction = "deny";
+      DefaultDuration = "until restart";
+      Firewall = "nftables";
+      InterceptUnknown = true;
+      LogLevel = 2;
+      ProcMonitorMethod = "ebpf";
+    };
+  };
 
   users.mutableUsers = false;
 
