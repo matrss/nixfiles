@@ -17,9 +17,11 @@
         isReadOnly = false;
       };
     };
-    config = {
+    specialArgs.inputs = inputs;
+    config = { inputs, ... }: {
       imports = [
         inputs.sops-nix.nixosModules.sops
+        ../../../profiles/core.nix
         ./acme.nix
         ./bazarr.nix
         ./buildbot

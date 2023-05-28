@@ -60,6 +60,9 @@
             inputs.impermanence.nixosModules.impermanence
             inputs.sops-nix.nixosModules.sops
             ./profiles/core.nix
+            {
+              home-manager.useGlobalPkgs = true;
+            }
           ];
         in
         {

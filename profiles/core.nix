@@ -1,6 +1,10 @@
 { inputs, pkgs, ... }:
 
 {
+  imports = [
+    ./dns.nix
+  ];
+
   time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
@@ -32,8 +36,6 @@
     settings.allowed-users = [ "@users" ];
     settings.trusted-users = [ "@wheel" ];
   };
-
-  home-manager.useGlobalPkgs = true;
 
   boot.tmp.useTmpfs = true;
 
