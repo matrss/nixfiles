@@ -1,6 +1,9 @@
 {
   imports = [
     ../../profiles/users/root
+    ./acme.nix
+    ./nginx.nix
+    ./dns-over-tls.nix
   ];
 
   zramSwap.enable = true;

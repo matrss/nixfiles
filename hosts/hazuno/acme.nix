@@ -7,17 +7,11 @@
   security.acme.defaults.email = "matthias.risze@t-online.de";
   security.acme.defaults.dnsResolver = "1.1.1.1:53";
 
-  security.acme.certs."mpanra.m.0px.xyz" = {
+  security.acme.certs."hazuno.m.0px.xyz" = {
     dnsProvider = "cloudflare";
     credentialsFile = config.sops.secrets.acme-dns-env.path;
     extraDomainNames = [
-      "buildbot.0px.xyz"
-      "cloud.0px.xyz"
-      "home.0px.xyz"
-      "idm.0px.xyz"
-      "nix-cache.0px.xyz"
-      "status.0px.xyz"
-      "wiki.0px.xyz"
+      "dns.0px.xyz"
     ];
   };
 

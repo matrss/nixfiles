@@ -112,6 +112,26 @@ resource "cloudflare_record" "services_0px_xyz" {
   value    = "mpanra.m.0px.xyz"
 }
 
+resource "cloudflare_record" "hazuno_m_0px_xyz_A" {
+  zone_id = cloudflare_zone._0px_xyz.id
+  type    = "A"
+  name    = "hazuno.m"
+  value   = "130.61.249.195"
+}
+
+resource "cloudflare_record" "hazuno_m_0px_xyz_AAAA" {
+  zone_id = cloudflare_zone._0px_xyz.id
+  type    = "AAAA"
+  name    = "hazuno.m"
+  value   = "2603:c020:800b:fd00:2b10:e461:ff1e:d3e9"
+}
+
+resource "cloudflare_record" "dns_0px_xyz" {
+  zone_id = cloudflare_zone._0px_xyz.id
+  type    = "CNAME"
+  name    = "dns"
+  value   = "hazuno.m.0px.xyz"
+}
 
 resource "cloudflare_zone" "matrss_de" {
   account_id = cloudflare_account.main.id
