@@ -9,6 +9,9 @@
     ./restic.nix
   ];
 
+  # Required to make buildbot work, since it is using nelvte's nix daemon
+  nix.settings.allowed-users = [ "*" ];
+
   networking.hostName = "nelvte";
   networking.domain = "m.0px.xyz";
 
