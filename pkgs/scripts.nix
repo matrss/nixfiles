@@ -3,7 +3,7 @@
     name = "dply";
     runtimeInputs = [ nixos-rebuild ];
     text = ''
-      nixos-rebuild switch --flake .#"$1" --build-host "root@$1" --target-host "root@$1"
+      nixos-rebuild switch --flake .#"$1" --target-host "root@$1"
     '';
   };
 
