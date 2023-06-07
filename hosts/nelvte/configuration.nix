@@ -92,10 +92,10 @@
   services.openssh = {
     enable = true;
     settings = {
-      permitRootLogin = "prohibit-password";
-      passwordAuthentication = false;
+      PermitRootLogin = "prohibit-password";
+      PasswordAuthentication = false;
       # Required for fail2ban
-      logLevel = "VERBOSE";
+      LogLevel = "VERBOSE";
     };
   };
 
