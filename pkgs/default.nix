@@ -23,7 +23,7 @@ in
     };
 
   dply = prev.callPackage (import ./scripts.nix).dply { };
-  drv-path = prev.callPackage (import ./scripts.nix).drv-path { };
+  nixos-config-path = prev.callPackage (import ./scripts.nix).nixos-config-path { };
   generate-hostnames = prev.callPackage (import ./scripts.nix).generate-hostnames { };
   lint.vulnix = prev.callPackage (import ./scripts.nix).lint.vulnix { };
   ci = prev.callPackage (import ./scripts.nix).ci { };

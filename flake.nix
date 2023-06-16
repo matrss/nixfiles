@@ -44,7 +44,7 @@
               terraform
               generate-hostnames
               dply
-              drv-path
+              nixos-config-path
               jq
             ];
           };

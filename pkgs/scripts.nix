@@ -7,11 +7,11 @@
     '';
   };
 
-  drv-path = { writeShellApplication, jq }: writeShellApplication {
-    name = "drv-path";
+  nixos-config-path = { writeShellApplication, jq }: writeShellApplication {
+    name = "nixos-config-path";
     runtimeInputs = [ jq ];
     text = ''
-      nix path-info --json --derivation .#nixosConfigurations.\""$1"\".config.system.build.toplevel |
+      nix path-info --json .#nixosConfigurations.\""$1"\".config.system.build.toplevel |
         jq '{ "path": .[0].path }'
     '';
   };
