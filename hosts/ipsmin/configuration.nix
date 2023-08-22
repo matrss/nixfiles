@@ -115,6 +115,30 @@
     hunspellDicts.en-us
     hunspellDicts.en-us-large
     hunspellDicts.de-de
+
+    noto-fonts
+
+    # gui stuff
+    firefox
+    thunderbird
+    vlc
+
+    barrier
+
+    lutris
+
+    anki-bin
+    zotero
+    spotify
+    libreoffice
+    xournalpp
+    discord
+    bitwarden
+    gimp
+    nextcloud-client
+    owncloud-client
+    krita
+    rnote
   ];
 
   # Enable adb

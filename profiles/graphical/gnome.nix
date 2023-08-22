@@ -22,32 +22,13 @@
     package = pkgs.gnomeExtensions.gsconnect;
   };
 
+  qt.style = "adwaita-dark";
+
   environment.systemPackages = with pkgs; [
-    noto-fonts
-
-    firefox
-    thunderbird
-    vlc
-
-    barrier
-
-    lutris
-
-    anki-bin
-    zotero
-    spotify
-    libreoffice
-    xournalpp
-    discord
-    bitwarden
-    gimp
-    nextcloud-client
-    owncloud-client
-    krita
-    rnote
-
     gnome.gnome-tweaks
     gnome.gnome-boxes
     gnome.gnome-terminal
+    gnome.dconf-editor
+    gnome-console
   ];
 }
