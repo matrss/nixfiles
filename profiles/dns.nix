@@ -8,6 +8,10 @@
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {
+      cache_min_ttl = 60;
+      cache_max_ttl = 60;
+      cache_neg_min_ttl = 60;
+      cache_neg_max_ttl = 60;
       sources.odoh-servers = {
         urls = [
           "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/odoh-servers.md"
