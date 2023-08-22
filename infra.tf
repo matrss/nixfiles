@@ -241,7 +241,7 @@ resource "cloudflare_record" "_spf_matrss_xyz" {
 }
 
 data "external" "instantiate" {
-  for_each = toset(["hazuno.m.0px.xyz", "ipsmin.m.0px.xyz", "nelvte.m.0px.xyz"])
+  for_each = toset(["hazuno.m.0px.xyz", "nelvte.m.0px.xyz"])
 
   program = ["nixos-config-path", each.key]
 }
