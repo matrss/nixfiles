@@ -4,6 +4,7 @@
     ./acme.nix
     ./nginx.nix
     ./dns-over-tls.nix
+    ./uptime-kuma.nix
   ];
 
   zramSwap.enable = true;

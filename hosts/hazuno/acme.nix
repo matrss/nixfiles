@@ -12,6 +12,7 @@
     credentialsFile = config.sops.secrets.acme-dns-env.path;
     extraDomainNames = [
       "dns.0px.xyz"
+      "status.0px.xyz"
     ];
   };
 
