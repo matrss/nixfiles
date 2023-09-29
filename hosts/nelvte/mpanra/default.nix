@@ -42,6 +42,7 @@
       sops.defaultSopsFile = ../../../secrets/mpanra/secrets.yaml;
       networking.useDHCP = false;
       networking.interfaces.mv-enp0s25.useDHCP = true;
+      networking.tempAddresses = "disabled";
 
       system.stateVersion = "20.09";
     };

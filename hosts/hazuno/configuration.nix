@@ -10,6 +10,7 @@
   zramSwap.enable = true;
   networking.hostName = "hazuno";
   networking.domain = "m.0px.xyz";
+  networking.tempAddresses = "disabled";
   services.openssh.enable = true;
 
   # Filesystems to be mounted.
