@@ -217,7 +217,7 @@ def nix_build_config(workernames):
                 "flakes",
                 "--out-link",
                 util.Interpolate("result-%(prop:attr)s"),
-                util.Property("drv_path"),
+                util.Property("drv_path") + "^*",
             ],
             haltOnFailure=True,
         )
