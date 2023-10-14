@@ -8,8 +8,8 @@
       "enp0s25"
     ];
     bindMounts = {
-      "/var/lib" = {
-        hostPath = "/data/mpanra-varlib";
+      "/var" = {
+        hostPath = "/data/mpanra-var";
         isReadOnly = false;
       };
       "/media" = {
