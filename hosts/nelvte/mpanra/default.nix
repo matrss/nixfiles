@@ -24,7 +24,6 @@
         ../../../profiles/core.nix
         ./acme.nix
         ./bazarr.nix
-        ./buildbot
         ./cloudflare-dyndns.nix
         ./home-assistant.nix
         ./jellyfin.nix
