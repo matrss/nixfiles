@@ -31,19 +31,7 @@
     programs.git = {
       enable = true;
       userName = "Matthias Riße";
-      # userEmail = "matthias.risze@t-online.de";
-      userEmail = "m.risse@fz-juelich.de";
-      # includes = [
-      #   {
-      #     condition = "gitdir:~/Projects/fzj/";
-      #     contents = {
-      #       user = {
-      #         name = "Matthias Riße";
-      #         email = "m.risse@fz-juelich.de";
-      #       };
-      #     };
-      #   }
-      # ];
+      userEmail = "matthias.risze@t-online.de";
       extraConfig = {
         pull.ff = "only";
         init.defaultBranch = "main";
