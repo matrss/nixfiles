@@ -16,6 +16,7 @@
       "idm.0px.xyz"
       "nix-cache.0px.xyz"
       "status.0px.xyz"
+      "paperless.0px.xyz"
       "wiki.0px.xyz"
     ];
   };
