@@ -41,7 +41,7 @@
               age
               ssh-to-age
               nixpkgs-fmt
-              terraform
+              opentofu
               generate-hostnames
               dply
               nixos-config-path
@@ -137,8 +137,8 @@
             ${pkgs.statix}/bin/statix check ${./.} && touch $out
           '';
 
-          "lint/terraform-fmt" = pkgs.runCommandLocal "lint.terraform-fmt" { } ''
-            ${pkgs.terraform}/bin/terraform fmt -check -recursive -diff ${./.} && touch $out
+          "lint/tofu-fmt" = pkgs.runCommandLocal "lint.tofu-fmt" { } ''
+            ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff ${./.} && touch $out
           '';
         });
 
