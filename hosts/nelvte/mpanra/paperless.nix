@@ -21,4 +21,15 @@
       proxyPass = "http://${config.services.paperless.address}:${toString config.services.paperless.port}";
     };
   };
+
+  environment.etc."fail2ban/filter.d/paperless.local".text = ''
+    [Definition]
+    failregex = Login failed for user `.*` from (?:IP|private IP) `<HOST>`\.$
+    ignoreregex =
+  '';
+
+  services.fail2ban.jails.paperless.settings = {
+    filter = "paperless";
+    journalmatch = "_SYSTEMD_UNIT=paperless-web.service";
+  };
 }
