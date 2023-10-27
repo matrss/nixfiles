@@ -13,7 +13,7 @@
     };
     enableServer = true;
     serverSettings = {
-      domain = "0px.xyz";
+      domain = "idm.0px.xyz";
       origin = "https://idm.0px.xyz";
       bindaddress = "127.0.0.1:8888";
       ldapbindaddress = "127.0.0.1:636";
