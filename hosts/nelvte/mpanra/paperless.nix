@@ -1,8 +1,6 @@
 { config, ... }:
 
 {
-  sops.secrets."paperless/secret-env" = { };
-
   services.paperless.enable = true;
   services.paperless.address = "127.0.0.1";
   services.paperless.extraConfig = {
@@ -11,8 +9,6 @@
     # Required for some documents, see: https://docs.paperless-ngx.com/troubleshooting/#consumption-fails-with-ghostscript-pdfa-rendering-failed
     PAPERLESS_OCR_USER_ARGS = "{\"continue_on_soft_render_error\": true}";
   };
-
-  systemd.services.paperless-web.serviceConfig.EnvironmentFile = config.sops.secrets."paperless/secret-env".path;
 
   services.nginx.virtualHosts."paperless.0px.xyz" = {
     forceSSL = true;
