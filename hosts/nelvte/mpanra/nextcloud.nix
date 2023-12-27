@@ -25,9 +25,7 @@
   services.postgresql.ensureUsers = [
     {
       name = "nextcloud";
-      ensurePermissions = {
-        "DATABASE nextcloud" = "ALL PRIVILEGES";
-      };
+      ensureDBOwnership = true;
     }
   ];
   services.postgresql.ensureDatabases = [ "nextcloud" ];
