@@ -12,7 +12,7 @@
     runtimeInputs = [ jq ];
     text = ''
       nix path-info --json .#nixosConfigurations.\""$1"\".config.system.build.toplevel |
-        jq '{ "path": .[0].path }'
+        jq 'to_entries | { "path": .[0].key }'
     '';
   };
 
