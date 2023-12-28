@@ -10,6 +10,9 @@
 
     impermanence.url = "github:nix-community/impermanence/master";
 
+    nix-github-actions.url = "github:nix-community/nix-github-actions";
+    nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -141,6 +144,8 @@
             ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff ${./.} && touch $out
           '';
         });
+
+      githubActions = inputs.nix-github-actions.lib.mkGithubMatrix { inherit (inputs.self) checks; };
 
       hydraJobs =
         let
