@@ -119,7 +119,8 @@
         in
         {
           "lint/deadnix" = pkgs.runCommandLocal "lint.deadnix" { } ''
-            ${pkgs.deadnix}/bin/deadnix --fail --hidden ${./.} && touch $out
+            cd ${./.}
+            ${pkgs.deadnix}/bin/deadnix --fail --hidden && touch $out
           '';
 
           "lint/editorconfig-checker" = pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
@@ -133,15 +134,18 @@
           '';
 
           "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
-            ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check ${./.} | tee $out
+            cd ${./.}
+            ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check . | tee $out
           '';
 
           "lint/statix" = pkgs.runCommandLocal "lint.statix" { } ''
-            ${pkgs.statix}/bin/statix check ${./.} && touch $out
+            cd ${./.}
+            ${pkgs.statix}/bin/statix check && touch $out
           '';
 
           "lint/tofu-fmt" = pkgs.runCommandLocal "lint.tofu-fmt" { } ''
-            ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff ${./.} && touch $out
+            cd ${./.}
+            ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff && touch $out
           '';
         });
 
