@@ -26,7 +26,7 @@
         ./bazarr.nix
         ./cloudflare-dyndns.nix
         ./fail2ban.nix
-        ./home-assistant.nix
+        # ./home-assistant.nix
         ./jellyfin.nix
         ./kanidm.nix
         ./nextcloud.nix
