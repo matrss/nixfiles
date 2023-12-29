@@ -10,7 +10,8 @@
 
     impermanence.url = "github:nix-community/impermanence/master";
 
-    nix-github-actions.url = "github:nix-community/nix-github-actions";
+    # nix-github-actions.url = "github:nix-community/nix-github-actions";
+    nix-github-actions.url = "github:matrss/nix-github-actions/fix-attrs-with-dots";
     nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
 
     sops-nix.url = "github:Mic92/sops-nix";
