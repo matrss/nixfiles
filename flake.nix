@@ -149,7 +149,19 @@
           '';
         });
 
-      githubActions = inputs.nix-github-actions.lib.mkGithubMatrix { inherit (inputs.self) checks; };
+      githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
+        checks =
+          let
+            inherit (inputs.nixpkgs) lib;
+            # Generate an attrset of the form { <system> = { <hostname> = <toplevel-derivation> } }
+            # (i.e. the format expected by mkGithubMatrix) from nixosConfigurations
+            nixosConfigurationsChecks =
+              builtins.mapAttrs (_: value: builtins.listToAttrs value)
+                (builtins.groupBy (x: x.value.system) (lib.attrsToList
+                  (builtins.mapAttrs (_: value: value.config.system.build.toplevel) inputs.self.nixosConfigurations)));
+          in
+          lib.recursiveUpdate inputs.self.checks nixosConfigurationsChecks;
+      };
 
       hydraJobs =
         let
