@@ -127,32 +127,32 @@
           pkgs = nixpkgsFor system;
         in
         {
-          "lint/deadnix" = pkgs.runCommandLocal "lint.deadnix" { } ''
+          "lint/deadnix" = pkgs.runCommand "lint.deadnix" { } ''
             cd ${./.}
             ${pkgs.deadnix}/bin/deadnix --fail --hidden && touch $out
           '';
 
-          "lint/editorconfig-checker" = pkgs.runCommandLocal "lint.editorconfig-checker" { } ''
+          "lint/editorconfig-checker" = pkgs.runCommand "lint.editorconfig-checker" { } ''
             cd ${./.}
             ${pkgs.editorconfig-checker}/bin/editorconfig-checker && touch $out
           '';
 
-          "lint/gitleaks" = pkgs.runCommandLocal "lint.gitleaks" { } ''
+          "lint/gitleaks" = pkgs.runCommand "lint.gitleaks" { } ''
             cd ${./.}
             ${pkgs.gitleaks}/bin/gitleaks detect --verbose --no-git --redact && touch $out
           '';
 
-          "lint/nixpkgs-fmt" = pkgs.runCommandLocal "lint.nixpkgs-fmt" { } ''
+          "lint/nixpkgs-fmt" = pkgs.runCommand "lint.nixpkgs-fmt" { } ''
             cd ${./.}
             ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt --check . | tee $out
           '';
 
-          "lint/statix" = pkgs.runCommandLocal "lint.statix" { } ''
+          "lint/statix" = pkgs.runCommand "lint.statix" { } ''
             cd ${./.}
             ${pkgs.statix}/bin/statix check && touch $out
           '';
 
-          "lint/tofu-fmt" = pkgs.runCommandLocal "lint.tofu-fmt" { } ''
+          "lint/tofu-fmt" = pkgs.runCommand "lint.tofu-fmt" { } ''
             cd ${./.}
             ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff && touch $out
           '';
