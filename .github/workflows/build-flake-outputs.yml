@@ -43,4 +43,16 @@ jobs:
         with:
           name: matrss
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix build -L '.#${{ matrix.attr }}'
+      - name: Build output
+        run: |
+          drv=$(nix path-info --derivation '.#${{ matrix.attr }}')
+          out=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path")
+          hash=$(echo $out | cut -d/ -f4 | cut -d- -f1)
+          is_cached() {
+            curl --fail "https://matrss.cachix.org/$hash.narinfo" > /dev/null 2>&1
+          }
+          if is_cached $hash; then
+            echo "output is cached, nothing to do"
+            exit 0
+          fi
+          nix build -L $drv^*
