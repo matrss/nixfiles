@@ -1,6 +1,15 @@
 {
   description = "My NixOS configuration as a flake.";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://matrss.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "matrss.cachix.org-1:02DRX8OkVWrsB8uF2rT736b+ILcVd73qn2rB/n64VQ4="
+    ];
+  };
+
   inputs = {
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
