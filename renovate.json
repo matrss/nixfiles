@@ -3,9 +3,10 @@
   "extends": [
     "config:recommended"
   ],
+  "timezone": "Europe/Berlin",
   "lockFileMaintenance": {
     "enabled": true,
-    "extends": ["schedule:weekly"]
+    "schedule": ["after 3pm on Friday"]
   },
   "nix": {
     "enabled": true
