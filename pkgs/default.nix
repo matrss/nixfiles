@@ -22,6 +22,8 @@ in
       ];
     };
 
+  smtp2paperless = prev.callPackage ./smtp2paperless.nix { };
+
   dply = prev.callPackage (import ./scripts.nix).dply { };
   nixos-config-path = prev.callPackage (import ./scripts.nix).nixos-config-path { };
   generate-hostnames = prev.callPackage (import ./scripts.nix).generate-hostnames { };
