@@ -4,6 +4,7 @@
     ./acme.nix
     ./nginx.nix
     ./dns-over-tls.nix
+    ./smtp2paperless.nix
     ./uptime-kuma.nix
   ];
 
