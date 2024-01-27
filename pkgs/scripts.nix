@@ -31,26 +31,4 @@
       EOF
     '';
   };
-
-  lint.vulnix = { writeShellApplication, vulnix }: writeShellApplication {
-    name = "lint.vulnix";
-    runtimeInputs = [ vulnix ];
-    text = ''
-      nix build .#nixosConfigurations."$1".config.system.build.toplevel
-      vulnix result
-    '';
-  };
-
-  ci = { writeShellApplication, jq }: writeShellApplication {
-    name = "ci";
-    runtimeInputs = [ jq ];
-    text = ''
-      nix flake check
-      nix flake show --json | jq -r '.nixosConfigurations | keys | join("\n")' | while IFS=$'\n' read -r hostname; do
-        echo "$hostname":
-        nix run .#lint.vulnix "$hostname" || true
-        nix build .#nixosConfigurations."$hostname".config.system.build.toplevel
-      done
-    '';
-  };
 }
