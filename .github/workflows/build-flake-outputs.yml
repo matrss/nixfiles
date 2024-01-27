@@ -18,27 +18,37 @@ jobs:
         name: Generate matrix
         run: |
           matrix=$(
-            nix flake show --refresh --json "." |
-              jq '{ attr: ((path(.. | select(.type? == "derivation")) | map((if (. | contains(".")) then "\"" + . + "\"" else . end)) | join(".")),
-                           (path(.. | select(.type? == "nixos-configuration")) | map((if (. | contains(".")) then "\"" + . + "\"" else . end)) | join(".") | . + ".config.system.build.toplevel"))
-                  }' |
+            nix flake show --refresh --all-systems --json "." |
+              jq '
+                def system_to_os: {
+                  "aarch64-linux": "ubuntu-latest",
+                  "x86_64-darwin": "macos-latest",
+                  "x86_64-linux": "ubuntu-latest",
+                }[.] // empty;
+                def quote: map((if (. | contains(".")) then "\"" + . + "\"" else . end));
+                (path(.. | select(.type? == "derivation")) | quote | { attr: join("."), os: .[1] | system_to_os }),
+                (path(.. | select(.type? == "nixos-configuration")) | quote | join(".") | . + ".config.system.build.toplevel" | { attr: . , os: "ubuntu-latest" })
+              ' |
               jq --slurp --compact-output
           )
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   nix-build:
     needs: nix-matrix
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        include: ${{fromJSON(needs.nix-matrix.outputs.matrix)}}
+        include: ${{ fromJSON(needs.nix-matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
+      - if: ${{ startsWith(matrix.os, 'ubuntu') }}
+        uses: docker/setup-qemu-action@v3
       - uses: cachix/install-nix-action@v25
         with:
           extra_nix_config: |
             always-allow-substitutes = true
+            ${{ startsWith(matrix.os, 'ubuntu') && 'extra-platforms = aarch64-linux' || ' ' }}
       - uses: cachix/cachix-action@v14
         with:
           name: matrss
