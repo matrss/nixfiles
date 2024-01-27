@@ -19,9 +19,6 @@
 
     impermanence.url = "github:nix-community/impermanence/master";
 
-    nix-github-actions.url = "github:nix-community/nix-github-actions";
-    nix-github-actions.inputs.nixpkgs.follows = "nixpkgs";
-
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -160,19 +157,5 @@
             ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff && touch $out
           '';
         });
-
-      githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
-        checks =
-          let
-            inherit (inputs.nixpkgs) lib;
-            # Generate an attrset of the form { <system> = { <hostname> = <toplevel-derivation> } }
-            # (i.e. the format expected by mkGithubMatrix) from nixosConfigurations
-            nixosConfigurationsChecks =
-              builtins.mapAttrs (_: value: builtins.listToAttrs value)
-                (builtins.groupBy (x: x.value.system) (lib.attrsToList
-                  (builtins.mapAttrs (_: value: value.config.system.build.toplevel) inputs.self.nixosConfigurations)));
-          in
-          lib.recursiveUpdate inputs.self.checks nixosConfigurationsChecks;
-      };
     };
 }
