@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -32,7 +32,6 @@
       '';
     gc.automatic = true;
     optimise.automatic = true;
-    registry.self.flake = inputs.self;
     settings.allowed-users = [ "@users" ];
     settings.trusted-users = [ "@wheel" ];
   };
