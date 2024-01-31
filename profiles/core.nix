@@ -1,8 +1,19 @@
-{ pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports = [
     ./dns.nix
+  ];
+
+  # Turn warnings into errors
+  assertions = [
+    {
+      assertion = config.warnings == [ ];
+      message = "You have warnings:\n\n" +
+        lib.concatStringsSep
+          "\n--------------------------------------------------------------------------------\n"
+          config.warnings;
+    }
   ];
 
   time.timeZone = "Europe/Berlin";
