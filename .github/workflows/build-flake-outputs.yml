@@ -34,6 +34,7 @@ jobs:
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   nix-build:
+    name: ${{ matrix.attr }}
     needs: nix-matrix
     runs-on: ${{ matrix.os }}
     strategy:
