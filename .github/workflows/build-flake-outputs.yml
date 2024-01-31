@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  nix-matrix:
+  discover:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -33,14 +33,14 @@ jobs:
           )
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
-  nix-build:
+  build:
     name: ${{ matrix.attr }}
-    needs: nix-matrix
+    needs: discover
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ fromJSON(needs.nix-matrix.outputs.matrix) }}
+        include: ${{ fromJSON(needs.discover.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
       - if: ${{ startsWith(matrix.os, 'ubuntu') }}
