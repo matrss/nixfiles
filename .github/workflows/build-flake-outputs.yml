@@ -25,7 +25,7 @@ jobs:
                   "x86_64-darwin": "macos-latest",
                   "x86_64-linux": "ubuntu-latest",
                 }[.] // empty;
-                def quote: map((if (. | contains(".")) then "\"" + . + "\"" else . end));
+                def quote: map(if contains(".") then "\"" + . + "\"" else . end);
                 (path(.. | select(.type? == "derivation")) | quote | { attr: join("."), os: .[1] | system_to_os }),
                 (path(.. | select(.type? == "nixos-configuration")) | quote | join(".") | . + ".config.system.build.toplevel" | { attr: . , os: "ubuntu-latest" })
               ' |
