@@ -63,8 +63,8 @@ jobs:
           is_cached() {
             curl --fail "https://matrss.cachix.org/$hash.narinfo" > /dev/null 2>&1
           }
-          if is_cached $hash; then
-            echo "output is cached, nothing to do"
-            exit 0
-          fi
+          # if is_cached $hash; then
+          #   echo "output is cached, nothing to do"
+          #   exit 0
+          # fi
           nix build -L $drv^*
