@@ -91,10 +91,7 @@
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
-              config = {
-                allowUnfree = true;
-                firefox.enableGnomeExtensions = true;
-              };
+              config = { allowUnfree = true; };
               overlays = [ inputs.self.overlays.default ];
             };
             modules = baseModules ++ [
