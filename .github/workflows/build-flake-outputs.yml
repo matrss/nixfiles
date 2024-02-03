@@ -13,7 +13,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v25
+      - uses: nixbuild/nix-quick-install-action@v26
       - id: set-matrix
         name: Generate matrix
         run: |
@@ -45,12 +45,14 @@ jobs:
       - uses: actions/checkout@v4
       - if: ${{ startsWith(matrix.os, 'ubuntu') }}
         uses: docker/setup-qemu-action@v3
-      - uses: cachix/install-nix-action@v25
+      - uses: nixbuild/nix-quick-install-action@v26
         with:
-          extra_nix_config: |
-            accept-flake-config = true
+          nix_conf: |
             always-allow-substitutes = true
             ${{ startsWith(matrix.os, 'ubuntu') && 'extra-platforms = aarch64-linux' || ' ' }}
+      - uses: nix-community/cache-nix-action@v5
+        with:
+          primary-key: nix-build-${{ matrix.os }}-${{ matrix.attr }}-1
       - uses: cachix/cachix-action@v14
         with:
           name: matrss
@@ -68,3 +70,4 @@ jobs:
           #   exit 0
           # fi
           nix build -L $drv^*
+          nix-store --add --add-root ./result
