@@ -57,7 +57,12 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Get store derivation
         run: |
-          drv=$(nix path-info --derivation '.#${{ matrix.attr }}')
+          drv=$(
+            { { nix path-info --derivation '.#${{ matrix.attr }}' 1>&3; } 2>&1 |
+              tee /dev/stderr |
+              if grep 'trace: warning:' > /dev/null; then echo "warnings=true" >> "$GITHUB_ENV"; else true; fi
+            } 3>&1
+          )
           echo "drv=$drv" >> "$GITHUB_ENV"
       - name: Get output hash
         run: |
@@ -75,3 +80,6 @@ jobs:
       - name: Build output
         if: ${{ env.skip_build != 'true' }}
         run: nix build -L $drv^*
+      - name: Check if there were warnings
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: test ! "$warnings" = "true"
