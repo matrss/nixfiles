@@ -19,8 +19,8 @@
     dbhost = "/run/postgresql";
     dbname = "nextcloud";
     dbuser = "nextcloud";
-    defaultPhoneRegion = "DE";
   };
+  services.nextcloud.settings.default_phone_region = "DE";
 
   services.postgresql.ensureUsers = [
     {

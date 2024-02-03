@@ -3,7 +3,7 @@
 {
   services.paperless.enable = true;
   services.paperless.address = "127.0.0.1";
-  services.paperless.extraConfig = {
+  services.paperless.settings = {
     PAPERLESS_URL = "https://paperless.0px.xyz";
     PAPERLESS_OCR_LANGUAGE = "deu+eng";
     # Required for some documents, see: https://docs.paperless-ngx.com/troubleshooting/#consumption-fails-with-ghostscript-pdfa-rendering-failed
