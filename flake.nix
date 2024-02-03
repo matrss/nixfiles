@@ -62,9 +62,6 @@
           };
         });
 
-      legacyPackages = forAllSystems (system:
-        import inputs.nixpkgs { inherit system; overlays = [ inputs.self.overlays.default ]; });
-
       nixosConfigurations =
         let
           baseModules = [
