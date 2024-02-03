@@ -48,6 +48,7 @@ jobs:
       - uses: cachix/install-nix-action@v25
         with:
           extra_nix_config: |
+            accept-flake-config = true
             always-allow-substitutes = true
             ${{ startsWith(matrix.os, 'ubuntu') && 'extra-platforms = aarch64-linux' || ' ' }}
       - uses: cachix/cachix-action@v14
@@ -56,7 +57,7 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build output
         run: |
-          drv=$(nix path-info --derivation --accept-flake-config '.#${{ matrix.attr }}')
+          drv=$(nix path-info --derivation '.#${{ matrix.attr }}')
           out=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path")
           hash=$(echo $out | cut -d/ -f4 | cut -d- -f1)
           is_cached() {
