@@ -55,16 +55,23 @@ jobs:
         with:
           name: matrss
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build output
+      - name: Get store derivation
         run: |
           drv=$(nix path-info --derivation '.#${{ matrix.attr }}')
-          out=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path")
-          hash=$(echo $out | cut -d/ -f4 | cut -d- -f1)
+          echo "drv=$drv" >> "$GITHUB_ENV"
+      - name: Get output hash
+        run: |
+          hash=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path" | cut -d/ -f4 | cut -d- -f1)
+          echo "hash=$hash" >> "$GITHUB_ENV"
+      - name: Check if output is cached
+        run: |
           is_cached() {
             curl --fail "https://matrss.cachix.org/$hash.narinfo" > /dev/null 2>&1
           }
           if is_cached $hash; then
             echo "output is cached, nothing to do"
-            exit 0
+            echo "skip_build=true" >> "$GITHUB_ENV"
           fi
-          nix build -L $drv^*
+      - name: Build output
+        if: ${{ env.skip_build != 'true' }}
+        run: nix build -L $drv^*
