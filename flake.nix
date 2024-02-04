@@ -69,7 +69,7 @@
             inputs.impermanence.nixosModules.impermanence
             inputs.sops-nix.nixosModules.sops
             ./profiles/core.nix
-            ./profiles/auto-upgrade.nix
+            ./profiles/upgrade.nix
             {
               home-manager.useGlobalPkgs = true;
             }
