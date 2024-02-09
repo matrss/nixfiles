@@ -8,6 +8,7 @@ on:
 jobs:
   build-flake-outputs:
     uses: ./.github/workflows/build-flake-outputs.yml
+    secrets: inherit
 
   deploy-nixos-systems:
     needs: build-flake-outputs
@@ -15,3 +16,4 @@ jobs:
     if: ${{ !cancelled() }}
     concurrency: live
     uses: ./.github/workflows/deploy-nixos-systems.yml
+    secrets: inherit
