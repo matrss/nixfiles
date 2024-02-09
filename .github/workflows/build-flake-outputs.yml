@@ -48,35 +48,23 @@ jobs:
             accept-flake-config = true
             always-allow-substitutes = true
             ${{ startsWith(matrix.os, 'ubuntu') && 'extra-platforms = aarch64-linux' || ' ' }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v3
       - uses: cachix/cachix-action@v14
         with:
           name: matrss
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Get store derivation
+      - name: Check if output exists already
         run: |
-          drv=$(
-            { { nix path-info --derivation '.#${{ matrix.attr }}' 1>&3; } 2>&1 |
-              tee /dev/stderr |
-              if grep 'trace: warning:' > /dev/null; then echo "warnings=true" >> "$GITHUB_ENV"; else true; fi
-            } 3>&1
-          )
-          echo "drv=$drv" >> "$GITHUB_ENV"
-      - name: Get output hash
-        run: |
-          hash=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path" | cut -d/ -f4 | cut -d- -f1)
-          echo "hash=$hash" >> "$GITHUB_ENV"
-      - name: Check if output is cached
-        run: |
-          is_cached() {
-            curl --fail "https://matrss.cachix.org/$hash.narinfo" > /dev/null 2>&1
-          }
-          if is_cached $hash; then
-            echo "output is cached, nothing to do"
+          if nix path-info '.#${{ matrix.attr }}'; then
             echo "skip_build=true" >> "$GITHUB_ENV"
           fi
       - name: Build output
         if: ${{ env.skip_build != 'true' }}
-        run: nix build -L $drv^*
+        run: |
+          { { nix build -L '.#${{ matrix.attr }}' 1>&3; } 2>&1 |
+            tee /dev/stderr |
+            if grep 'trace: warning:' > /dev/null; then echo "warnings=true" >> "$GITHUB_ENV"; else true; fi
+          } 3>&1
       - name: Check if there were warnings
         if: ${{ github.ref != 'refs/heads/main' }}
         run: test ! "$warnings" = "true"
