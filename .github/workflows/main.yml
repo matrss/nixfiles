@@ -11,5 +11,7 @@ jobs:
 
   deploy-nixos-systems:
     needs: build-flake-outputs
+    # Always deploy stuff that reached main
+    if: ${{ !cancelled() }}
     concurrency: live
     uses: ./.github/workflows/deploy-nixos-systems.yml
