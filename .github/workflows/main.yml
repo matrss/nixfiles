@@ -1,0 +1,15 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-flake-outputs:
+    uses: ./.github/workflows/build-flake-outputs.yml
+
+  deploy-nixos-systems:
+    needs: build-flake-outputs
+    concurrency: live
+    uses: ./.github/workflows/deploy-nixos-systems.yml

@@ -1,0 +1,10 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-flake-outputs:
+    uses: ./.github/workflows/build-flake-outputs.yml

@@ -1,0 +1,41 @@
+name: Deploy NixOS systems
+
+on:
+  workflow_call:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v25
+      - id: set-matrix
+        name: Generate matrix
+        run: |
+          matrix=$(
+            nix flake show --refresh --all-systems --json "." |
+              jq '
+                path(.. | select(.type? == "nixos-configuration")) | last | { fqdn: . }
+              ' |
+              jq --slurp --compact-output
+          )
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: ${{ matrix.fqdn }}
+    needs: discover
+    runs-on: ubuntu-latest
+    environment: live
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write SSH keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/deploy_key
+          echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          cp ssh_known_hosts ~/.ssh/known_hosts
+      - name: Deploy systems
+        run: ssh root@${{ matrix.fqdn }} system-upgrade
