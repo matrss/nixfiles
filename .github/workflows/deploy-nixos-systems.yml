@@ -40,4 +40,4 @@ jobs:
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
           cp ssh_known_hosts ~/.ssh/known_hosts
       - name: Deploy systems
-        run: ssh root@${{ matrix.fqdn }} system-upgrade
+        run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} system-upgrade
