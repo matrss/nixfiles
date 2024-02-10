@@ -4,47 +4,41 @@ on:
   workflow_call:
 
 jobs:
-  discover:
+  deploy:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    environment: live
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v25
-      - id: set-matrix
-        name: Generate matrix
-        run: |
-          matrix=$(
-            nix flake show --refresh --all-systems --json "." |
-              jq '
-                path(.. | select(.type? == "nixos-configuration")) | last | { fqdn: . }
-              ' |
-              jq --slurp --compact-output
-          )
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
-  deploy:
-    name: ${{ matrix.fqdn }}
-    needs: discover
-    runs-on: ubuntu-latest
-    environment: live
-    strategy:
-      fail-fast: false
-      matrix:
-        include: ${{ fromJSON(needs.discover.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v4
       - name: Write SSH keys
         run: |
           install -m 600 -D /dev/null ~/.ssh/deploy_key
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
           cp ssh_known_hosts ~/.ssh/known_hosts
-      - name: Check if system should be reachable
+      - name: Collect systems
         run: |
-          if ! host ${{ matrix.fqdn }}; then
-            echo "::notice::The system ${{ matrix.fqdn }} is not reachable, skipping deployment"
-            echo "skip_deploy=true" >> "$GITHUB_ENV"
-          fi
-      - name: Deploy system
-        if: ${{ env.skip_deploy != 'true' }}
-        run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} system-upgrade
+          systems=$(
+            nix flake show --refresh --all-systems --json "." |
+              jq '
+                path(.. | select(.type? == "nixos-configuration")) | last
+              ' |
+              jq --slurp --compact-output
+          )
+          echo "systems=$systems" >> "$GITHUB_ENV"
+      - name: Deploy systems
+        run: |
+          echo "$systems" | jq -r '.[]' | xargs -P2 -I{} bash -c '
+            if host "{}"; then
+              ssh -i ~/.ssh/deploy_key root@"{}" system-upgrade 2>&1 | tee {}-deploy.log
+            else
+              echo "::notice::The system {} is not reachable, skipping its deployment"
+            fi
+          '
+      - name: Show deploy logs
+        if: ${{ !cancelled() }}
+        run: |
+          echo "$systems" | jq -r '.[]' | while read -r fqdn; do
+            echo "::group::$fqdn"
+            cat "$fqdn"-deploy.log || echo ""
+            echo "::endgroup::"
+          done
