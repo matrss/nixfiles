@@ -40,7 +40,11 @@ jobs:
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
           cp ssh_known_hosts ~/.ssh/known_hosts
       - name: Check if system should be reachable
-        run: host ${{ matrix.fqdn }} || echo "skip_deploy=true" >> "$GITHUB_ENV"
+        run: |
+          if ! host ${{ matrix.fqdn }}; then
+            echo "::notice::The system ${{ matrix.fqdn }} is not reachable, skipping deployment"
+            echo "skip_deploy=true" >> "$GITHUB_ENV"
+          fi
       - name: Deploy system
         if: ${{ env.skip_deploy != 'true' }}
         run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} system-upgrade
