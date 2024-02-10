@@ -39,5 +39,5 @@ jobs:
           install -m 600 -D /dev/null ~/.ssh/deploy_key
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
           cp ssh_known_hosts ~/.ssh/known_hosts
-      - name: Deploy systems
+      - name: Deploy system
         run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} system-upgrade
