@@ -39,5 +39,8 @@ jobs:
           install -m 600 -D /dev/null ~/.ssh/deploy_key
           echo "${{ secrets.SSH_DEPLOY_KEY }}" > ~/.ssh/deploy_key
           cp ssh_known_hosts ~/.ssh/known_hosts
+      - name: Check if system should be reachable
+        run: host ${{ matrix.fqdn }} || echo "skip_deploy=true" >> "$GITHUB_ENV"
       - name: Deploy system
+        if: ${{ env.skip_deploy != 'true' }}
         run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} system-upgrade
