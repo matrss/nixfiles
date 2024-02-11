@@ -29,7 +29,9 @@ jobs:
         run: |
           echo "$systems" | jq -r '.[]' | xargs -P2 -I{} bash -c '
             if host "{}"; then
-              ssh -i ~/.ssh/deploy_key root@"{}" system-upgrade 2>&1 | tee {}-deploy.log
+              ssh -i ~/.ssh/deploy_key root@"{}" system-upgrade 2>&1 |
+                tee {}-deploy.log |
+                while read -r line; do printf '"'"'{}: %s\n'"'"' "$line"; done
             else
               echo "::notice::The system {} is not reachable, skipping its deployment"
             fi
