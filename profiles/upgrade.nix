@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   flake = "github:matrss/nixfiles/main";
@@ -9,14 +9,4 @@ in
     flake = "${flake}#${config.networking.fqdn}";
     flags = [ "--accept-flake-config" "--refresh" ];
   };
-
-  environment.systemPackages = with pkgs; [
-    (pkgs.writeShellApplication {
-      name = "system-upgrade";
-      runtimeInputs = [ pkgs.nixos-rebuild ];
-      text = ''
-        nixos-rebuild switch --accept-flake-config --refresh --flake '${flake}#${config.networking.fqdn}'
-      '';
-    })
-  ];
 }

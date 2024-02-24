@@ -34,6 +34,11 @@ jobs:
         include: ${{ fromJSON(needs.discover.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+            always-allow-substitutes = true
       - name: Write SSH keys
         run: |
           install -m 600 -D /dev/null ~/.ssh/deploy_key
@@ -45,6 +50,22 @@ jobs:
             echo "::notice::The system ${{ matrix.fqdn }} is not reachable, skipping deployment"
             echo "skip_deploy=true" >> "$GITHUB_ENV"
           fi
-      - name: Deploy system
+      - name: Get expected output path
         if: ${{ env.skip_deploy != 'true' }}
-        run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} system-upgrade
+        run: |
+          drv=$(nix path-info --derivation '.#nixosConfigurations."${{ matrix.fqdn }}".config.system.build.toplevel')
+          out=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path")
+          echo "out=$out" >> "$GITHUB_ENV"
+      - name: Get current timestamp
+        if: ${{ env.skip_deploy != 'true' }}
+        run: echo "timestamp=$(date --utc +"%Y-%m-%dT%H:%M:%SZ")" >> "$GITHUB_ENV"
+      - name: Start deployment
+        if: ${{ env.skip_deploy != 'true' }}
+        run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} systemctl start --no-block nixos-upgrade.service
+      - name: Check if deployment was successful
+        if: ${{ env.skip_deploy != 'true' }}
+        timeout-minutes: 30
+        run: until [ "$(ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} readlink /run/current-system)" = "${{ env.out }}" ]; do sleep 10; done
+      - name: Get deployment logs
+        if: ${{ !cancelled() && env.skip_deploy != 'true' }}
+        run: ssh -i ~/.ssh/deploy_key root@${{ matrix.fqdn }} journalctl --unit nixos-upgrade.service --since ${{ env.timestamp }}
