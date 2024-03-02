@@ -1,0 +1,95 @@
+name: NixOS closure diffs
+
+on:
+  pull_request_target:
+    branches:
+      - main
+
+jobs:
+  closure-diffs-comment:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Find potentially existing comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: NixOS closure diffs
+      - name: Set in-progress message
+        uses: peter-evans/create-or-update-comment@v4
+        id: create-or-update-comment
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            # NixOS closure diffs
+
+            Just a moment...
+          edit-mode: replace
+      - uses: actions/checkout@v4
+        with:
+          path: before
+          ref: ${{ github.event.pull_request.base.ref }}
+      - uses: actions/checkout@v4
+        with:
+          path: after
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+            always-allow-substitutes = true
+      - run: |
+          nix flake show --refresh --all-systems --json ./before |
+            jq --raw-output '
+              path(.. | select(.type? == "nixos-configuration")) | .[1]
+            ' |
+            sort > systems-before
+          cat systems-before
+      - run: |
+          nix flake show --refresh --all-systems --json ./after |
+            jq --raw-output '
+              path(.. | select(.type? == "nixos-configuration")) | .[1]
+            ' |
+            sort > systems-after
+          cat systems-after
+      - run: printf '# NixOS closure diffs\n\n' > message-body
+      - run: |
+          printf 'Removed systems:\n```\n' >> message-body
+          comm -23 systems-before systems-after >> message-body
+          printf '```\n\n' >> message-body
+      - run: |
+          printf 'Added systems:\n```\n' >> message-body
+          comm -13 systems-before systems-after >> message-body
+          printf '```\n\n' >> message-body
+      - run: |
+          printf 'Changed systems:\n\n' >> message-body
+          comm -12 systems-before systems-after |
+            while read -r system; do
+              printf '<details>\n<summary>%s</summary>\n\n```\n' "$system" >> message-body
+              nix store diff-closures --derivation \
+                "./before#nixosConfigurations.\"$system\".config.system.build.toplevel" \
+                "./after#nixosConfigurations.\"$system\".config.system.build.toplevel" >> message-body
+              printf '```\n</details>\n\n' >> message-body
+            done
+      - name: Set finished message
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.create-or-update-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: message-body
+          edit-mode: replace
+      - name: Set failure message
+        if: ${{ failure() }}
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.create-or-update-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            # NixOS closure diffs
+
+            Something went wrong. Please check the action log.
+          edit-mode: replace
