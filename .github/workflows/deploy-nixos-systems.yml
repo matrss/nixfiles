@@ -17,7 +17,7 @@ jobs:
           matrix=$(
             nix flake show --refresh --all-systems --json "." |
               jq '
-                path(.. | select(.type? == "nixos-configuration")) | last | { fqdn: . }
+                path(.. | select(.type? == "nixos-configuration")) | last | { fqdn: . | gsub("_"; ".") }
               ' |
               jq --slurp --compact-output
           )
