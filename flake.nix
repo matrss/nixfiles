@@ -76,7 +76,7 @@
           ];
         in
         {
-          "hazuno.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
+          hazuno_m_0px_xyz = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
@@ -88,7 +88,7 @@
             ];
             specialArgs.inputs = inputs;
           };
-          "ipsmin.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
+          ipsmin_m_0px_xyz = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;
@@ -100,7 +100,7 @@
             ];
             specialArgs.inputs = inputs;
           };
-          "nelvte.m.0px.xyz" = inputs.nixpkgs.lib.nixosSystem rec {
+          nelvte_m_0px_xyz = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             pkgs = import inputs.nixpkgs {
               inherit system;

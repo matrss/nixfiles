@@ -17,7 +17,7 @@ jobs:
           matrix=$(
             nix flake show --refresh --all-systems --json "." |
               jq '
-                path(.. | select(.type? == "nixos-configuration")) | last | { fqdn: . }
+                path(.. | select(.type? == "nixos-configuration")) | last | { attr: ., fqdn: . | gsub("_"; ".") }
               ' |
               jq --slurp --compact-output
           )
@@ -53,7 +53,7 @@ jobs:
       - name: Get expected output path
         if: ${{ env.skip_deploy != 'true' }}
         run: |
-          drv=$(nix path-info --derivation '.#nixosConfigurations."${{ matrix.fqdn }}".config.system.build.toplevel')
+          drv=$(nix path-info --derivation '.#nixosConfigurations."${{ matrix.attr }}".config.system.build.toplevel')
           out=$(nix derivation show $drv^* | jq -r ".\"$drv\".outputs.out.path")
           echo "out=$out" >> "$GITHUB_ENV"
       - name: Get current timestamp
