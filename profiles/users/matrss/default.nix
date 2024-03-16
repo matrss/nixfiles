@@ -44,7 +44,7 @@
     services.gpg-agent = {
       enable = true;
       enableScDaemon = true;
-      pinentryFlavor = "gnome3";
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
 
     programs.bash.enable = true;
