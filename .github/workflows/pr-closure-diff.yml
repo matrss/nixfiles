@@ -70,9 +70,12 @@ jobs:
           comm -12 systems-before systems-after |
             while read -r system; do
               printf '<details>\n<summary>%s</summary>\n\n```\n' "$system" >> message-body
+              # The sed call filters out the control characters that diff-closures emits.
+              # See: https://github.com/NixOS/nix/issues/4626
               nix store diff-closures --derivation \
                 "./before#nixosConfigurations.\"$system\".config.system.build.toplevel" \
-                "./after#nixosConfigurations.\"$system\".config.system.build.toplevel" >> message-body
+                "./after#nixosConfigurations.\"$system\".config.system.build.toplevel" |
+                sed 's/\x1b\[[0-9;]*m//g' >> message-body
               printf '```\n</details>\n\n' >> message-body
             done
       - name: Set finished message
