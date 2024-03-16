@@ -6,7 +6,7 @@ in
 {
   system.autoUpgrade = {
     enable = true;
-    flake = "${flake}#${config.networking.fqdn}";
+    flake = "${flake}#${builtins.replaceStrings ["."] ["_"] config.networking.fqdn}";
     flags = [ "--accept-flake-config" "--refresh" ];
   };
 }
