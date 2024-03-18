@@ -55,8 +55,6 @@
               nixpkgs-fmt
               opentofu
               generate-hostnames
-              dply
-              nixos-config-path
               jq
             ];
           };
