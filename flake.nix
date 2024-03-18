@@ -3,10 +3,10 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://matrss.cachix.org"
+      "https://cache.garnix.io"
     ];
     extra-trusted-public-keys = [
-      "matrss.cachix.org-1:02DRX8OkVWrsB8uF2rT736b+ILcVd73qn2rB/n64VQ4="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 
