@@ -27,7 +27,7 @@
           };
       in
       ''
-        experimental-features = nix-command flakes
+        experimental-features = nix-command flakes impure-derivations ca-derivations
         flake-registry = ${pkgs.writeText "flake-registry.json" flake-registry}
       '';
     gc.automatic = true;

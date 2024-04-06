@@ -149,6 +149,20 @@
             cd ${./.}
             ${pkgs.opentofu}/bin/tofu fmt -check -recursive -diff && touch $out
           '';
+
+          "impure-test" = pkgs.stdenv.mkDerivation {
+            name = "impure-test";
+            __noChroot = true;
+            nativeBuildInputs = [ pkgs.cacert pkgs.git pkgs.nix ];
+            buildCommand = ''
+              export HOME=$(mktemp -d)
+              git clone https://github.com/matrss/nixfiles latest
+              git clone https://github.com/matrss/nixfiles older
+              git -C older switch --detach HEAD~5
+              nix --extra-experimental-features "nix-command flakes" --accept-flake-config store diff-closures --derivation ./older#nixosConfigurations.hazuno_m_0px_xyz.config.system.build.toplevel ./latest#nixosConfigurations.hazuno_m_0px_xyz.config.system.build.toplevel
+              touch $out
+            '';
+          };
         });
     };
 }
