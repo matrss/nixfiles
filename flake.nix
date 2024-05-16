@@ -48,7 +48,7 @@
             name = "nixfiles";
             buildInputs = with pkgs; [
               git
-              nixUnstable
+              nixVersions.latest
               sops
               age
               ssh-to-age
