@@ -22,7 +22,8 @@
       };
     in
     [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIByQhPnALCgo9Q4FbqYBCSTbMbP6OuSNmgRafdDo6yAx matrss@ipsmin"
       "command=\"${restricted-commands-for-deployments}/bin/restricted-commands-for-deployments\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBAxL0AN/OIueekEBUTvjdJippFSHP0gzooz66rvmLFL GitHub Actions deploy"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIByQhPnALCgo9Q4FbqYBCSTbMbP6OuSNmgRafdDo6yAx matrss@ipsmin"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPubsvPoZUNcSgsxMgsjwLoqNJlwEAqm/L1B7yXJBH0x matrss@kayhat"
     ];
 }
