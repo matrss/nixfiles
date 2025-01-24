@@ -9,6 +9,7 @@
     PAPERLESS_CONSUMER_ENABLE_BARCODES = true;
     PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE = true;
     PAPERLESS_CONSUMER_BARCODE_SCANNER = "ZXING";
+    PAPERLESS_CONSUMER_BARCODE_UPSCALE = 1.5;
     # Required for some documents, see: https://docs.paperless-ngx.com/troubleshooting/#consumption-fails-with-ghostscript-pdfa-rendering-failed
     PAPERLESS_OCR_USER_ARGS = {
         continue_on_soft_render_error = true;
