@@ -2,7 +2,7 @@
 
 {
   services.xserver.enable = true;
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
   services.xserver.wacom.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
@@ -25,10 +25,10 @@
   qt.style = "adwaita-dark";
 
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
-    gnome.gnome-boxes
-    gnome.gnome-terminal
-    gnome.dconf-editor
+    gnome-tweaks
+    gnome-boxes
+    gnome-terminal
+    dconf-editor
     gnome-console
   ];
 }
