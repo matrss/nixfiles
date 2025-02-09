@@ -33,6 +33,8 @@
     in
     {
 
+      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+
       devShells = forAllSystems (system:
         let
           pkgs = import inputs.nixpkgs {
