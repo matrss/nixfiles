@@ -35,7 +35,7 @@
         ./paperless.nix
         ./postgresql.nix
         ./radarr.nix
-        ./sonarr.nix
+        # ./sonarr.nix
         ./tiddlywiki.nix
       ];
 
