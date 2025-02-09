@@ -15,7 +15,6 @@
       fd
       git
       tig
-      bitwarden-cli
       autossh
       nodePackages.tiddlywiki
       vscodium-fhs
