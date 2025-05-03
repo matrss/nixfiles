@@ -103,7 +103,7 @@
   services.avahi.publish.enable = true;
   services.avahi.publish.addresses = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   # Default sops file for secrets.
   sops.defaultSopsFile = ../../secrets/nelvte/secrets.yaml;
