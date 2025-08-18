@@ -29,11 +29,11 @@ jobs:
 
             Just a moment...
           edit-mode: replace
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: before
           ref: ${{ github.event.pull_request.base.ref }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: after
           ref: ${{ github.event.pull_request.head.ref }}
