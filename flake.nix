@@ -112,6 +112,18 @@
             ];
             specialArgs.inputs = inputs;
           };
+          mpanra_m_0px_xyz = inputs.nixpkgs.lib.nixosSystem rec {
+            system = "x86_64-linux";
+            pkgs = import inputs.nixpkgs {
+              inherit system;
+              config = { allowUnfree = true; };
+              overlays = [ inputs.self.overlays.default ];
+            };
+            modules = baseModules ++ [
+              ./hosts/mpanra
+            ];
+            specialArgs.inputs = inputs;
+          };
         };
 
       overlays.default = import ./pkgs;
