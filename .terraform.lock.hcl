@@ -2,23 +2,23 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.opentofu.org/carlpett/sops" {
-  version     = "1.1.1"
+  version     = "1.4.1"
   constraints = "~> 1.0"
   hashes = [
-    "h1:0lv+4VCaIRTkBAMXmCxSJC1dsYPuoyBAvnrLsofcseA=",
-    "h1:AM1mG6OjcEL8hIr0PPel85i0HUlLZH8BZer5Dq7uiOM=",
-    "h1:FDG2jSsAr/tWk/w5zuPGovEtCqKxxosCYPlA5msBhec=",
-    "h1:WCfQL+3Nf73jZ40NkduHIBze7vOtYeyXb4t1xoa/3as=",
-    "h1:cl4VtE/cu7gL2DmwXEiNfD9xpv66Xzr4IeUzlGgfMZ0=",
-    "h1:hqyownSt8teS7g0+XDOxmAtuAHB5kDNQkW1voBhLmZU=",
-    "h1:iKoZfVYPK2awiHuf2k0F9CyDjfnYYwoaNC9/pxINU8E=",
-    "zh:175ec198e1b4d1cad1ae559ebe8cdf574617805010c22dfb8af93a2057ba8332",
-    "zh:2b550b2372f71408e7b47b099f314d981bbb82b263cb55248a36a9af8afd44a1",
-    "zh:684544ed3460c34585b090b5de1d4e0caf8eba8e6ba50ad0734cda818a6c86f0",
-    "zh:6ab656d3f3645b8158769f34c16820523a621b9e735c1b3233cecf010ac61dda",
-    "zh:6b1f0007569ea36903c9b2b1b114c3cec7c163d9b83946362c3e165e255f64e7",
-    "zh:7d562f2fc76c954f974f2745557059a4d33dacb8d46e9f1cf09323348dcf5ddc",
-    "zh:cc7e97d8b55ebd90a4c1424cf9cb930af76e98a11c6eeb07e51d648369859fa1",
+    "h1:++2JmC1ykEcRLHiB7kRhqq9kfxH3H28zWWCGYJt6xwE=",
+    "h1:Bxls7vaSoHFx5oLyCC4BKWkF9A24QyYI+LDR0xwjyBo=",
+    "h1:CtjK3CV+eu5920uq2ma3cJrtPXgYqAhKoyNPsjsi2cE=",
+    "h1:HyIxpskyTiLdJhGFJYzCk45IsG7zMe3K+y7em3k23BE=",
+    "h1:nTX8t1aP800EVoUFK9p7/IfSihRN3CAgTiawINe2CLY=",
+    "h1:vmBW+4J2FkW/zuDesBHYHpS4eqGZveI43AHwvDczzSw=",
+    "h1:znlUxdbGKlHDWA0hZ4E2nEW4h2x0fTsQD4pau4+KyRw=",
+    "zh:4df8dea170a4cd926ca6ef0b9fa6fd1d8c1fa9bc9e78333d544a74c24e269cf9",
+    "zh:5cf661333ec5d5cce3b7c0fc399052cf8f8c50f6cb0a50f5aec2f91d83685e1e",
+    "zh:680616383404bc836a2d740a0dfae4691c18c8616f346e8fa795a1d790a2d888",
+    "zh:8ef127e590bd676718bc82afc0f1cad8d0a93d82e935ec21b22d6ae2fc2bff9f",
+    "zh:d030531c7b61922d4f4150c45a87c48ed5c6743348dbbfe70d34191cd13f2649",
+    "zh:d8c138c2c0d7c7d4e72a4ab667772e8f96ec17e13ffe0c6fbe21457e82c140f0",
+    "zh:fd3903e0f2040b67550bbce3b58e4e615a738993bc787f71adbc41afe38df518",
   ]
 }
 
